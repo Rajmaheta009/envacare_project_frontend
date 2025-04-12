@@ -1,0 +1,346 @@
+A. SAMPLING CHARGES
+    1."Air Monitoring"
+        “Sampling (upto each 8 hrs) for suspended particulate matter and gaseous pollutants”  =======3500
+        "Sampling (24 hrs) for suspended particulate matter and gaseous pollutants" =======10500
+        "Sampling of Volatile Organic Compounds (VOCs)/ Benzene Toluene Xylene (BTX)" =======3500
+        "Sampling of Poly Aromatic Hydrocarbons (PAHs)" =======440
+        "Sampling (24 hrs using PUF HVS) of Ambient Air for Dioxin- Furan (PCDDs-PCDFs) congeners " =====15000
+
+    2."Source Emission Monitoring/Sampling charges"
+        "Sampling/measurement of Velocity, Flow rate, temperature and molecular weight of 	FlueGas (each specific location/each sample in duplicate for the mentioned parameter)"=======9600
+        "Sampling of SO2/NO2" =======3500
+        "Sampling of Volatile Organic Compounds (VOCs)/ Benzene Toluene Xylene (BTX)" =======5300
+        "Sampling of Poly Aromatic  Hydrocarbons (PAHs)" =======6200
+        "Sampling of emission from stationary source for DioxinFuran (PCDDs-PCDFs) congeners using Manual Sampling Kit"====25000
+
+    3.“Noise Monitoring”
+        "First Monitoring" =======7000
+        "Each Subsequent Monitoring within same premises" =======3500
+        "For 08 hours Continuous Monitoring or more" =======18000
+
+    4.“Sampling charges for water & wastewater samples”
+        “GRAB SAMPLING”
+            " Grab sampling/sample/place " =======960
+            "For every additional Grab sampling/same place" =======440
+        “COMPOSITE SAMPLING”
+            "Composite sampling/source/place upto 8 hrs. " =======1800
+            "Composite sampling/source/place upto 16 hrs. " =======3500
+            "Composite sampling/source/place upto 24 hrs" =======5300
+            "For every additional composite sampling/same place but different source upto 8 hrs." ======= 960
+            "For every additional composite sampling/same place but different source upto 16hrs"  ======= 2000
+            "For every additional composite sampling/same place but different source upto 24hrs" ======= 2900
+        "Flow Rate measurement/source – once " ======= 700
+        "Flow Rate measurement/source – every additional " ======= 270
+
+    5.“Sampling charges for Soil samples”
+        "Grab sampling/sample/place" =======1050
+        "For additional Grab sampling/same place" ======= 530
+
+     6.“Hazardous Waste Sample collection charges at the premises of Industry/Import site/Disposal site”
+        "Integrated sample collect ion charges" =======1800
+
+B. “ANALYSIS CHARGES”
+    1."Analysis charges of Ambient Air/ Fugitive Emission Samples"
+        "Ammonia" =======1050
+        "Analysis using dragger (per tube)" ======= 700
+        "Benzene Toluene Xylene (BTX)" ======= 1800
+        "Carbon Monoxide" ======= 1050
+        "Chlorine " ======= 1050
+        "Fluoride (gaseous)" ======= 1050
+        "Fluoride (particulate)" =======1050
+        "Hydrogen Chloride" ======= 1050
+        "Hydrogen Sulphide" ======= 1050
+        "Lead & Other metals (per metal) As per water & waste water analysis at clause V" =======0
+        "NO2" ======= 1050
+        "Ozone" ======= 1800
+        "Poly Aromatic Hydrocarbons (PAHs) As per water & waste water analysis at clause V"============0
+        "Suspended Particulate Matter (SPM) " =======1050
+        "Particulate Matter (PM2.5)" =======1800
+        "Respirable Suspended Particulate Matter (PM10) " ======= 1050
+        "Sulphur Dioxide" ======= 1050
+        "Volatile Organics Carbon" =======3500
+        "Trace Metals on air filter paper using EDXRF Aluminium, Antimony, Arsenic, Barium,Bromine, Cadmium, Calcium, Cesium, Chlorine, Chromium, Cobalt, Copper, Gallium,ermanium, Gold, Iodine, Iron, Lanthanum, Lead, Magnesium, Manganese,Molybdenum, Nickel, Palladium, Phosphorous, Potassium, Rubidium, Rutherfordium,Selenium, Silicon, Silver, Sodium, Strontium, Sulphur, Tellurium, Tin, Titanium, Tungsten,Vanadium, Ytterbium, and Zinc.( Per filter paper)" =======5300
+        "Water Extractable ions in Air Particulate Matter using Ion Chromatograph (IC) (i).Processing / Pretreatment Charge per Sample (Filter Paper) " =======530
+        "Water Extractable ions in Air Particulate Matter using Ion Chromatograph (IC) (ii).Cations (Na+ , NH4 + , K+ , Ca+2& Mg+2 ) and Anions (F- , Br- , Cl- , NO3 - , NO2 - ,SO4 -2& PO4 -3 )      (for 12 icone)" =======2100
+        "Organic and Elemental Carbon (OC/EC) on quartz filter paper" ======= 3500
+        "Sample processing and analysis for Dioxin-Furan (PCDDs-PCDFs) congeners (Isotope Dilution method using GC-HRMS)" =======75000
+
+    2.“Analysis Charges for Source Emission Parameters”
+        "Acid Mist" ======1050
+        "Ammonia" =======1050
+        "Carbon Monoxide" =======1050
+        "Oxides of Nitrogen" =======1050
+        "Hydrogen Sulphide" =======1050
+        "Hydrogen Chloride" =======1050
+        "Fluorides (Particulate)" =======1050
+        "Fluoride (Gaseous) " =======1050
+        "Chlorine" =======1050
+        "Oxygen" =======1050
+        "Polycyclic Aromatic Hydrocarbons (Particulate) As per water & waste water analysis At Clause V" ==========0
+        "Suspended Particulate Matter" ======= 1050
+        "Sulphur Dioxide " =======1050
+        "Benzene Toluene Xylene (BTX)" =======2700
+        "Volatile Organic Compounds (VOCs)" =======5300
+        "Sample processing and analysis for Dioxin-Furan (PCDDs-PCDFs) congeners (Isotope Dilution method using GC-HRMS) " =======75000
+
+    3."Ambient Air Quality Monitoring using on-line monitoring instruments by Mobile Van”
+        "PM10, PM2.5 , SO2, NOx, SPM, CO along with Meteorological data viz. temperature, 	Humidity, Wind speed, Wind direct         - per hour (minimum charges Rs.15,000/-) + 	Rs.50.00/km run of the van for 24 hours monitoring" ======= 6200
+
+    4.“Auto Exhaust Monitoring - One time checking of vehicular exhaust”
+        "Carbon Monoxide % As per rate notified by Transport Department" =========0
+        "Hydrocarbon, PPM    As per rate notified by Transport Department" =========0
+        "Smoke Density, HSU   As per rate notified by Transport Department" =========0
+
+    5.“Analysis charges of Water & Wastewater samples”
+        "PHYSICAL PARAMETERS"
+            "Conductivity" =====110
+            "Odour" =======110
+            "Sludge Volume Index (S.V.I.)" =======350
+            "Solids (dissolved) " =======180
+            "Solids (fixed) " =======270
+            "Solids (volatile)  " =======270
+            "Suspended Solids " =======180
+            "Temperature" =======110
+            "Turbidity" =======180
+            "Total Solids" =======110
+            "Velocity of Flow (Current Meter)" =======350
+            "Velocity of Flow (other)" =======960
+
+        "CHEMICAL PARAMETERS"
+            "Inorganic"  =======180
+                "Acidity" =======180
+                "Alkalinity" =======350
+                "Ammonical Nitrogen" =======180
+                "Bicarbonatesgen" =======1050
+                "Biochemical Oxygen Demand (BOD)" =======180
+                "Bromide" =======180
+                "Calcium (titrimetric) " =======180
+                "Carbon Dioxide" =======180
+                "Carbonate" =======180
+                "Chloride" =======180
+                "Chlorine Demand" =======350
+                "Chlorine Residual" =======180
+                "Chemical Oxygen Demand (COD)" =======620
+                "Cyanide" =======620
+                "Detergent" =======350
+                "Dissolved Oxygen" =======180
+                "Fluoride" =======350
+                "H. Acid " =======620
+                "Hardness (calcium) " =======180
+                "Hardness (total) " =======180
+                "Iodide" =======180
+                "Nitrate Nitrogen" =======350
+                "Nitrite Nitrogen" =======350
+                "Percent Sodium" =======1050
+                "Permanganate Value" =======350
+                "pH" =======110
+                "Phosphate (ortho)" =======350
+                "Phosphate (total)" =======620
+                "Salinity " =======180
+                "Sodium Absorption Ratio (SAR)" =======1050
+                "Settlable Solids" =======180
+                "Silica" =======350
+                "Sulphate" =======270
+                "Sulphide" =======350
+                "Total Kjeldahl Nitrogen (TKN)" =======350
+                "Urea Nitrogen " =======620
+                "Cations (Na+ , NH4 + , K+ , Ca+2& Mg+2) and Anions (F- , Br- , Cl- , NO3 - , NO2 - ,SO4 -2& PO4 -3 ) in surface & ground water sample using Ion Chromatograph (for 12 ions)"===========2100
+
+            "Metals"
+                "Processing pre-treatment Charge per Sample" =======880
+                "Aluminium" =======530
+                "Antimony" =======530
+                "Arsenic" =======530
+                "Barium" =======530
+                "Beryllium" =======530
+                "Boron" =======530
+                "Chromium Hexavalent" =======350
+                "Chromium Totalnt" =======530
+                "Cobalt" =======530
+                "Copper" =======530
+                "Iron" =======530
+                "Lead" =======530
+                "Manganese" =======350
+                "Magnesium" =======530
+                "Mercury (Processing & Analysis) " =======1400
+                "Molybdenum" =======530
+                "Nickel" =======530
+                "Potassium" =======350
+                "Tin" =======530
+                "Selenium" =======530
+                "Silver" =======530
+                "Sodium" =======350
+                "Strontium" =======530
+                "Vanadium" =======530
+                "Zinc" =======530
+            "Organics Organo Chlorine Pesticides (OCPs) "
+                "Processing / pretreatment Charge per Sample" =======1800
+                "Aldrin" =======700
+                "Dicofol" =======700
+                "Dieldrin" =======700
+                "Endosulfan-I" =======700
+                "Endosulfan-II" =======700
+                "Endosulfansulfate" =======700
+                "Heptachlor" =======700
+                "Hexachlorobenzene (HCB) " =======700
+                "Methoxy Chlor" =======700
+                "o,p-DDT" =======700
+                "p,p’-DDD" =======700
+                "p,p’-DDE" =======700
+                "p,p’-DDT" =======700
+                "α-HCH " =======700
+                "β-HCH " =======700
+                "γ-HCH " =======700
+                "δ-HCH " =======700
+
+            "Organo Phosphorous Pesticides (OPPs)"
+                "Processing / pretreatment Charge per Sample " =======1800
+                "Chlorpyriphos" ======700
+                "Dimethoate" =======700
+                "Ethion" =======700
+                "Malathion" =======700
+                "Monocrotophos" =======700
+                "Parathion-methyl " =======700
+                "Phorate" =======700
+                "Phosphamidon" =======700
+                "Profenophos" =======700
+                "Quinalphos" =======700
+
+            "Synthetic Pyrethroids (SPs)"
+                "Processing / pretreatment Charge per Sample" =======1800
+                "Deltamethrin" =======700
+                "Fenpropethrin" =======700
+                "Fenvalerate" =======700
+                "α-Cypermethrin" =======700
+                "β-Cyfluthrin" =======700
+                "λ-Cyhalothrin" =======700
+
+            "Herbicides"
+                "Processing / pretreatment Charge per Sample " =======1800
+                "Alachlor" =======700
+                "Butachlor" =======700
+                "Fluchloralin" =======700
+                "Pendimethalin" =======700
+
+            "Polycyclic Aromatic Hydrocarbons (PAHs)"
+                "Processing / pretreatment Charge per Sample" =======1800
+                "Acenaphthene" =======700
+                "Acenaphthylene" =======700
+                "Anthracene" =======700
+                "Benz(a)anthracene" =======700
+                "Benzo(a)pyrene" =======700
+                "Benzo(b)fluoranthene" =======700
+                "Benzo(e)pyrene" =======700
+                "Benzo(g,h,i)perylene" =======700
+                "Benzo(k)fluoranthene" =======700
+                "Chrysene" =======700
+                "Dibenzo(a,h)anthracene" =======700
+                "Fluoranthene" =======700
+                "Fluorene" =======700
+                "Indeno(1,2,3-cd)pyrene" =======700
+                "Naphthalene" =======700
+                "Perylene" =======700
+                "Phenanthrene" =======700
+                "Pyrene" =======700
+
+            "Polychlorinated Biphenyls (PCBs)"
+                "Processing / pretreatment Charge per Sample" =======1800
+                "Aroclor 1221" =======700
+                "Aroclor 1016" =======700
+                "Aroclor 1232" =======700
+                "Aroclor 1242" =======700
+                "Aroclor 1248" =======700
+                "Aroclor 1254" =======700
+                "Aroclor 1260" =======700
+
+
+            "Tri Halo Methane (THM)"
+                "Processing / pretreatment Charge per Sample" =======1400
+                "Bromodichloromethane" =======700
+                "Bromoform" =======700
+                "Chloroform" =======700
+                "Dibromochloromethane" =======700
+                "Other Organic Parameter"
+                    "Adsorbable Organic Halogen (AOX)" =======3500
+                    "Tanin / Lignin" =======620
+                    "Oil & Grease" =======350
+                    "Phenol" =======350
+                    "Total Organic Carbon (TOC)" =======880
+                    "Volatile Organic Acids" =======620
+
+
+        "BIOLOGICAL TEST"
+            "Bacteriological Sample Collection" =======350
+            "Benthos Organism Identification & Count (each sample) " =======1050
+            "Benthos Organism Sample collection" =======1800
+            "Chlorophyll Estimation " =======1050
+            "E. Coli (MFT technique) " =======700
+            "E. Coli (MPN technique) " =======620
+            "Faecal Coliform (MFT technique)" =======700
+            "Faecal Coliform (MPN technique)" =======620
+            "Faecal Streptococci(MPN technique)" =======790
+            "Faecal Streptococci(MFT technique)" =======700
+            "Plankton Sample collectione)" =======440
+            "Plankton (Phytoplankton) count" =======1050
+            "Plankton (Zooplankton) count" =======1050
+            "Standard Plate Count" =======350
+            "Total Coliform (MFT technique)" =======700
+            "Total Coliform (MPN technique)" =======620
+            "Total Plate Count" =======620
+            "Toxicological"
+                "Bio-assay (LC50) " =======4900
+                “Dimensionless toxicity Test" =======2800
+
+    6.“Analysis charges of Soil/Sludge/Sediment/Solid waste samples” =======
+        "Ammonia" =======530
+        "Bicarbonates" =======350
+        "Boron" =======700
+        "Calcium" =======270
+        "Calcium Carbonate" =======620
+        "Cation Exchange Capacity (CEC) " =======700
+        "Chloride" =======270
+        "Colour" =======175
+        "Electrical Conductivity (EC)" =======175
+        "Exchangeable Sodium Percentage (ESP) " =======960
+        "Gypsum Requirement" =======620
+        "H. Acid" =======700
+        "Heavy Metal (As per water & waste water analysis At Clause V)" ============0
+        "Trace Metals using ED-XRF”
+            “Aluminium, Antimony, Arsenic, Barium, Bromine, Cadmium, Calcium, Cesium,	 			Chlorine,Chromium, Cobalt, Copper, Gallium, Germanium, Gold, Iodine, Iron, 				Lanthanum, Lead,Magnesium, Manganese, Molybdenum, Nickel, Palladium, 					Phosphorous, Potassium, 	Rubidium, Rutherfordium, Selenium, Silicon, Silver, Sodium, 			Strontium, Sulphur, Tellurium, Tin, 	Titanium, Tungsten, Vanadium, Ytterbium and Zinc, 		per sample." =======7000
+            “Magnesium" =======530
+            “Mechanical soil analysis (soil texture)" =======270
+            “Nitrate" =======	530
+            “Nitrite" =======530
+            “Nitrogen available" =======620
+            “Organic Carbon/Matter (chemical method)" =======620
+            “Polycyclic Aromatic Hydrocarbons (PAHs) (As per water & waste water analysis at clause V)" ============0
+            “Polychlorinated Biphenyls (PCBs) (As per water & waste water analysis at clause V)" ==============0
+            “Pesticides (As per water & waste water analysis at clause V)" ============= 0
+            “pH" =======175
+            “Phosphorous (available)" =======700
+            “Phosphate (ortho) " =======530
+            “Phosphate (total)" =======700
+            “Potash (Available)" =======350
+            “Potassium" =======530
+            “Sodium Absorption Ratio (SAR) in Soil extract" =======1140
+            “Sodium" =======530
+            “Soil Moisture" =======175
+            “Sulphate" =======350
+            “Sulphur" =======620
+            “Total Kjehldhal Nitrogen (TKN)" =======700
+            “TOC" =======960
+            “Total water soluble salts" =======350
+            “Water Holding capacity" =======175
+            “Sample processing and analysis for Dioxin-Furan (PCDDs-PCDFs) congeners (Isotope Dilution method using GC-HRMS)"ailable)" ===== 70000
+
+
+    7.“Analysis charges for Hazardous Waste samples”
+        "Preparation of Leachate (TCLP extract/Water Extract)" ======= 1750
+        "Preparation of LeDetermination of various parameters in  Leachateachate (TCLP 	extract/Water Extract) (As per water & waste water analysis in respective at clause V)" ===========0
+        "Flash point/Ignitibility"	 =======960
+        "Reactivity " =======960
+        "Corrosivity" =======960
+        "Measurement of Toxicity----LC50" =======4900
+        "Measurement of Toxicity----Dimensionless Toxicity" =======2800
+        "Total Organic Carbon" =======880
+        "Absorbable Organic Halogen (AOX)" =======3500

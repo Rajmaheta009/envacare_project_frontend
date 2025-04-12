@@ -1,0 +1,1922 @@
+[
+    {
+        "id": 1,
+        "name": "1.Air Monitoring",
+        "parent_id": null,
+        "price": null
+    },
+    {
+        "id": 2,
+        "name": "Sampling (upto each 8 hrs) for suspended particulate matter and gaseous pollutants",
+        "parent_id": 1,
+        "price": "3500"
+    },
+    {
+        "id": 3,
+        "name": "Sampling (24 hrs) for suspended particulate matter and gaseous pollutants",
+        "parent_id": 1,
+        "price": "100"
+    },
+    {
+        "id": 4,
+        "name": "Sampling of Volatile Organic Compounds (VOCs)/ Benzene Toluene Xylene (BTX)",
+        "parent_id": 1,
+        "price": "1000"
+    },
+    {
+        "id": 5,
+        "name": "Sampling of Poly Aromatic Hydrocarbons (PAHs)",
+        "parent_id": 1,
+        "price": "100"
+    },
+    {
+        "id": 6,
+        "name": "Sampling (24 hrs using PUF HVS) of Ambient Air for Dioxin- Furan (PCDDs-PCDFs) congeners",
+        "parent_id": 1,
+        "price": "10500"
+    },
+    {
+        "id": 7,
+        "name": "2.Source Emission Monitoring/Sampling charges",
+        "parent_id": null,
+        "price": null
+    },
+    {
+        "id": 8,
+        "name": "Sampling/measurement of Velocity, Flow rate, temperature and molecular weight of     FlueGas (each specific location/each sample in duplicate for the mentioned parameter)",
+        "parent_id": 7,
+        "price": "3500"
+    },
+    {
+        "id": 9,
+        "name": "Sampling of SO2/NO2",
+        "parent_id": 7,
+        "price": "4400"
+    },
+    {
+        "id": 10,
+        "name": "Sampling of Volatile Organic Compounds (VOCs)/ Benzene Toluene Xylene (BTX)",
+        "parent_id": 7,
+        "price": "1500"
+    },
+    {
+        "id": 11,
+        "name": "Sampling of Poly Aromatic  Hydrocarbons (PAHs)",
+        "parent_id": 7,
+        "price": "9600"
+    },
+    {
+        "id": 12,
+        "name": "Sampling of emission from stationary source for DioxinFuran (PCDDs-PCDFs) congeners using Manual Sampling Kit",
+        "parent_id": 7,
+        "price": "3500"
+    },
+    {
+        "id": 13,
+        "name": "3.Noise Monitoring",
+        "parent_id": null,
+        "price": null
+    },
+    {
+        "id": 14,
+        "name": "First Monitoring",
+        "parent_id": 13,
+        "price": "5300"
+    },
+    {
+        "id": 15,
+        "name": "Each Subsequent Monitoring within same premises",
+        "parent_id": 13,
+        "price": "6200"
+    },
+    {
+        "id": 16,
+        "name": "For 08 hours Continuous Monitoring or more",
+        "parent_id": 13,
+        "price": "25000"
+    },
+    {
+        "id": 17,
+        "name": "4.Sampling charges for water & wastewater samples",
+        "parent_id": null,
+        "price": null
+    },
+    {
+        "id": 18,
+        "name": "GRAB SAMPLING",
+        "parent_id": 17,
+        "price": null
+    },
+    {
+        "id": 19,
+        "name": "Grab sampling/sample/place",
+        "parent_id": 18,
+        "price": "700"
+    },
+    {
+        "id": 20,
+        "name": "For every additional Grab sampling/same place",
+        "parent_id": 18,
+        "price": "3500"
+    },
+    {
+        "id": 21,
+        "name": "COMPOSITE SAMPLING",
+        "parent_id": 17,
+        "price": null
+    },
+    {
+        "id": 22,
+        "name": "Composite sampling/source/place upto 8 hrs.",
+        "parent_id": 21,
+        "price": "18000"
+    },
+    {
+        "id": 23,
+        "name": "Composite sampling/source/place upto 16 hrs.",
+        "parent_id": 21,
+        "price": "960"
+    },
+    {
+        "id": 24,
+        "name": "Composite sampling/source/place upto 24 hrs",
+        "parent_id": 21,
+        "price": "440"
+    },
+    {
+        "id": 25,
+        "name": "For every additional composite sampling/same place but different source upto 8 hrs.",
+        "parent_id": 21,
+        "price": "1800"
+    },
+    {
+        "id": 26,
+        "name": "For every additional composite sampling/same place but different source upto 16hrs",
+        "parent_id": 21,
+        "price": "5300"
+    },
+    {
+        "id": 27,
+        "name": "For every additional composite sampling/same place but different source upto 24hrs",
+        "parent_id": 21,
+        "price": "960"
+    },
+    {
+        "id": 28,
+        "name": "Flow Rate measurement/source – once",
+        "parent_id": 17,
+        "price": "2000"
+    },
+    {
+        "id": 29,
+        "name": "Flow Rate measurement/source – every additional",
+        "parent_id": 17,
+        "price": "2900"
+    },
+    {
+        "id": 30,
+        "name": "5.Sampling charges for Soil samples",
+        "parent_id": null,
+        "price": null
+    },
+    {
+        "id": 31,
+        "name": "Grab sampling/sample/place",
+        "parent_id": 30,
+        "price": "700"
+    },
+    {
+        "id": 32,
+        "name": "For additional Grab sampling/same place",
+        "parent_id": 30,
+        "price": "270"
+    },
+    {
+        "id": 33,
+        "name": "6.Hazardous Waste Sample collection charges at the premises of Industry/Import site/Disposal site",
+        "parent_id": null,
+        "price": null
+    },
+    {
+        "id": 34,
+        "name": "Integrated sample collect ion charges",
+        "parent_id": 33,
+        "price": null
+    },
+    {
+        "id": 35,
+        "name": "ANALYSIS CHARGES",
+        "parent_id": 33,
+        "price": null
+    },
+    {
+        "id": 36,
+        "name": "Ammonia",
+        "parent_id": 35,
+        "price": "1050"
+    },
+    {
+        "id": 37,
+        "name": "Analysis using dragger (per tube)",
+        "parent_id": 35,
+        "price": "700"
+    },
+    {
+        "id": 38,
+        "name": "Benzene Toluene Xylene (BTX)",
+        "parent_id": 35,
+        "price": "1800"
+    },
+    {
+        "id": 39,
+        "name": "Carbon Monoxide",
+        "parent_id": 35,
+        "price": "1050"
+    },
+    {
+        "id": 40,
+        "name": "Chlorine",
+        "parent_id": 35,
+        "price": "1050"
+    },
+    {
+        "id": 41,
+        "name": "Fluoride (gaseous)",
+        "parent_id": 35,
+        "price": "1050"
+    },
+    {
+        "id": 42,
+        "name": "Fluoride (particulate)",
+        "parent_id": 35,
+        "price": null
+    },
+    {
+        "id": 43,
+        "name": "Hydrogen Chloride",
+        "parent_id": 35,
+        "price": "1050"
+    },
+    {
+        "id": 44,
+        "name": "Hydrogen Sulphide",
+        "parent_id": 35,
+        "price": "1050"
+    },
+    {
+        "id": 45,
+        "name": "Lead & Other metals (per metal)",
+        "parent_id": 35,
+        "price": "\"As per water & waste water analysis at clause V\""
+    },
+    {
+        "id": 46,
+        "name": "NO2",
+        "parent_id": 35,
+        "price": "1050"
+    },
+    {
+        "id": 47,
+        "name": "Ozone",
+        "parent_id": 35,
+        "price": "1800"
+    },
+    {
+        "id": 48,
+        "name": "Poly Aromatic Hydrocarbons (PAHs)",
+        "parent_id": 35,
+        "price": "\"As per water & waste water analysis at clause V\""
+    },
+    {
+        "id": 49,
+        "name": "Suspended Particulate Matter (SPM)",
+        "parent_id": 35,
+        "price": "1050"
+    },
+    {
+        "id": 50,
+        "name": "Particulate Matter (PM2.5)",
+        "parent_id": 35,
+        "price": "1800"
+    },
+    {
+        "id": 51,
+        "name": "Respirable Suspended Particulate Matter (PM10)",
+        "parent_id": 35,
+        "price": "1050"
+    },
+    {
+        "id": 52,
+        "name": "Sulphur Dioxide",
+        "parent_id": 35,
+        "price": "1050"
+    },
+    {
+        "id": 53,
+        "name": "Volatile Organics Carbon",
+        "parent_id": 35,
+        "price": "3500"
+    },
+    {
+        "id": 54,
+        "name": "Trace Metals on air filter paper using EDXRF Aluminium, Antimony, Arsenic, Barium,Bromine, Cadmium, Calcium, Cesium, Chlorine, Chromium, Cobalt, Copper, Gallium,ermanium, Gold, Iodine, Iron, Lanthanum, Lead, Magnesium, Manganese,Molybdenum, Nickel, Palladium, Phosphorous, Potassium, Rubidium, Rutherfordium,Selenium, Silicon, Silver, Sodium, Strontium, Sulphur, Tellurium, Tin, Titanium, Tungsten,Vanadium, Ytterbium, and Zinc.( Per filter paper)",
+        "parent_id": 35,
+        "price": "5300"
+    },
+    {
+        "id": 55,
+        "name": "Water Extractable ions in Air Particulate Matter using Ion Chromatograph (IC) (i).Processing / Pretreatment Charge per Sample (Filter Paper)",
+        "parent_id": 35,
+        "price": "530"
+    },
+    {
+        "id": 56,
+        "name": "Water Extractable ions in Air Particulate Matter using Ion Chromatograph (IC) (ii).Cations (Na+ , NH4 + , K+ , Ca+2& Mg+2 ) and Anions (F- , Br- , Cl- , NO3 - , NO2 - ,SO4 -2& PO4 -3 )      (for 12 icone)",
+        "parent_id": 35,
+        "price": "2100"
+    },
+    {
+        "id": 57,
+        "name": "Organic and Elemental Carbon (OC/EC) on quartz filter paper",
+        "parent_id": 35,
+        "price": "3500"
+    },
+    {
+        "id": 58,
+        "name": "Sample processing and analysis for Dioxin-Furan (PCDDs-PCDFs) congeners (Isotope Dilution method using GC-HRMS)",
+        "parent_id": 35,
+        "price": "75000"
+    },
+    {
+        "id": 59,
+        "name": "7.Analysis Charges for Source Emission Parameters",
+        "parent_id": null,
+        "price": null
+    },
+    {
+        "id": 60,
+        "name": "Acid Mist",
+        "parent_id": 59,
+        "price": null
+    },
+    {
+        "id": 61,
+        "name": "Ammonia",
+        "parent_id": 60,
+        "price": "1050"
+    },
+    {
+        "id": 62,
+        "name": "Carbon Monoxide",
+        "parent_id": 60,
+        "price": "1050"
+    },
+    {
+        "id": 63,
+        "name": "Oxides of Nitrogen",
+        "parent_id": 60,
+        "price": "1050"
+    },
+    {
+        "id": 64,
+        "name": "Hydrogen Sulphide",
+        "parent_id": 60,
+        "price": "1050"
+    },
+    {
+        "id": 65,
+        "name": "Hydrogen Chloride",
+        "parent_id": 60,
+        "price": "1050"
+    },
+    {
+        "id": 66,
+        "name": "Fluorides (Particulate)",
+        "parent_id": 60,
+        "price": "1050"
+    },
+    {
+        "id": 67,
+        "name": "Fluoride (Gaseous)",
+        "parent_id": 60,
+        "price": "1050"
+    },
+    {
+        "id": 68,
+        "name": "Chlorine",
+        "parent_id": 60,
+        "price": "1050"
+    },
+    {
+        "id": 69,
+        "name": "Oxygen",
+        "parent_id": 60,
+        "price": "1050"
+    },
+    {
+        "id": 70,
+        "name": "Polycyclic Aromatic Hydrocarbons (Particulate)",
+        "parent_id": 60,
+        "price": "\"As per water & waste water analysis At Clause V\""
+    },
+    {
+        "id": 71,
+        "name": "Suspended Particulate Matter",
+        "parent_id": 60,
+        "price": "1050"
+    },
+    {
+        "id": 72,
+        "name": "Sulphur Dioxide",
+        "parent_id": 60,
+        "price": "1050"
+    },
+    {
+        "id": 73,
+        "name": "Benzene Toluene Xylene (BTX)",
+        "parent_id": 60,
+        "price": "2700"
+    },
+    {
+        "id": 74,
+        "name": "Volatile Organic Compounds (VOCs)",
+        "parent_id": 60,
+        "price": "5300"
+    },
+    {
+        "id": 75,
+        "name": "Sample processing and analysis for Dioxin-Furan (PCDDs-PCDFs) congeners (Isotope Dilution method using GC-HRMS)",
+        "parent_id": 60,
+        "price": "75000"
+    },
+    {
+        "id": 76,
+        "name": "8.Ambient Air Quality Monitoring using on-line monitoring instruments by Mobile Van",
+        "parent_id": null,
+        "price": null
+    },
+    {
+        "id": 77,
+        "name": "PM10, PM2.5 , SO2, NOx, SPM, CO along with Meteorological data viz. temperature,     Humidity, Wind speed, Wind direct         - per hour (minimum charges Rs.15,000/-) +     Rs.50.00/km run of the van for 24 hours monitoring",
+        "parent_id": 76,
+        "price": "6200"
+    },
+    {
+        "id": 78,
+        "name": "9.Auto Exhaust Monitoring - One time checking of vehicular exhaust",
+        "parent_id": null,
+        "price": null
+    },
+    {
+        "id": 79,
+        "name": "Carbon Monoxide %",
+        "parent_id": 78,
+        "price": "\"As per rate notified by Transport Department\""
+    },
+    {
+        "id": 80,
+        "name": "Hydrocarbon, PPM",
+        "parent_id": 78,
+        "price": "\"As per rate notified by Transport Department\""
+    },
+    {
+        "id": 81,
+        "name": "Smoke Density, HSU",
+        "parent_id": 78,
+        "price": "\"As per rate notified by Transport Department\""
+    },
+    {
+        "id": 82,
+        "name": "10.Analysis charges of Water & Wastewater samples",
+        "parent_id": null,
+        "price": null
+    },
+    {
+        "id": 83,
+        "name": "PHYSICAL PARAMETERS",
+        "parent_id": 82,
+        "price": null
+    },
+    {
+        "id": 84,
+        "name": "Conductivity",
+        "parent_id": 83,
+        "price": "110"
+    },
+    {
+        "id": 85,
+        "name": "Odour",
+        "parent_id": 83,
+        "price": "110"
+    },
+    {
+        "id": 86,
+        "name": "Sludge Volume Index (S.V.I.)",
+        "parent_id": 83,
+        "price": "350"
+    },
+    {
+        "id": 87,
+        "name": "Solids (dissolved)",
+        "parent_id": 83,
+        "price": "180"
+    },
+    {
+        "id": 88,
+        "name": "Solids (fixed)",
+        "parent_id": 83,
+        "price": "270"
+    },
+    {
+        "id": 89,
+        "name": "Solids (volatile)",
+        "parent_id": 83,
+        "price": "270"
+    },
+    {
+        "id": 90,
+        "name": "Suspended Solids",
+        "parent_id": 83,
+        "price": "180"
+    },
+    {
+        "id": 91,
+        "name": "Temperature",
+        "parent_id": 83,
+        "price": "110"
+    },
+    {
+        "id": 92,
+        "name": "Turbidity",
+        "parent_id": 83,
+        "price": "180"
+    },
+    {
+        "id": 93,
+        "name": "Total Solids",
+        "parent_id": 83,
+        "price": "110"
+    },
+    {
+        "id": 94,
+        "name": "Velocity of Flow (Current Meter)",
+        "parent_id": 83,
+        "price": "350"
+    },
+    {
+        "id": 95,
+        "name": "Velocity of Flow (other)",
+        "parent_id": 83,
+        "price": "960"
+    },
+    {
+        "id": 96,
+        "name": "CHEMICAL PARAMETERS",
+        "parent_id": 82,
+        "price": null
+    },
+    {
+        "id": 97,
+        "name": "Inorganic",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 98,
+        "name": "Acidity",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 99,
+        "name": "Alkalinity",
+        "parent_id": 96,
+        "price": "350"
+    },
+    {
+        "id": 100,
+        "name": "Ammonical Nitrogen",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 101,
+        "name": "Bicarbonatesgen",
+        "parent_id": 96,
+        "price": "1050"
+    },
+    {
+        "id": 102,
+        "name": "Biochemical Oxygen Demand (BOD)",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 103,
+        "name": "Bromide",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 104,
+        "name": "Calcium (titrimetric)",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 105,
+        "name": "Carbon Dioxide",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 106,
+        "name": "Carbonate",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 107,
+        "name": "Chloride",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 108,
+        "name": "Chlorine Demand",
+        "parent_id": 96,
+        "price": "350"
+    },
+    {
+        "id": 109,
+        "name": "Chlorine Residual",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 110,
+        "name": "Chemical Oxygen Demand (COD)",
+        "parent_id": 96,
+        "price": "620"
+    },
+    {
+        "id": 111,
+        "name": "Cyanide",
+        "parent_id": 96,
+        "price": "620"
+    },
+    {
+        "id": 112,
+        "name": "Detergent",
+        "parent_id": 96,
+        "price": "350"
+    },
+    {
+        "id": 113,
+        "name": "Dissolved Oxygen",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 114,
+        "name": "Fluoride",
+        "parent_id": 96,
+        "price": "350"
+    },
+    {
+        "id": 115,
+        "name": "H. Acid",
+        "parent_id": 96,
+        "price": "620"
+    },
+    {
+        "id": 116,
+        "name": "Hardness (calcium)",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 117,
+        "name": "Hardness (total)",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 118,
+        "name": "Iodide",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 119,
+        "name": "Nitrate Nitrogen",
+        "parent_id": 96,
+        "price": "350"
+    },
+    {
+        "id": 120,
+        "name": "Nitrite Nitrogen",
+        "parent_id": 96,
+        "price": "350"
+    },
+    {
+        "id": 121,
+        "name": "Percent Sodium",
+        "parent_id": 96,
+        "price": "1050"
+    },
+    {
+        "id": 122,
+        "name": "Permanganate Value",
+        "parent_id": 96,
+        "price": "350"
+    },
+    {
+        "id": 123,
+        "name": "pH",
+        "parent_id": 96,
+        "price": "110"
+    },
+    {
+        "id": 124,
+        "name": "Phosphate (ortho)",
+        "parent_id": 96,
+        "price": "350"
+    },
+    {
+        "id": 125,
+        "name": "Phosphate (total)",
+        "parent_id": 96,
+        "price": "620"
+    },
+    {
+        "id": 126,
+        "name": "Salinity",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 127,
+        "name": "Sodium Absorption Ratio (SAR)",
+        "parent_id": 96,
+        "price": "1050"
+    },
+    {
+        "id": 128,
+        "name": "Settlable Solids",
+        "parent_id": 96,
+        "price": "180"
+    },
+    {
+        "id": 129,
+        "name": "Silica",
+        "parent_id": 96,
+        "price": "350"
+    },
+    {
+        "id": 130,
+        "name": "Sulphate",
+        "parent_id": 96,
+        "price": "270"
+    },
+    {
+        "id": 131,
+        "name": "Sulphide",
+        "parent_id": 96,
+        "price": "350"
+    },
+    {
+        "id": 132,
+        "name": "Total Kjeldahl Nitrogen (TKN)",
+        "parent_id": 96,
+        "price": "350"
+    },
+    {
+        "id": 133,
+        "name": "Urea Nitrogen",
+        "parent_id": 96,
+        "price": "620"
+    },
+    {
+        "id": 134,
+        "name": "Cations (Na+ , NH4 + , K+ , Ca+2& Mg+2) and Anions (F- , Br- , Cl- , NO3 - , NO2 - ,SO4 -2& PO4 -3 ) in surface & ground water sample using Ion Chromatograph (for 12 ions)",
+        "parent_id": 96,
+        "price": "\"2100.00 (for 12 ions)\""
+    },
+    {
+        "id": 135,
+        "name": "Metals",
+        "parent_id": 96,
+        "price": null
+    },
+    {
+        "id": 136,
+        "name": "Processing pre-treatment Charge per Sample",
+        "parent_id": 135,
+        "price": "880"
+    },
+    {
+        "id": 137,
+        "name": "Aluminium",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 138,
+        "name": "Antimony",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 139,
+        "name": "Arsenic",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 140,
+        "name": "Barium",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 141,
+        "name": "Beryllium",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 142,
+        "name": "Boron",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 143,
+        "name": "Chromium Hexavalent",
+        "parent_id": 135,
+        "price": "350"
+    },
+    {
+        "id": 144,
+        "name": "Chromium Totalnt",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 145,
+        "name": "Cobalt",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 146,
+        "name": "Copper",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 147,
+        "name": "Iron",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 148,
+        "name": "Lead",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 149,
+        "name": "Manganese",
+        "parent_id": 135,
+        "price": "350"
+    },
+    {
+        "id": 150,
+        "name": "Magnesium",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 151,
+        "name": "Mercury (Processing & Analysis)",
+        "parent_id": 135,
+        "price": "1400"
+    },
+    {
+        "id": 152,
+        "name": "Molybdenum",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 153,
+        "name": "Nickel",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 154,
+        "name": "Potassium",
+        "parent_id": 135,
+        "price": "350"
+    },
+    {
+        "id": 155,
+        "name": "Tin",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 156,
+        "name": "Selenium",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 157,
+        "name": "Silver",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 158,
+        "name": "Sodium",
+        "parent_id": 135,
+        "price": "350"
+    },
+    {
+        "id": 159,
+        "name": "Strontium",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 160,
+        "name": "Vanadium",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 161,
+        "name": "Zinc",
+        "parent_id": 135,
+        "price": "530"
+    },
+    {
+        "id": 162,
+        "name": "Organics Organo Chlorine Pesticides (OCPs)",
+        "parent_id": 96,
+        "price": null
+    },
+    {
+        "id": 163,
+        "name": "Processing / pretreatment Charge per Sample",
+        "parent_id": 162,
+        "price": "1800"
+    },
+    {
+        "id": 164,
+        "name": "Aldrin",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 165,
+        "name": "Dicofol",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 166,
+        "name": "Dieldrin",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 167,
+        "name": "Endosulfan-I",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 168,
+        "name": "Endosulfan-II",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 169,
+        "name": "Endosulfansulfate",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 170,
+        "name": "Heptachlor",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 171,
+        "name": "Hexachlorobenzene (HCB)",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 172,
+        "name": "Methoxy Chlor",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 173,
+        "name": "o,p-DDT",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 174,
+        "name": "p,p’-DDD",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 175,
+        "name": "p,p’-DDE",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 176,
+        "name": "p,p’-DDT",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 177,
+        "name": "α-HCH",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 178,
+        "name": "β-HCH",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 179,
+        "name": "γ-HCH",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 180,
+        "name": "δ-HCH",
+        "parent_id": 162,
+        "price": "700"
+    },
+    {
+        "id": 181,
+        "name": "Organo Phosphorous Pesticides (OPPs)",
+        "parent_id": 96,
+        "price": null
+    },
+    {
+        "id": 182,
+        "name": "Processing / pretreatment Charge per Sample",
+        "parent_id": 181,
+        "price": "1800"
+    },
+    {
+        "id": 183,
+        "name": "Chlorpyriphos",
+        "parent_id": 181,
+        "price": "700"
+    },
+    {
+        "id": 184,
+        "name": "Dimethoate",
+        "parent_id": 181,
+        "price": "700"
+    },
+    {
+        "id": 185,
+        "name": "Ethion",
+        "parent_id": 181,
+        "price": "700"
+    },
+    {
+        "id": 186,
+        "name": "Malathion",
+        "parent_id": 181,
+        "price": "700"
+    },
+    {
+        "id": 187,
+        "name": "Monocrotophos",
+        "parent_id": 181,
+        "price": "700"
+    },
+    {
+        "id": 188,
+        "name": "Parathion-methyl",
+        "parent_id": 181,
+        "price": "700"
+    },
+    {
+        "id": 189,
+        "name": "Phorate",
+        "parent_id": 181,
+        "price": "700"
+    },
+    {
+        "id": 190,
+        "name": "Phosphamidon",
+        "parent_id": 181,
+        "price": "700"
+    },
+    {
+        "id": 191,
+        "name": "Profenophos",
+        "parent_id": 181,
+        "price": "700"
+    },
+    {
+        "id": 192,
+        "name": "Quinalphos",
+        "parent_id": 181,
+        "price": "700"
+    },
+    {
+        "id": 193,
+        "name": "Synthetic Pyrethroids (SPs)",
+        "parent_id": 96,
+        "price": null
+    },
+    {
+        "id": 194,
+        "name": "Processing / pretreatment Charge per Sample",
+        "parent_id": 193,
+        "price": "1800"
+    },
+    {
+        "id": 195,
+        "name": "Deltamethrin",
+        "parent_id": 193,
+        "price": "700"
+    },
+    {
+        "id": 196,
+        "name": "Fenpropethrin",
+        "parent_id": 193,
+        "price": "700"
+    },
+    {
+        "id": 197,
+        "name": "Fenvalerate",
+        "parent_id": 193,
+        "price": "700"
+    },
+    {
+        "id": 198,
+        "name": "α-Cypermethrin",
+        "parent_id": 193,
+        "price": "700"
+    },
+    {
+        "id": 199,
+        "name": "β-Cyfluthrin",
+        "parent_id": 193,
+        "price": "700"
+    },
+    {
+        "id": 200,
+        "name": "λ-Cyhalothrin",
+        "parent_id": 193,
+        "price": "700"
+    },
+    {
+        "id": 201,
+        "name": "Herbicides",
+        "parent_id": 96,
+        "price": null
+    },
+    {
+        "id": 202,
+        "name": "Processing / pretreatment Charge per Sample",
+        "parent_id": 201,
+        "price": "1800"
+    },
+    {
+        "id": 203,
+        "name": "Alachlor",
+        "parent_id": 201,
+        "price": "700"
+    },
+    {
+        "id": 204,
+        "name": "Butachlor",
+        "parent_id": 201,
+        "price": "700"
+    },
+    {
+        "id": 205,
+        "name": "Fluchloralin",
+        "parent_id": 201,
+        "price": "700"
+    },
+    {
+        "id": 206,
+        "name": "Pendimethalin",
+        "parent_id": 201,
+        "price": "700"
+    },
+    {
+        "id": 207,
+        "name": "Polycyclic Aromatic Hydrocarbons (PAHs)",
+        "parent_id": 96,
+        "price": null
+    },
+    {
+        "id": 208,
+        "name": "Processing / pretreatment Charge per Sample",
+        "parent_id": 207,
+        "price": "1800"
+    },
+    {
+        "id": 209,
+        "name": "Acenaphthene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 210,
+        "name": "Acenaphthylene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 211,
+        "name": "Anthracene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 212,
+        "name": "Benz(a)anthracene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 213,
+        "name": "Benzo(a)pyrene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 214,
+        "name": "Benzo(b)fluoranthene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 215,
+        "name": "Benzo(e)pyrene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 216,
+        "name": "Benzo(g,h,i)perylene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 217,
+        "name": "Benzo(k)fluoranthene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 218,
+        "name": "Chrysene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 219,
+        "name": "Dibenzo(a,h)anthracene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 220,
+        "name": "Fluoranthene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 221,
+        "name": "Fluorene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 222,
+        "name": "Indeno(1,2,3-cd)pyrene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 223,
+        "name": "Naphthalene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 224,
+        "name": "Perylene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 225,
+        "name": "Phenanthrene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 226,
+        "name": "Pyrene",
+        "parent_id": 207,
+        "price": "700"
+    },
+    {
+        "id": 227,
+        "name": "Polychlorinated Biphenyls (PCBs)",
+        "parent_id": 96,
+        "price": null
+    },
+    {
+        "id": 228,
+        "name": "Processing / pretreatment Charge per Sample",
+        "parent_id": 227,
+        "price": "1800"
+    },
+    {
+        "id": 229,
+        "name": "Aroclor 1221",
+        "parent_id": 227,
+        "price": "700"
+    },
+    {
+        "id": 230,
+        "name": "Aroclor 1016",
+        "parent_id": 227,
+        "price": "700"
+    },
+    {
+        "id": 231,
+        "name": "Aroclor 1232",
+        "parent_id": 227,
+        "price": "700"
+    },
+    {
+        "id": 232,
+        "name": "Aroclor 1242",
+        "parent_id": 227,
+        "price": "700"
+    },
+    {
+        "id": 233,
+        "name": "Aroclor 1248",
+        "parent_id": 227,
+        "price": "700"
+    },
+    {
+        "id": 234,
+        "name": "Aroclor 1254",
+        "parent_id": 227,
+        "price": "700"
+    },
+    {
+        "id": 235,
+        "name": "Aroclor 1260",
+        "parent_id": 227,
+        "price": "700"
+    },
+    {
+        "id": 236,
+        "name": "Tri Halo Methane (THM)",
+        "parent_id": 96,
+        "price": null
+    },
+    {
+        "id": 237,
+        "name": "Processing / pretreatment Charge per Sample",
+        "parent_id": 236,
+        "price": "1400"
+    },
+    {
+        "id": 238,
+        "name": "Bromodichloromethane",
+        "parent_id": 236,
+        "price": "700"
+    },
+    {
+        "id": 239,
+        "name": "Bromoform",
+        "parent_id": 236,
+        "price": "700"
+    },
+    {
+        "id": 240,
+        "name": "Chloroform",
+        "parent_id": 236,
+        "price": "700"
+    },
+    {
+        "id": 241,
+        "name": "Dibromochloromethane",
+        "parent_id": 236,
+        "price": "700"
+    },
+    {
+        "id": 242,
+        "name": "Other Organic Parameter",
+        "parent_id": 236,
+        "price": null
+    },
+    {
+        "id": 243,
+        "name": "Adsorbable Organic Halogen (AOX)",
+        "parent_id": 242,
+        "price": "3500"
+    },
+    {
+        "id": 244,
+        "name": "Tanin / Lignin",
+        "parent_id": 242,
+        "price": "620"
+    },
+    {
+        "id": 245,
+        "name": "Oil & Grease",
+        "parent_id": 242,
+        "price": "350"
+    },
+    {
+        "id": 246,
+        "name": "Phenol",
+        "parent_id": 242,
+        "price": "350"
+    },
+    {
+        "id": 247,
+        "name": "Total Organic Carbon (TOC)",
+        "parent_id": 242,
+        "price": "880"
+    },
+    {
+        "id": 248,
+        "name": "Volatile Organic Acids",
+        "parent_id": 242,
+        "price": "620"
+    },
+    {
+        "id": 249,
+        "name": "BIOLOGICAL TEST",
+        "parent_id": 82,
+        "price": null
+    },
+    {
+        "id": 250,
+        "name": "Bacteriological Sample Collection",
+        "parent_id": 249,
+        "price": "350"
+    },
+    {
+        "id": 251,
+        "name": "Benthos Organism Identification & Count (each sample)",
+        "parent_id": 249,
+        "price": "1050"
+    },
+    {
+        "id": 252,
+        "name": "Benthos Organism Sample collection",
+        "parent_id": 249,
+        "price": "1800"
+    },
+    {
+        "id": 253,
+        "name": "Chlorophyll Estimation",
+        "parent_id": 249,
+        "price": "1050"
+    },
+    {
+        "id": 254,
+        "name": "E. Coli (MFT technique)",
+        "parent_id": 249,
+        "price": "700"
+    },
+    {
+        "id": 255,
+        "name": "E. Coli (MPN technique)",
+        "parent_id": 249,
+        "price": "620"
+    },
+    {
+        "id": 256,
+        "name": "Faecal Coliform (MFT technique)",
+        "parent_id": 249,
+        "price": "700"
+    },
+    {
+        "id": 257,
+        "name": "Faecal Coliform (MPN technique)",
+        "parent_id": 249,
+        "price": "620"
+    },
+    {
+        "id": 258,
+        "name": "Faecal Streptococci(MPN technique)",
+        "parent_id": 249,
+        "price": "790"
+    },
+    {
+        "id": 259,
+        "name": "Faecal Streptococci(MFT technique)",
+        "parent_id": 249,
+        "price": "700"
+    },
+    {
+        "id": 260,
+        "name": "Plankton Sample collectione)",
+        "parent_id": 249,
+        "price": "440"
+    },
+    {
+        "id": 261,
+        "name": "Plankton (Phytoplankton) count",
+        "parent_id": 249,
+        "price": "1050"
+    },
+    {
+        "id": 262,
+        "name": "Plankton (Zooplankton) count",
+        "parent_id": 249,
+        "price": "1050"
+    },
+    {
+        "id": 263,
+        "name": "Standard Plate Count",
+        "parent_id": 249,
+        "price": "350"
+    },
+    {
+        "id": 264,
+        "name": "Total Coliform (MFT technique)",
+        "parent_id": 249,
+        "price": "700"
+    },
+    {
+        "id": 265,
+        "name": "Total Coliform (MPN technique)",
+        "parent_id": 249,
+        "price": "620"
+    },
+    {
+        "id": 266,
+        "name": "Total Plate Count",
+        "parent_id": 249,
+        "price": "620"
+    },
+    {
+        "id": 267,
+        "name": "Toxicological",
+        "parent_id": 249,
+        "price": null
+    },
+    {
+        "id": 268,
+        "name": "Bio-assay (LC50)",
+        "parent_id": 267,
+        "price": "4900"
+    },
+    {
+        "id": 269,
+        "name": "Dimensionless toxicity Test",
+        "parent_id": 267,
+        "price": "2800"
+    },
+    {
+        "id": 270,
+        "name": "11.Analysis charges of Soil/Sludge/Sediment/Solid waste samples",
+        "parent_id": null,
+        "price": null
+    },
+    {
+        "id": 271,
+        "name": "Ammonia",
+        "parent_id": 270,
+        "price": "530"
+    },
+    {
+        "id": 272,
+        "name": "Bicarbonates",
+        "parent_id": 270,
+        "price": "350"
+    },
+    {
+        "id": 273,
+        "name": "Boron",
+        "parent_id": 270,
+        "price": "700"
+    },
+    {
+        "id": 274,
+        "name": "Calcium",
+        "parent_id": 270,
+        "price": "270"
+    },
+    {
+        "id": 275,
+        "name": "Calcium Carbonate",
+        "parent_id": 270,
+        "price": "620"
+    },
+    {
+        "id": 276,
+        "name": "Cation Exchange Capacity (CEC)",
+        "parent_id": 270,
+        "price": "700"
+    },
+    {
+        "id": 277,
+        "name": "Chloride",
+        "parent_id": 270,
+        "price": "270"
+    },
+    {
+        "id": 278,
+        "name": "Colour",
+        "parent_id": 270,
+        "price": "175"
+    },
+    {
+        "id": 279,
+        "name": "Electrical Conductivity (EC)",
+        "parent_id": 270,
+        "price": "175"
+    },
+    {
+        "id": 280,
+        "name": "Exchangeable Sodium Percentage (ESP)",
+        "parent_id": 270,
+        "price": "960"
+    },
+    {
+        "id": 281,
+        "name": "Gypsum Requirement",
+        "parent_id": 270,
+        "price": "620"
+    },
+    {
+        "id": 282,
+        "name": "H. Acid",
+        "parent_id": 270,
+        "price": "700"
+    },
+    {
+        "id": 283,
+        "name": "Heavy Metal",
+        "parent_id": 270,
+        "price": "\"(As per water & waste water analysis At Clause V)\""
+    },
+    {
+        "id": 284,
+        "name": "Trace Metals using ED-XRF",
+        "parent_id": 270,
+        "price": null
+    },
+    {
+        "id": 285,
+        "name": "Aluminium, Antimony, Arsenic, Barium, Bromine, Cadmium, Calcium, Cesium,                 Chlorine,Chromium, Cobalt, Copper, Gallium, Germanium, Gold, Iodine, Iron,                 Lanthanum, Lead,Magnesium, Manganese, Molybdenum, Nickel, Palladium,                     Phosphorous, Potassium,     Rubidium, Rutherfordium, Selenium, Silicon, Silver, Sodium,             Strontium, Sulphur, Tellurium, Tin,     Titanium, Tungsten, Vanadium, Ytterbium and Zinc,         per sample.",
+        "parent_id": 284,
+        "price": "7000"
+    },
+    {
+        "id": 286,
+        "name": "Magnesium",
+        "parent_id": 284,
+        "price": "530"
+    },
+    {
+        "id": 287,
+        "name": "Mechanical soil analysis (soil texture)",
+        "parent_id": 284,
+        "price": "270"
+    },
+    {
+        "id": 288,
+        "name": "Nitrate",
+        "parent_id": 284,
+        "price": "530"
+    },
+    {
+        "id": 289,
+        "name": "Nitrite",
+        "parent_id": 284,
+        "price": "530"
+    },
+    {
+        "id": 290,
+        "name": "Nitrogen available",
+        "parent_id": 284,
+        "price": "620"
+    },
+    {
+        "id": 291,
+        "name": "Organic Carbon/Matter (chemical method)",
+        "parent_id": 284,
+        "price": "620"
+    },
+    {
+        "id": 292,
+        "name": "Polycyclic Aromatic Hydrocarbons (PAHs)",
+        "parent_id": 284,
+        "price": "\"(As per water & waste water analysis at clause V)\""
+    },
+    {
+        "id": 293,
+        "name": "Polychlorinated Biphenyls (PCBs)",
+        "parent_id": 284,
+        "price": "\"(As per water & waste water analysis at clause V)\""
+    },
+    {
+        "id": 294,
+        "name": "Pesticides",
+        "parent_id": 284,
+        "price": "\"(As per water & waste water analysis at clause V)\""
+    },
+    {
+        "id": 295,
+        "name": "pH",
+        "parent_id": 284,
+        "price": "175"
+    },
+    {
+        "id": 296,
+        "name": "Phosphorous (available)",
+        "parent_id": 284,
+        "price": "700"
+    },
+    {
+        "id": 297,
+        "name": "Phosphate (ortho)",
+        "parent_id": 284,
+        "price": "530"
+    },
+    {
+        "id": 298,
+        "name": "Phosphate (total)",
+        "parent_id": 284,
+        "price": "700"
+    },
+    {
+        "id": 299,
+        "name": "Potash (Available)",
+        "parent_id": 284,
+        "price": "350"
+    },
+    {
+        "id": 300,
+        "name": "Potassium",
+        "parent_id": 284,
+        "price": "530"
+    },
+    {
+        "id": 301,
+        "name": "Sodium Absorption Ratio (SAR) in Soil extract",
+        "parent_id": 284,
+        "price": "1140"
+    },
+    {
+        "id": 302,
+        "name": "Sodium",
+        "parent_id": 284,
+        "price": "530"
+    },
+    {
+        "id": 303,
+        "name": "Soil Moisture",
+        "parent_id": 284,
+        "price": "175"
+    },
+    {
+        "id": 304,
+        "name": "Sulphate",
+        "parent_id": 284,
+        "price": "350"
+    },
+    {
+        "id": 305,
+        "name": "Sulphur",
+        "parent_id": 284,
+        "price": "620"
+    },
+    {
+        "id": 306,
+        "name": "Total Kjehldhal Nitrogen (TKN)",
+        "parent_id": 284,
+        "price": "700"
+    },
+    {
+        "id": 307,
+        "name": "TOC",
+        "parent_id": 284,
+        "price": "960"
+    },
+    {
+        "id": 308,
+        "name": "Total water soluble salts",
+        "parent_id": 284,
+        "price": "350"
+    },
+    {
+        "id": 309,
+        "name": "Water Holding capacity",
+        "parent_id": 284,
+        "price": "175"
+    },
+    {
+        "id": 310,
+        "name": "Sample processing and analysis for Dioxin-Furan (PCDDs-PCDFs) congeners (Isotope Dilution method using GC-HRMS)ailable)",
+        "parent_id": 284,
+        "price": "70000"
+    },
+    {
+        "id": 311,
+        "name": "12.Analysis charges for Hazardous Waste samples",
+        "parent_id": null,
+        "price": null
+    },
+    {
+        "id": 312,
+        "name": "Preparation of Leachate (TCLP extract/Water Extract)",
+        "parent_id": 311,
+        "price": "1750"
+    },
+    {
+        "id": 313,
+        "name": "Preparation of LeDetermination of various parameters in  Leachateachate (TCLP     extract/Water Extract)",
+        "parent_id": 311,
+        "price": "\"(As per water & waste water analysis in respective at clause V)\""
+    },
+    {
+        "id": 314,
+        "name": "Flash point/Ignitibility",
+        "parent_id": 311,
+        "price": "960"
+    },
+    {
+        "id": 315,
+        "name": "Reactivity",
+        "parent_id": 311,
+        "price": "960"
+    },
+    {
+        "id": 316,
+        "name": "Corrosivity",
+        "parent_id": 311,
+        "price": "960"
+    },
+    {
+        "id": 317,
+        "name": "Measurement of Toxicity----LC50",
+        "parent_id": 311,
+        "price": "4900"
+    },
+    {
+        "id": 318,
+        "name": "Measurement of Toxicity----Dimensionless Toxicity",
+        "parent_id": 311,
+        "price": "2800"
+    },
+    {
+        "id": 319,
+        "name": "Total Organic Carbon",
+        "parent_id": 311,
+        "price": "880"
+    },
+    {
+        "id": 320,
+        "name": "Absorbable Organic Halogen (AOX)",
+        "parent_id": 311,
+        "price": "3500"
+    }
+]
