@@ -1,3 +1,5 @@
+import os
+
 import streamlit as st
 import requests
 from streamlit import session_state
@@ -5,7 +7,8 @@ from pages.test import render_parameters
 from pages.parameter import fetch_parameters
 
 # API URLs
-API_BASE_URL = "http://localhost:8000"
+# API_BASE_URL = "http://localhost:8000"
+API_BASE_URL = os.getenv('API_BASE_URL')
 CUSTOMER_API = f"{API_BASE_URL}/customer_request/"
 ORDER_API = f"{API_BASE_URL}/order/"
 QUOTATION_API = f"{API_BASE_URL}/quotations/"

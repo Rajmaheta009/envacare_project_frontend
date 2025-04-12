@@ -1,10 +1,13 @@
+import os
+
 import streamlit as st
 import requests
 import pandas as pd
 
-BASE_URL = "http://localhost:8000"
-PARAMETER_URL = f"{BASE_URL}/parameter"
-PARENT_PARAMETER_URL = f"{BASE_URL}/parent_parameter"
+API_BASE_URL = os.getenv('API_BASE_URL')
+# API_BASE_URL = "http://localhost:8000"
+PARAMETER_URL = f"{API_BASE_URL}/parameter"
+PARENT_PARAMETER_URL = f"{API_BASE_URL}/parent_parameter"
 
 if "edit_form" not in st.session_state:
     st.session_state.edit_form = None

@@ -1,8 +1,12 @@
+import os
+
 import requests
 import streamlit as st
 import pandas as pd
 
-API_BASE_URL = "http://localhost:8000"
+
+API_BASE_URL = os.getenv('API_BASE_URL')
+# API_BASE_URL = "http://localhost:8000"
 
 # Initialize session state variables
 if "login" not in st.session_state:
