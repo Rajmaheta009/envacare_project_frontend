@@ -1,7 +1,7 @@
 import streamlit as st
 
 nav_pages=[
-    st.Page("frontend/pages/dashboard.py", title= "Dashboard", default = True),
+    st.Page("pages/Dashboard.py", title= "Dashboard", default = True),
     st.Page("pages/Customer_request.py", title= "Customer Request"),
     st.Page("pages/Quotation.py", title= "Quotation List"),
     st.Page("pages/Sample.py", title= "Sample List"),
