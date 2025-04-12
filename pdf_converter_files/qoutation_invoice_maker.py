@@ -18,7 +18,7 @@ template_str = """
         }
 
         html, body {
-            margin: 0;
+            margin-bottom: 5%;
             padding: 0;
             height: 100%;
             background: url('frontend/static/pdf_back.png') no-repeat center center;
@@ -34,6 +34,7 @@ template_str = """
             z-index: 1;
             top:6%;
             margin: auto;
+            # height:800px;
             padding: 30px 50px;
         }
 

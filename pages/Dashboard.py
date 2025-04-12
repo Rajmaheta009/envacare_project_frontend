@@ -1,8 +1,10 @@
+import os
 import requests
 import streamlit as st
 import pandas as pd
 from component.local_store import LocalStorageManager
-
+from dotenv import load_dotenv
+load_dotenv()
 
 storage=LocalStorageManager("user_login_status")
 
@@ -14,7 +16,8 @@ if "quotation_data" not in st.session_state:
 if "sample_form_data" not in st.session_state:
     st.session_state.sample_form_data = []
 
-API_BASE_URL = "http://localhost:8000"
+# API_BASE_URL = "http://localhost:8000"
+API_BASE_URL = os.getenv('API_BASE_URL')
 
 # Page layout
 col1, col2 = st.columns([5, 1])
