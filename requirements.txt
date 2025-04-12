@@ -1,0 +1,15 @@
+streamlit~=1.43.2
+pymupdf
+datetime~=5.5
+pandas~=2.2.3
+sqlalchemy~=2.0.39
+pydantic~=2.10.6
+fastapi~=0.115.12
+schema~=0.7.7
+modal~=0.73.126
+uvicorn~=0.34.0
+dotenv~=0.9.9
+python-dotenv~=1.1.0
+jose~=1.0.0
+passlib~=1.7.4
+requests~=2.32.3
