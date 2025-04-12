@@ -1,3 +1,5 @@
+import os
+
 import requests
 import streamlit as st
 from component.local_store import LocalStorageManager
@@ -6,12 +8,13 @@ from component.nav import login_nav
 storage=LocalStorageManager("user_login_status")
 
 # --- Backend API URL ---
-BASE_URL = "http://127.0.0.1:8000/auth"
-LOGIN_URL = f"{BASE_URL}/"
+# BASE_URL = "http://127.0.0.1:8000/auth"
+API_BASE_URL = os.getenv('API_BASE_URL')
+LOGIN_URL = f"{API_BASE_URL}/auth"
 
 # Layout: Title and Logo
 col1, col2, col3 = st.columns([1.3, 1, 1])
-col1.image("frontend/static/logo.png", width=150)
+col1.image("static/logo.png", width=150)
 
 col4, col5 = st.columns([2, 3])
 col4.title("Login")
