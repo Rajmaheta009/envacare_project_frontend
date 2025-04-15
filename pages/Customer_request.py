@@ -41,11 +41,26 @@ if "customer_to_edit" not in st.session_state:
 #     "Header 3": {"Sub6": 400, "Sub7": 350}
 # }
 
-# ✅ Function to fetch customers with orders
 def fetch_customers_with_orders():
     try:
-        customers = requests.get(CUSTOMER_API).json()
-        orders = requests.get(ORDER_API).json()
+        customer_response = requests.get(CUSTOMER_API)
+        order_response = requests.get(ORDER_API)
+
+        if customer_response.status_code != 200:
+            st.error(f"Customer API error: {customer_response.status_code}")
+            return []
+
+        if order_response.status_code != 200:
+            st.error(f"Order API error: {order_response.status_code}")
+            return []
+
+        # Optional: log the response text if debugging
+        # st.write(customer_response.text)
+        # st.write(order_response.text)
+
+        customers = customer_response.json()
+        orders = order_response.json()
+
         order_map = {order['customer_id']: order for order in orders}
         for customer in customers:
             customer_id = customer.get("id")
