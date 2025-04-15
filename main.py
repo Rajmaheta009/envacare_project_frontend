@@ -9,6 +9,9 @@ if "user_id" not in st.session_state:
     st.session_state.user_id = ""
 if "role" not in st.session_state:
     st.session_state.role = ""
+if "login" not in st.session_state:
+    st.session_state.login = False
+
 
 # ✅ Sync LocalStorage with session state
 storage=LocalStorageManager("user_login_status")
