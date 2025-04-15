@@ -15,7 +15,7 @@ for p in parameters:
         child_map.setdefault(parent_id, []).append(p)
 
 # Page layout
-st.set_page_config(layout="wide")
+# st.set_page_config(layout="wide")
 st.title("🧪 Test Quotation Designer")
 
 col1, col2 = st.columns([2, 1])
