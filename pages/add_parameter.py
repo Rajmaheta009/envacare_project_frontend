@@ -89,9 +89,18 @@ try:
 
     # Finalize
     conn.commit()
-    cur.close()
-    conn.close()
 
     st.success("✅ All data has been successfully added to the database.")
+
+    # Fetch and display all data from parameters table
+    cur.execute("SELECT id, name, parent_id, price FROM parameters ORDER BY id")
+    rows = cur.fetchall()
+    df = pd.DataFrame(rows, columns=["ID", "Name", "Parent ID", "Price"])
+
+    st.subheader("📋 Parameters Table")
+    st.dataframe(df)
+
+    cur.close()
+    conn.close()
 except Exception as e:
     st.warning(f"❌ Something went wrong: {e}")
