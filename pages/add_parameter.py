@@ -5,11 +5,12 @@ import re
 from dotenv import load_dotenv
 load_dotenv()
 
-database = os.getenv('databse')
+database = os.getenv('database')
 user = os.getenv('user')
 password = os.getenv('password')
 host = os.getenv('HOST','0.0.0.0')
-port = os.getenv('PORT','8000')
+port = os.getenv('PORT','5432')
+
 # PostgreSQL connection
 conn = psycopg2.connect(
     dbname=database,
