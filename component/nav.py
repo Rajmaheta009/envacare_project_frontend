@@ -10,7 +10,7 @@ nav_pages=[
     st.Page("pages/employee.py", title= "Employee Set"),
     st.Page("pages/parameter.py", title= "Parameter"),
     st.Page("pages/test.py", title= "TEST"),
-    st.Page("pages/add_parameter.py", title= "TEST ADD PARAMETER"),
+    # st.Page("pages/add_parameter.py", title= "TEST ADD PARAMETER"),
     st.Page("pages/log_out.py", title= "Log Out")
 ]
 
