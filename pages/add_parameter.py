@@ -8,16 +8,16 @@ load_dotenv()
 database = os.getenv('database')
 user = os.getenv('user')
 password = os.getenv('password')
-# host = os.getenv('HOST')
-# port = os.getenv('PORT')
+host = os.getenv('host')
+port = os.getenv('port')
 
 # PostgreSQL connection
 conn = psycopg2.connect(
     dbname=database,
     user=user,
     password=password,
-    # host=host,
-    # port=port
+    host=host,
+    port=port
 )
 cur = conn.cursor()
 
