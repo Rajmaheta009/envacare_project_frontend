@@ -1,3 +1,4 @@
+import json
 import psycopg2
 import re
 
@@ -63,14 +64,20 @@ for line in lines:
 
     id_counter += 1
 
-# Insert into services table
-for item in output_data:
-    cur.execute(
-        "INSERT INTO parameters (name, parent_id, price) VALUES (%s, %s, %s)",
-        (item['name'], item['parent_id'], item['price'])
-    )
+# Save to JSON file
+with open("output_data.json", "w", encoding="utf-8") as json_file:
+    json.dump(output_data, json_file, ensure_ascii=False, indent=4)
 
-# Finalize
-conn.commit()
-cur.close()
-conn.close()
+print("Data has been saved to output_data.json")
+
+# # Insert into services table
+# for item in output_data:
+#     cur.execute(
+#         "INSERT INTO parameters (name, parent_id, price) VALUES (%s, %s, %s)",
+#         (item['name'], item['parent_id'], item['price'])
+#     )
+#
+# # Finalize
+# conn.commit()
+# cur.close()
+# conn.close()
