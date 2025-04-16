@@ -82,21 +82,21 @@ try:
     # print("Data has been saved to output_data.json")
 
     # Insert into services table
-    for item in output_data:
-        cur.execute(
-            "INSERT INTO parameters (name, parent_id, price) VALUES (%s, %s, %s)",
-            (item['name'], item['parent_id'], item['price'])
-        )
-
-    # Finalize
-    conn.commit()
+    # for item in output_data:
+    #     cur.execute(
+    #         "INSERT INTO parameters (name, parent_id, price) VALUES (%s, %s, %s)",
+    #         (item['name'], item['parent_id'], item['price'])
+    #     )
+    #
+    # # Finalize
+    # conn.commit()
 
     st.success("✅ All data has been successfully added to the database.")
 
     # Fetch and display all data from parameters table
-    # cur.execute("TRUNCATE TABLE parameters RESTART IDENTITY CASCADE;")
+    cur.execute("TRUNCATE TABLE parameters RESTART IDENTITY CASCADE;")
 
-    cur.execute("SELECT id, name, parent_id, price FROM parameters ORDER BY id")
+    # cur.execute("SELECT id, name, parent_id, price FROM parameters ORDER BY id")
     rows = cur.fetchall()
     df = pd.DataFrame(rows, columns=["ID", "Name", "Parent ID", "Price"])
 
