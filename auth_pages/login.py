@@ -3,6 +3,8 @@ import requests
 import streamlit as st
 from component.local_store import LocalStorageManager
 from component.nav import login_nav
+from dotenv import load_dotenv
+load_dotenv()
 
 # Local storage for login status
 storage = LocalStorageManager("user_login_status")
@@ -41,11 +43,12 @@ if st.session_state.show_register:
             st.warning("⚠️ Passwords do not match.")
         else:
             res = requests.post(REGISTER_URL, json={
-                "username": username,
+                "name": username,
                 "email": email,
-                "password": password
+                "password": password,
+                "role": "admin"
             })
-            if res.status_code == 200:
+            if res.status_code == 201:
                 st.success("✅ Registration successful! Please login.")
                 st.session_state.show_register = False
                 st.rerun()
