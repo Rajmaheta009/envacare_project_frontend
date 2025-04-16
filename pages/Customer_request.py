@@ -5,6 +5,8 @@ import requests
 from streamlit import session_state
 from pages.test import render_parameters
 from pages.parameter import fetch_parameters
+from dotenv import load_dotenv
+load_dotenv()
 
 # API URLs
 # API_BASE_URL = "http://localhost:8000"

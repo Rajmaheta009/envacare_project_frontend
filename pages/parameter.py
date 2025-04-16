@@ -3,6 +3,8 @@ import os
 import streamlit as st
 import requests
 import pandas as pd
+from dotenv import load_dotenv
+load_dotenv()
 
 API_BASE_URL = os.getenv('API_BASE_URL')
 # API_BASE_URL = "http://localhost:8000"

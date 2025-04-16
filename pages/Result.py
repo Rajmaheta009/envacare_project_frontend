@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+from dotenv import load_dotenv
+load_dotenv()
 
 # Initialize session state
 if "login" not in st.session_state:
