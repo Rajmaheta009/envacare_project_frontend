@@ -23,7 +23,7 @@ def delete_department(dept_id):
 if "edit_id" not in st.session_state:
     st.session_state.edit_id = None
 
-st.title("🏢 Department Management System (with API)")
+st.title("🏢 Department Management System")
 
 # 🔝 Add form
 with st.form("add_form"):

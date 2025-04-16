@@ -36,7 +36,7 @@ def get_departments():
 if "emp_edit_id" not in st.session_state:
     st.session_state.emp_edit_id = None
 
-st.title("👨‍💼 Employee Management System (with API)")
+st.title("👨‍💼 Employee Management System")
 
 # --- Add Employee Form ---
 with st.form("add_employee_form"):
