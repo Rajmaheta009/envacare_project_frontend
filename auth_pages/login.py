@@ -34,7 +34,7 @@ if st.session_state.show_register:
         email = st.text_input("Email")
         password = st.text_input("Password", type="password")
         confirm_password = st.text_input("Confirm Password", type="password")
-        register_btn = st.form_submit_button("Create Account")
+        register_btn = st.form_submit_button("Create Account",use_container_width=20)
 
     if register_btn:
         if password != confirm_password:
@@ -57,7 +57,7 @@ else:
     with st.form("login_form"):
         email = st.text_input("Email")
         password = st.text_input("Password", type="password")
-        login_btn = st.form_submit_button("Login")
+        login_btn = st.form_submit_button("Login",use_container_width=20)
 
     if login_btn:
         res = requests.post(LOGIN_URL, json={"email": email, "password": password})
@@ -74,8 +74,9 @@ else:
             st.rerun()
         else:
             st.error("❌ Invalid credentials. Try again.")
-col6, col7 = st.columns(2)
-if col6.button("🔑 Login"):
-    st.session_state.show_register = False
-if col7.button("📝 Register"):
-    st.session_state.show_register = True
+with st.form('login_register_button'):
+    col6, col7 = st.columns(2)
+    if col6.form_submit_button("🔑 Login",use_container_width=10):
+        st.session_state.show_register = False
+    if col7.form_submit_button("📝 Register",use_container_width=10):
+        st.session_state.show_register = True
