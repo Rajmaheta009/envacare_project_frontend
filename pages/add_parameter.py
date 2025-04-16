@@ -1,3 +1,4 @@
+import streamlit as st
 import json
 import os
 import psycopg2
@@ -91,6 +92,6 @@ try:
     cur.close()
     conn.close()
 
-    print("✅ All data has been successfully added to the database.")
+    st.success("✅ All data has been successfully added to the database.")
 except Exception as e:
-    print(f"❌ Something went wrong: {e}")
+    st.warning(f"❌ Something went wrong: {e}")
