@@ -26,7 +26,7 @@ def clean_text(text):
     return text.strip()
 
 # Read input file
-with open("Untitled-2.txt", "r", encoding="utf-8") as file:
+with open("test_for_extraconcept/Untitled-2.txt", "r", encoding="utf-8") as file:
     lines = file.readlines()
 
 output_data = []
