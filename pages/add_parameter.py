@@ -90,3 +90,5 @@ for item in output_data:
 conn.commit()
 cur.close()
 conn.close()
+
+print("✅ All data has been successfully added to the database.")
