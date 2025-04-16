@@ -103,6 +103,7 @@ try:
     st.subheader("📋 Parameters Table")
     st.dataframe(df)
 
+    conn.commit()
     cur.close()
     conn.close()
 except Exception as e:
