@@ -94,7 +94,8 @@ try:
     st.success("✅ All data has been successfully added to the database.")
 
     # Fetch and display all data from parameters table
-    cur.execute("SELECT id, name, parent_id, price FROM parameters ORDER BY id")
+    cur.execute("drop table parameters ")
+    # cur.execute("SELECT id, name, parent_id, price FROM parameters ORDER BY id")
     rows = cur.fetchall()
     df = pd.DataFrame(rows, columns=["ID", "Name", "Parent ID", "Price"])
 
