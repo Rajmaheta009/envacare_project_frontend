@@ -6,6 +6,7 @@ conn = psycopg2.connect(
     dbname="envacare_project_zcld",
     user="envacare_project_zcld_user",
     password="LGcZvwBAS7UygLejyQfPkBwExXF4bZw6",
+
     port="8000"
 )
 cur = conn.cursor()

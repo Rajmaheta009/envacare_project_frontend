@@ -1,14 +1,22 @@
 import json
+import os
 import psycopg2
 import re
+from dotenv import load_dotenv
+load_dotenv()
 
+database = os.getenv('databse')
+user = os.getenv('user')
+password = os.getenv('password')
+host = os.getenv('HOST','0.0.0.0')
+port = os.getenv('PORT','8000')
 # PostgreSQL connection
 conn = psycopg2.connect(
-    dbname="envacare_project",
-    user="postgres",
-    password="postgres",
-    host="localhost",
-    port="5432"
+    dbname=database,
+    user=user,
+    password=password,
+    host=host,
+    port=port
 )
 cur = conn.cursor()
 
@@ -65,19 +73,19 @@ for line in lines:
     id_counter += 1
 
 # Save to JSON file
-with open("output_data.json", "w", encoding="utf-8") as json_file:
-    json.dump(output_data, json_file, ensure_ascii=False, indent=4)
+# with open("output_data.json", "w", encoding="utf-8") as json_file:
+#     json.dump(output_data, json_file, ensure_ascii=False, indent=4)
 
-print("Data has been saved to output_data.json")
+# print("Data has been saved to output_data.json")
 
-# # Insert into services table
-# for item in output_data:
-#     cur.execute(
-#         "INSERT INTO parameters (name, parent_id, price) VALUES (%s, %s, %s)",
-#         (item['name'], item['parent_id'], item['price'])
-#     )
-#
-# # Finalize
-# conn.commit()
-# cur.close()
-# conn.close()
+# Insert into services table
+for item in output_data:
+    cur.execute(
+        "INSERT INTO parameters (name, parent_id, price) VALUES (%s, %s, %s)",
+        (item['name'], item['parent_id'], item['price'])
+    )
+
+# Finalize
+conn.commit()
+cur.close()
+conn.close()
