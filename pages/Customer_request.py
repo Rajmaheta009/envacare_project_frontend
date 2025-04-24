@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 import streamlit as st
 import requests
@@ -7,6 +8,8 @@ from pages.test import render_parameters
 from pages.parameter import fetch_parameters
 from dotenv import load_dotenv
 load_dotenv()
+
+current_date = datetime.now()
 
 # API URLs
 # API_BASE_URL = "http://localhost:8000"
@@ -36,13 +39,6 @@ if "selected_customer_id" not in st.session_state:
 if "customer_to_edit" not in st.session_state:
     st.session_state.customer_to_edit = None
 
-# Sample Parameters with Costs
-# parameters = {
-#     "Header 1": {"Sub1": 100, "Sub2": 200, "Sub3": 150},
-#     "Header 2": {"Sub4": 300, "Sub5": 250},
-#     "Header 3": {"Sub6": 400, "Sub7": 350}
-# }
-
 def fetch_customers_with_orders():
     try:
         customer_response = requests.get(CUSTOMER_API)
@@ -56,10 +52,6 @@ def fetch_customers_with_orders():
             st.error(f"Order API error: {order_response.status_code}")
             return []
 
-        # Optional: log the response text if debugging
-        # st.write(customer_response.text)
-        # st.write(order_response.text)
-
         customers = customer_response.json()
         orders = order_response.json()
 
@@ -67,8 +59,10 @@ def fetch_customers_with_orders():
         for customer in customers:
             customer_id = customer.get("id")
             order = order_map.get(customer_id, {})
+            customer["o_number"] = order.get("order_number", "No Order Number")
             customer["order_req_comment"] = order.get("order_req_comment", "No comment")
             customer["order_req_doc"] = order.get("order_req_doc", "No document")
+
         return customers
     except Exception as e:
         st.error(f"⚠️ Error: {e}")
@@ -77,7 +71,7 @@ def fetch_customers_with_orders():
 # ✅ Function to fetch customer details by ID
 def fetch_customer_by_id(customer_id):
     try:
-        customer = requests.get(f"{CUSTOMER_API}{customer_id}/").json()
+        customer = requests.get(f"{CUSTOMER_API}{customer_id}").json()
         return customer
     except Exception as e:
         st.error(f"⚠️ Error fetching customer details: {e}")
@@ -86,11 +80,12 @@ def fetch_customer_by_id(customer_id):
 # ✅ Function to fetch order details by customer ID
 def fetch_order_by_customer_id(customer_id):
     try:
-        order = requests.get(f"{ORDER_API}?customer_id={customer_id}").json()
-        return order[0]
+        order = requests.get(f"{ORDER_API}c_id/{customer_id}").json()
+        return order
     except Exception as e:
         st.error(f"⚠️ Error fetching order details: {e}")
         return None
+
 
 # ✅ Function to create customer and order
 def create_customer_and_order(data, comment, docfile):
@@ -99,10 +94,13 @@ def create_customer_and_order(data, comment, docfile):
         if response.status_code == 200:
             customer = response.json()
             customer_id = customer.get("id")
+            customer_name = customer.get("name")
+            formatted_date = current_date.strftime("%m**%d/")
             order_data = {
                 "customer_id": customer_id,
                 "order_req_comment": comment,
-                "status": "Quotation Check"
+                "status": "Quotation Check",
+                "order_number" : f"{customer_name}/{formatted_date}/ORDER000{customer_id}"
             }
             files = {'docfile': docfile} if docfile else None
             order_response = requests.post(ORDER_API, data=order_data, files=files)
@@ -112,6 +110,10 @@ def create_customer_and_order(data, comment, docfile):
                 st.rerun()
             else:
                 st.error(f"❌ Failed to create order. Status: {order_response.status_code}")
+        else:
+            st.error(f"❌ Failed to create order. Status: {response.status_code}")
+            st.error(f"❌ Failed to create order. Status: {response.json()}")
+
     except Exception as e:
         st.error(f"⚠️ Error: {e}")
 
@@ -137,6 +139,12 @@ def update_customer_and_order(customer_id, order_id, data, comment, docfile):
                 st.rerun()
             else:
                 st.error(f"❌ Failed to update order. Status: {order_response.status_code}")
+                st.write(order_data)
+                st.write(files)
+                st.write(order_id)
+                # st.write(session_state.c_id)
+
+
     except Exception as e:
         st.error(f"⚠️ Error: {e}")
 
@@ -177,6 +185,33 @@ def render_filtered_parameters():
                 selected_parameters.pop(p["name"], None)
 
 
+# ---------------------
+# Function to send quotation
+# ---------------------
+def handle_send_quotation(customer_id):
+    if not st.session_state.selected_parameters:
+        st.warning("Please select at least one parameter before sending quotation.")
+        return
+
+    total = sum(int(price) for price in st.session_state.selected_parameters.values())
+
+    quotation_data = {
+        "customer_id": customer_id,
+        "parameters": list(st.session_state.selected_parameters.keys()),
+        "prices": list(st.session_state.selected_parameters.values()),
+        "total": total,
+    }
+
+    response =  requests.post(f"{QUOTATION_API}", json=quotation_data)
+
+    if response.status_code == 200:
+        st.success("Quotation sent successfully!")
+        st.session_state.selected_customer_id = None
+        st.session_state.selected_parameters.clear()
+        st.rerun()
+    else:
+        st.error("Failed to send quotation.")
+
 
 # ✅ Main App Logic
 if session_state.login:
@@ -189,8 +224,9 @@ if session_state.login:
         with st.form("customer_form"):
             st.markdown("### 🛠️ Add New Customer Request")
 
+            c_name = st.text_input("Company Name",placeholder="Enter company name",max_chars=50)
             col1, col2 = st.columns(2)
-            name = col1.text_input("Customer Name", placeholder="Enter customer name", max_chars=50)
+            name = col1.text_input("Person Name", placeholder="Enter person name", max_chars=50)
             email = col2.text_input("Email ID", placeholder="Enter customer email")
 
             col3, col4 = st.columns(2)
@@ -209,6 +245,7 @@ if session_state.login:
         if submit_btn:
             if name and email and phone and (comment or document):
                 new_customer = {
+                    "c_name" : c_name,
                     "name": name,
                     "email": email,
                     "phone_number": phone,
@@ -224,21 +261,32 @@ if session_state.login:
             st.session_state.show_form = False
             st.rerun()
 
+
     # 🚀 Display Customers
     st.markdown("### 📊 Submitted Customer Requests")
     customers = fetch_customers_with_orders()
     if not customers:
         st.warning("⚠️ No customer requests found")
 
+    search = st.text_input("🔍 Search Customer by name or email", "").lower().strip()
+    # Filter customers based on search input
+    filtered_customers = [
+        customer for customer in customers
+        if search in customer['name'].lower() or search in customer['email'].lower() or search in customer['c_name'].lower()
+]
     if customers:
-        for customer in customers:
+        for customer in filtered_customers:
             customer_id = customer.get("id")
+            # session_state.c_id=customer_id
             with st.expander(f"{customer['name']} - {customer['email']}"):
+                st.write(f"**Order Number :** {customer['o_number']}")
+                st.write(f"**Company Name :** {customer['c_name']}")
                 st.write(f"**Address:** {customer['address']}")
                 st.write(f"**Phone:** {customer['phone_number']}")
                 st.write(f"**WhatsApp:** {customer['whatsapp_number']}")
                 st.write(f"**Comment:** {customer['order_req_comment']}")
                 st.write(f"**Document:** {customer['order_req_doc']}")
+                # st.write(customer)
 
                 col1, col2 = st.columns([1, 1])
 
@@ -300,35 +348,39 @@ if session_state.login:
                                 render_filtered_parameters()
 
                     # RIGHT COLUMN
+                    # RIGHT COLUMN
                     with col3:
                         st.subheader("🧾 Selected Parameters")
+                        if "selected_parameters" not in st.session_state:
+                            st.session_state.selected_parameters = {}
+
+                        # Update the session state with selected parameters
+                        for key, value in selected_parameters.items():
+                            st.session_state.selected_parameters[key] = value
+
                         total = 0
-                        for name, price in selected_parameters.items():
-                            st.write(f"- {name}: ₹{price}")
+                        for name, price in st.session_state.selected_parameters.items():
+                            st.write(f"✔️ {name} - ₹{price}")
                             total += int(price)
 
-                        st.markdown("---")
-                        st.markdown(f"### 💰 Total Cost: ₹{total}")
+                        st.markdown(f"### 💰 Total: ₹{total}")
 
-                        if st.button("📩 Send Quotation", key=f"send_{customer_id}"):
-                            # You can call your backend quotation saving logic here
-                            st.success("Quotation sent successfully!")
-                            st.session_state.selected_customer_id = None
-                            st.rerun()
+                        if st.button("📤 Send Quotation", key=f"send_{customer_id}"):
+                            handle_send_quotation(customer_id)
 
                 # ✅ Edit Form
                 if st.session_state.show_form and st.session_state.customer_to_edit and \
                         st.session_state.customer_to_edit["id"] == customer_id:
                     customer_to_edit = st.session_state.customer_to_edit
-                    order = fetch_order_by_customer_id(customer_id)
-                    order_comment = order.get("order_req_comment", "")
-                    order_doc = order.get("order_req_doc", "")
+                    order_comment = customer["order_req_comment"]
+                    order_doc = customer["order_req_doc"]
 
                     with st.form(f"customer_form_{customer_id}"):
                         st.markdown("### 🛠️ Edit Customer Request")
 
+                        c_name = st.text_input("Company Name",value=customer_to_edit["c_name"])
                         col1, col2 = st.columns(2)
-                        name = col1.text_input("Customer Name", value=customer_to_edit["name"])
+                        name = col1.text_input("Person Name", value=customer_to_edit["name"])
                         email = col2.text_input("Email ID", value=customer_to_edit["email"])
 
                         col3, col4 = st.columns(2)
@@ -353,6 +405,7 @@ if session_state.login:
                     if submit_btn:
                         if name and email and phone and (comment or document):
                             updated_customer = {
+                                "c_name" : c_name,
                                 "name": name,
                                 "email": email,
                                 "phone_number": phone,
@@ -361,6 +414,7 @@ if session_state.login:
                                 "is_delete": False
                             }
                             docfile = document if document else order_doc
+                            order = fetch_order_by_customer_id(customer_id)
                             order_id = order.get("id")
                             update_customer_and_order(customer_id, order_id, updated_customer, comment, docfile)
                         else:

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Quotation Format</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         @page {
@@ -15,39 +15,52 @@
         body {
             margin: 0;
             padding: 0;
-            height: 100%;
-            background: url('../static/pdf_back.png') no-repeat center center;
-            background-size: cover;
-        }
-        
-        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        .container {
-            position: relative;
-            z-index: 1;
-            top: 6%;
-            margin: auto;
-            padding: 30px 50px;
+        header,
+        footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+            background: #fff;
+            z-index: 999;
+        }
+        
+        header {
+            top: 0;
+            padding: 20px;
+            text-align: center;
+            height: 100px;
+        }
+        
+        footer {
+            bottom: 0;
+            padding: 0px 40px 0;
+            border-top: 3px solid #003d1a;
+            height: 100px;
         }
         
         .top-logo {
             position: absolute;
-            top: 20px;
+            top: 10px;
             left: 30px;
         }
         
         .top-logo img {
-            width: 100px;
+            width: 200px;
             opacity: 0.8;
+        }
+        
+        .content {
+            padding: 130px 50px 130px;
         }
         
         .quotation-header {
             display: flex;
             justify-content: space-between;
             font-size: 15px;
-            margin-top: 20px;
+            margin-bottom: 20px;
         }
         
         table {
@@ -57,23 +70,10 @@
             background: transparent;
         }
         
-        tbody tr {
-            break-inside: avoid !important;
-            page-break-inside: avoid !important;
-        }
-        
-        table,
-        tr,
-        td,
-        th {
-            page-break-inside: avoid !important;
-            break-inside: avoid !important;
-        }
-        
         th,
         td {
             border: 1px solid #000;
-            padding: 5px;
+            padding: 6px;
             vertical-align: top;
             text-align: left;
         }
@@ -83,20 +83,33 @@
             font-weight: bold;
         }
         
+        thead {
+            display: table-header-group;
+        }
+        
+        table,
+        tr,
+        td,
+        th {
+            page-break-inside: avoid !important;
+            break-inside: avoid;
+        }
+        
         .terms-container {
             display: flex;
             border: 1px solid #000;
-            page-break-inside: avoid;
-            break-inside: avoid;
-            orphans: 3;
-            widows: 3;
-            margin-top: 20px;
+            margin-top: 25px;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            page-break-before: auto !important;
         }
         
         .terms-left,
         .terms-right {
             padding: 15px;
             text-align: center;
+            /*break-inside: avoid;
+            page-break-inside: avoid;*/
         }
         
         .terms-left {
@@ -106,8 +119,8 @@
         
         .terms-left b {
             display: block;
-            margin-bottom: 10px;
             font-size: 16px;
+            margin-bottom: 10px;
         }
         
         .terms-left p {
@@ -116,7 +129,6 @@
         
         .terms-right {
             width: 30%;
-            text-align: center;
         }
         
         .terms-right img {
@@ -125,29 +137,86 @@
         
         .signature-label {
             font-weight: bold;
+            margin-top: 10px;
         }
         
-        .table-section {
-            page-break-inside: avoid;
-            break-inside: avoid;
-            overflow: hidden;
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            border-bottom: 3px solid #003d1a;
+            padding-bottom: 15px;
         }
         
-        .bank-details,
+        .footer-column {
+            flex: 1;
+            min-width: 50px;
+        }
+        
+        .footer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            color: #003d1a;
+        }
+        
+        .footer-header img {
+            width: 20px;
+            margin-right: 8px;
+        }
+        
         .footer-text {
-            font-size: 14px;
-            margin-top: 20px;
+            margin-left: 28px;
+            color: #999;
+            line-height: 1.4;
         }
         
-        .content-wrapper {
-            page-break-inside: avoid;
-            break-inside: avoid;
+        .footer-accreditation {
+            background-color: #003d1a;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            border-radius: 0 0 25px 25px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        @media print {
+            body {
+                margin-bottom: 150px;
+            }
+            header,
+            footer {
+                position: fixed;
+            }
+            .content {
+                padding-top: 130px;
+                padding-bottom: 130px;
+            }
+            table,
+            tr,
+            td,
+            th {
+                page-break-inside: avoid !important;
+                break-inside: avoid;
+            }
+            .terms-container {
+                page-break-before: always;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container" id="quotation">
+    <header>
+        <div class="top-logo">
+            <img src="../static/logo.png" alt="Logo">
+        </div>
+        <h4 style="margin: 0; padding-top: 10px; font-size: 45px">Quotation</h4>
+    </header>
+
+    <div class="content">
         <div class="quotation-header">
             <div><strong>Quo. No.:</strong> EC/2425/QU/017</div>
             <div><strong>Dated:</strong> 23-09-2024</div>
@@ -160,140 +229,179 @@
             </tr>
             <tr>
                 <td>
-                    Shop No-51,52, Shree Sharan Business Park<br /> Sanand Changodar GIDC<br /> Ahmedabad-382213
-                    <br /><br />
-                    <strong>GSTIN/UIN:</strong> 24AAKFE7625D1ZL<br />
-                    <strong>E-Mail:</strong> info@envacarelaboratoryllp.in
+                    Shop No-51,52, Shree Sharan Business Park<br> Sanand Changodar GIDC<br> Ahmedabad-382213
+                    <br><br>
+                    <strong>GSTIN/UIN:</strong> 24AAKFE7625D1ZL<br>
+                    <strong>Email:</strong> info@envacarelaboratoryllp.in
                 </td>
                 <td>
-                    <strong>METTUBE COPPER INDIA PRIVATE LIMITED</strong><br /> Plot No.SM-9/5, Sanand - II Industrial Estate, Village Bol, Taluka Sanand,<br /> District Ahmedabad, Gujarat - 382170<br /><br />
-                    <strong>GSTIN/UIN:</strong> 24AAQCM2685Q1ZK<br />
-                    <strong>E-Mail:</strong> rajagopal@mettubeindia.com
+                    <strong>METTUBE COPPER INDIA PRIVATE LIMITED</strong><br> Plot No.SM-9/5, Sanand - II Industrial Estate, Village Bol,<br> Taluka Sanand, District Ahmedabad, Gujarat - 382170<br><br>
+                    <strong>GSTIN/UIN:</strong> 24AAQCM2685Q1ZK<br>
+                    <strong>Email:</strong> rajagopal@mettubeindia.com
                 </td>
             </tr>
         </table>
 
-        <div class="content-wrapper">
-            <div class="table-section">
-                <table>
-                    <thead>
+        <table class="mt-4">
+            <thead>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>Product</th>
+                    <th>Charges Per Unit</th>
+                    <th>Quantity</th>
+                    <th>Amount (Rs.)</th>
+                </tr>
+            </thead>
+            <tbody id="quotation-body">
+                <!-- You can insert rows dynamically here -->
+                <tr>
+                    <td>1</td>
+                    <td>Ambient sample Analysis of Work Place Air Quality</td>
+                    <td>12000</td>
+                    <td>4</td>
+                    <td>48000</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Ambient sample Analysis of Work Place Air Quality</td>
+                    <td>12000</td>
+                    <td>4</td>
+                    <td>48000</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Ambient sample Analysis of Work Place Air Quality</td>
+                    <td>12000</td>
+                    <td>4</td>
+                    <td>48000</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Ambient sample Analysis of Work Place Air Quality</td>
+                    <td>12000</td>
+                    <td>4</td>
+                    <td>48000</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Ambient sample Analysis of Work Place Air Quality</td>
+                    <td>12000</td>
+                    <td>4</td>
+                    <td>48000</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Ambient sample Analysis of Work Place Air Quality</td>
+                    <td>12000</td>
+                    <td>4</td>
+                    <td>48000</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Ambient sample Analysis of Work Place Air Quality</td>
+                    <td>12000</td>
+                    <td>4</td>
+                    <td>48000</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Ambient sample Analysis of Work Place Air Quality</td>
+                    <td>12000</td>
+                    <td>4</td>
+                    <td>48000</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Ambient sample Analysis of Work Place Air Quality</td>
+                    <td>12000</td>
+                    <td>4</td>
+                    <td>48000</td>
+                </tr>
+            </tbody>
+            <tr>
+                <td colspan="2">
+                    <strong>Bank Details</strong><br><br>
+                    <strong>A/c Name:</strong> ENVACARE LABORATORY LLP<br>
+                    <strong>Bank:</strong> BANK OF BARODA<br>
+                    <strong>A/c No.:</strong> 03200200001364<br>
+                    <strong>IFSC:</strong> BARBOAMBAWA<br>
+                    <strong>PAN:</strong> AAKFE7625D
+                </td>
+                <td colspan="3">
+                    <table style="width: 100%;">
                         <tr>
-                            <th>Sr. No.</th>
-                            <th>Product</th>
-                            <th>Charges Per Unit</th>
-                            <th>Quantity</th>
-                            <th>Amount (Rs.)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Ambient sample Analysis of Work Place Air Quality</td>
-                            <td>12000</td>
-                            <td>4</td>
-                            <td>48000</td>
+                            <td><strong>Total</strong></td>
+                            <td>1164200</td>
                         </tr>
                         <tr>
-                            <td>2</td>
-                            <td>Ambient sample Analysis of Work Place Air Quality</td>
-                            <td>12000</td>
-                            <td>4</td>
-                            <td>48000</td>
+                            <td>SGST @9%</td>
+                            <td>104778</td>
                         </tr>
                         <tr>
-                            <td>1</td>
-                            <td>Ambient sample Analysis of Work Place Air Quality</td>
-                            <td>12000</td>
-                            <td>4</td>
-                            <td>48000</td>
+                            <td>CGST @9%</td>
+                            <td>104778</td>
                         </tr>
                         <tr>
-                            <td>1</td>
-                            <td>Ambient sample Analysis of Work Place Air Quality</td>
-                            <td>12000</td>
-                            <td>4</td>
-                            <td>48000</td>
+                            <td>Round Off</td>
+                            <td>0</td>
                         </tr>
                         <tr>
-                            <td>1</td>
-                            <td>Ambient sample Analysis of Work Place Air Quality</td>
-                            <td>12000</td>
-                            <td>4</td>
-                            <td>48000</td>
+                            <td><strong>Balance Due</strong></td>
+                            <td><strong>1373756</strong></td>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Ambient sample Analysis of Work Place Air Quality</td>
-                            <td>12000</td>
-                            <td>4</td>
-                            <td>48000</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Ambient sample Analysis of Work Place Air Quality</td>
-                            <td>12000</td>
-                            <td>4</td>
-                            <td>48000</td>
-                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5"><strong>In Words:</strong> Rupees thirteen lakh seventy-three thousand seven hundred fifty-six only</td>
+            </tr>
+        </table>
 
-                    </tbody>
-                    <tr>
-                        <td colspan="2">
-                            <strong>Bank Details</strong><br><br>
-                            <strong>A/c Name:</strong> ENVACARE LABORATORY LLP<br>
-                            <strong>Bank:</strong> BANK OF BARODA<br>
-                            <strong>A/c No.:</strong> 03200200001364<br>
-                            <strong>IFSC:</strong> BARBOAMBAWA<br>
-                            <strong>PAN:</strong> AAKFE7625D
-                        </td>
-                        <td colspan="3">
-                            <table style="width: 100%; border-collapse: collapse;">
-                                <tr>
-                                    <td><strong>TOTAL</strong></td>
-                                    <td>1164200</td>
-                                </tr>
-                                <tr>
-                                    <td>SGST @9% Tax</td>
-                                    <td>104778</td>
-                                </tr>
-                                <tr>
-                                    <td>CGST @9% Tax</td>
-                                    <td>104778</td>
-                                </tr>
-                                <tr>
-                                    <td>Balance round off (+)</td>
-                                    <td>0</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Balance Due</strong></td>
-                                    <td><strong>1373756</strong></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="5"><strong>In Words:</strong> Rupees thirteen lakh seventy-three thousand seven hundred fifty-Six Only</td>
-                    </tr>
-                </table>
+        <!-- <div style="page-break-inside: avoid; break-inside: avoid;"> -->
+        <div class="terms-container">
+            <div class="terms-left">
+                <b>Terms & Conditions</b>
+                <p><strong>Delivery Term:</strong> 15 days after monitoring</p>
+                <p><strong>Terms of Payment:</strong> Immediate upon report submission</p>
+                <p><strong>Taxes:</strong> 18% GST</p>
+                <p><strong>Jurisdiction:</strong> Ahmedabad courts</p>
+                <p><strong>Validity:</strong> 30 days (extension requires written confirmation)</p>
             </div>
-
-            <div class="terms-container">
-                <div class="terms-left">
-                    <b>Terms & Conditions</b>
-                    <p><strong>Delivery Term:</strong> 15 days after monitoring</p>
-                    <p><strong>Terms of Payment:</strong> Analysis charges will be immediate against submission of reports.</p>
-                    <p><strong>Taxes & Duties:</strong> 18% GST</p>
-                    <p><strong>Jurisdiction:</strong> Subjected to the jurisdiction of Ahmedabad (India) courts.</p>
-                    <p><strong>Validity:</strong> Quotation is valid for 30 days. Extension requires written confirmation.</p>
-                </div>
-                <div class="terms-right">
-                    <p><strong>For Envacare Laboratory LLP</strong></p>
-                    <img src="../static/img.png" alt="Stamp" />
-                    <div class="signature-label">Authorized Signature</div>
-                </div>
+            <div class="terms-right">
+                <p><strong>For Envacare Laboratory LLP</strong></p>
+                <img src="../static/img.png" alt="Stamp">
+                <div class="signature-label">Authorized Signature</div>
             </div>
         </div>
     </div>
+    <!-- </div> -->
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-header">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="Phone Icon">
+                    <strong>Phone</strong>
+                </div>
+                <div class="footer-text">+91 99240 85245</div>
+            </div>
+            <div class="footer-column">
+                <div class="footer-header">
+                    <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email Icon">
+                    <strong>Email & Website</strong>
+                </div>
+                <div class="footer-text">info@envacarelaboratoryllp.in<br>www.envacarelaboratoryllp.in</div>
+            </div>
+            <div class="footer-column address-column">
+                <div class="footer-header">
+                    <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Address Icon">
+                    <strong>Address</strong>
+                </div>
+                <div class="footer-text">Shop No.51–52, Shree Sharan Business Park,<br>Changodar, Sanand, Ahmedabad,<br>Gujarat – 382213</div>
+            </div>
+        </div>
+        <div class="footer-accreditation">(NABL ACCREDITATION LABORATORY)</div>
+    </footer>
 </body>
 
 </html>

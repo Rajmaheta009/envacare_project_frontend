@@ -12,6 +12,8 @@ if "role" not in st.session_state:
 if "login" not in st.session_state:
     st.session_state.login = False
 
+st.set_page_config(layout="wide")
+
 
 # ✅ Sync LocalStorage with session state
 storage=LocalStorageManager("user_login_status")
