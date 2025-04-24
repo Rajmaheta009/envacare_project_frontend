@@ -73,11 +73,27 @@ if st.session_state.login:
 
     # ✅ Sample Details Section
     st.subheader("🧪 Sample Details")
-    if st.session_state.sample_form_data:
-        df = pd.DataFrame(st.session_state.sample_form_data)
-        st.dataframe(df, use_container_width=True)
-    else:
-        st.warning("⚠️ No sample details found")
+    response = requests.get(f"{API_BASE_URL}/samples/get_sample")
+    try:
+        if response.status_code == 200:
+            data = response.json()
+
+            if data:
+                df = pd.DataFrame(data)
+                df = df.drop("id", axis=1)
+                df = df.drop("is_delete", axis=1)
+                df = df.drop("is_active", axis=1)
+                df = df.drop("updated_at", axis=1)
+                st.dataframe(df, use_container_width=True)
+
+            else:
+                st.warning("⚠️ No sample details found")
+
+        else:
+            st.error("❌ Failed to fetch customer requests")
+
+    except Exception as e:
+        st.error(f"⚠️ Error: {e}")
 
 else:
     st.text("⚠️ Please login first")
