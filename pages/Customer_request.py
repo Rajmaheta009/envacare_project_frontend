@@ -16,6 +16,7 @@ current_date = datetime.now()
 API_BASE_URL = os.getenv('API_BASE_URL')
 CUSTOMER_API = f"{API_BASE_URL}/customer_request/"
 ORDER_API = f"{API_BASE_URL}/order/"
+ORDER_PERAMETER = f"{API_BASE_URL}/order_peramter/"
 QUOTATION_API = f"{API_BASE_URL}/quotations/"
 
 
@@ -347,7 +348,6 @@ if session_state.login:
                             else:
                                 render_filtered_parameters()
 
-                    # RIGHT COLUMN
                     # RIGHT COLUMN
                     with col3:
                         st.subheader("🧾 Selected Parameters")

@@ -1,10 +1,13 @@
 import os
+from email.policy import default
+
 import requests
 import streamlit as st
 from component.local_store import LocalStorageManager
 from component.nav import login_nav
 from dotenv import load_dotenv
 load_dotenv()
+
 
 # Local storage for login status
 storage = LocalStorageManager("user_login_status")
