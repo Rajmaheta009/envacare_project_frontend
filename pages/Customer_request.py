@@ -4,7 +4,7 @@ from datetime import datetime
 import streamlit as st
 import requests
 from streamlit import session_state
-from pages.test import render_parameters
+# from pages.test import render_parameters
 from pages.parameter import fetch_parameters
 from dotenv import load_dotenv
 load_dotenv()
@@ -16,8 +16,8 @@ current_date = datetime.now()
 API_BASE_URL = os.getenv('API_BASE_URL')
 CUSTOMER_API = f"{API_BASE_URL}/customer_request/"
 ORDER_API = f"{API_BASE_URL}/order/"
-ORDER_PERAMETER = f"{API_BASE_URL}/order_peramter/"
 QUOTATION_API = f"{API_BASE_URL}/quotations/"
+ORDER_PARAMETER = f"{API_BASE_URL}/order_parameters/"
 
 
 # Fetch all parameters
@@ -170,9 +170,13 @@ def render_parameters(parent_id):
         else:
             key = f"{child['id']}_{child['name']}"
             if st.checkbox(f"{child['name']} ₹{child['price']}", key=key):
-                selected_parameters[child["name"]] = child["price"]
+                selected_parameters[child["id"]] = {
+                    "name": child["name"],
+                    "cost": child["price"]
+                }
             else:
-                selected_parameters.pop(child["name"], None)
+                selected_parameters.pop(child["id"], None)
+
             # html(select_parameter, height=100, scrolling=True)
 
 # MODE 2: Filtered flat list view
@@ -181,37 +185,48 @@ def render_filtered_parameters():
         if p["price"] is not None and search_term in p["name"].lower():
             key = f"{p['id']}_{p['name']}"
             if st.checkbox(f"{p['name']} ₹{p['price']}", key=key):
-                selected_parameters[p["name"]] = p["price"]
+                selected_parameters[p["id"]] = {
+                    "name": p["name"],
+                    "cost": p["price"]
+                }
             else:
-                selected_parameters.pop(p["name"], None)
+                selected_parameters.pop(p["id"], None)
 
 
-# ---------------------
-# Function to send quotation
-# ---------------------
-def handle_send_quotation(customer_id):
-    if not st.session_state.selected_parameters:
-        st.warning("Please select at least one parameter before sending quotation.")
-        return
-
-    total = sum(int(price) for price in st.session_state.selected_parameters.values())
-
-    quotation_data = {
-        "customer_id": customer_id,
-        "parameters": list(st.session_state.selected_parameters.keys()),
-        "prices": list(st.session_state.selected_parameters.values()),
-        "total": total,
+def create_quotation(order_id,pdf):
+    if pdf:
+        pdf_u = "pdf"
+    else:
+        pdf_u = "that is coming soon"
+    payload = {
+        "order_id": order_id,
+        "pdf_url":pdf_u
     }
-
-    response =  requests.post(f"{QUOTATION_API}", json=quotation_data)
+    response = requests.post(QUOTATION_API, json=payload)
 
     if response.status_code == 200:
-        st.success("Quotation sent successfully!")
-        st.session_state.selected_customer_id = None
-        st.session_state.selected_parameters.clear()
-        st.rerun()
+        return response.json()["id"]  # get the quotation_id
+
     else:
-        st.error("Failed to send quotation.")
+        st.error("Failed to create quotation")
+        return None
+
+def save_selected_parameters_to_api(quotation_id):
+    selected = st.session_state.get("selected_parameters", {})
+    for param_id, cost in selected.items():
+        payload = {
+            "quotation_id": quotation_id,
+            "parameter_id": param_id,
+            "cost": cost["cost"],
+            "result": "None",
+            "is_delete": False,
+            "is_active": True
+        }
+        response = requests.post(ORDER_PARAMETER, json=payload)
+        if response.status_code != 200:
+            st.error(f"❌ Failed to save parameter {param_id}")
+            st.write(payload)
+    st.success(f"✅ Parameter saved")
 
 
 # ✅ Main App Logic
@@ -336,37 +351,45 @@ if session_state.login:
                             child_map.setdefault(parent_id, []).append(p)
 
                     with col2:
-                        st.subheader("📌 Select Parameters")
-                        search_term = st.text_input("🔍 Filter by parameter name", "", ).lower().strip()
-                        search_btn = st.button("Search")
-                        with st.container(height=500, border=False):
-                            if search_term == "":
-                                for parent in parent_parameters:
-                                    if parent["parent_id"] is None:
-                                        st.markdown(f"### {parent['name']}")
-                                        render_parameters(parent["id"])
-                            else:
-                                render_filtered_parameters()
+                        with col2:
+                            st.subheader("📌 Select Parameters")
+                            search_term = st.text_input("🔍 Filter by parameter name", "", ).lower().strip()
+                            search_btn = st.button("Search")
+                            with st.container(height=500, border=False):
+                                if search_term == "":
+                                    for parent in parent_parameters:
+                                        if parent["parent_id"] is None:
+                                            st.markdown(f"### {parent['name']}")
+                                            render_parameters(parent["id"])
+                                else:
+                                    render_filtered_parameters()
 
-                    # RIGHT COLUMN
                     with col3:
                         st.subheader("🧾 Selected Parameters")
                         if "selected_parameters" not in st.session_state:
                             st.session_state.selected_parameters = {}
+                        with st.container(height=400) :
+                            # Update the session state with selected parameters
+                            for key, value in selected_parameters.items():
+                                    st.session_state.selected_parameters[key] = value
 
-                        # Update the session state with selected parameters
-                        for key, value in selected_parameters.items():
-                            st.session_state.selected_parameters[key] = value
-
-                        total = 0
-                        for name, price in st.session_state.selected_parameters.items():
-                            st.write(f"✔️ {name} - ₹{price}")
-                            total += int(price)
+                            total = 0
+                            for pid, param in st.session_state.selected_parameters.items():
+                                st.write(f"✔️ {param['name']} - ₹{param['cost']}")
+                                total += int(param["cost"])
 
                         st.markdown(f"### 💰 Total: ₹{total}")
 
-                        if st.button("📤 Send Quotation", key=f"send_{customer_id}"):
-                            handle_send_quotation(customer_id)
+                        if st.button("📨 Submit Quotation"):
+                            order = fetch_order_by_customer_id(customer_id)
+                            if order:
+                                quotation_id = create_quotation(order_id=order["id"], pdf=None)
+                                if quotation_id:
+                                    save_selected_parameters_to_api(quotation_id)
+                                    st.success("✅ Quotation submitted successfully!")
+                                    st.session_state.selected_customer_id = None
+                                    st.session_state.selected_parameters = {}
+                                    # st.rerun()
 
                 # ✅ Edit Form
                 if st.session_state.show_form and st.session_state.customer_to_edit and \
@@ -423,46 +446,6 @@ if session_state.login:
                     if cancel_btn:
                         st.session_state.show_form = False
                         st.session_state.customer_to_edit = None
-    #                     st.rerun()
-    #
-    # # ✅ Quotation Form Section
-    # if st.session_state.selected_customer_id:
-    #     st.markdown("## 🧾 Add Quotation")
-    #
-    #     customer_id = st.session_state.selected_customer_id
-    #     customer = fetch_customer_by_id(customer_id)
-    #
-    #     if customer:
-    #         col1, col2, col3 = st.columns([2, 3, 2])
-    #         with col1:
-    #             st.subheader("Customer Info")
-    #             st.text(f"Name: {customer['name']}")
-    #             st.text(f"Email: {customer['email']}")
-    #             st.text(f"Phone: {customer['phone_number']}")
-    #             st.text(f"WhatsApp: {customer['whatsapp_number']}")
-    #
-    #         selected_parameters = {}
-    #         with col2:
-    #             st.subheader("Select Parameters")
-    #             for header, params in parameters.items():
-    #                 st.markdown(f"**{header}**")
-    #                 for param, cost in params.items():
-    #                     if st.checkbox(f"{param} - ₹{cost}", key=f"{param}_{customer_id}"):
-    #                         selected_parameters[param] = cost
-    #
-    #         with col3:
-    #             st.subheader("Summary")
-    #             total_cost = sum(selected_parameters.values())
-    #             for param, cost in selected_parameters.items():
-    #                 st.text(f"{param}: ₹{cost}")
-    #             st.markdown(f"### Total: ₹{total_cost}")
-    #
-    #             if st.button("📩 Send Quotation"):
-    #                 # Add backend logic here to save quotation if needed
-    #                 st.success("Quotation sent successfully!")
-    #                 st.session_state.selected_customer_id = None
-    #                 st.rerun()
-
 else:
     st.warning("🚫 Please log in to access this page.")
     st.switch_page("auth_pages/login.py")
