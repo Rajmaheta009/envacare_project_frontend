@@ -101,7 +101,7 @@ def create_customer_and_order(data, comment, docfile):
                 "customer_id": customer_id,
                 "order_req_comment": comment,
                 "status": "Quotation Check",
-                "order_number" : f"{customer_name}/{formatted_date}/ORDER000{customer_id}"
+                "order_number" : f"{customer_name}/{formatted_date}/ORDERNo{customer_id}"
             }
             files = {'docfile': docfile} if docfile else None
             order_response = requests.post(ORDER_API, data=order_data, files=files)

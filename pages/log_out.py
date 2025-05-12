@@ -1,3 +1,4 @@
+import requests
 import streamlit as st
 from component.nav import login_nav
 from component.local_store import LocalStorageManager
@@ -15,3 +16,7 @@ if col2.button("Yes"):
 if col3.button("No"):
     st.navigation([st.Page("Pages/Dashboard.py")])
     st.rerun()
+
+re=requests.get("http://localhost:8000/customer_request/")
+if re:
+    st.write(re.json())

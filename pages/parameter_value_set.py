@@ -66,8 +66,8 @@ if submit:
             "parameter_id": selected_param["id"],
             "name": selected_param["name"],
             "price": selected_param.get("price", 0.0),
-            "min_range": float(min_val) if min_val else None,
-            "max_range": float(max_val) if max_val else None,
+            "min_range": float(min_val) if min_val else "00.0",
+            "max_range": float(max_val) if max_val else "00.0",
             "protocol": protocol if protocol else None
         }
 
@@ -78,5 +78,6 @@ if submit:
             st.rerun()
         else:
             st.error(f"Failed to submit values. Status Code: {res.status_code}")
+            st.write(payload)
     except ValueError:
         st.error("Min and Max values must be numeric.")
