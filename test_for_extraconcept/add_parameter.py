@@ -1,25 +1,15 @@
 import pandas as pd
 import streamlit as st
-import json
-import os
 import psycopg2
 import re
-from dotenv import load_dotenv
-load_dotenv()
 
-database = os.getenv('database')
-user = os.getenv('user')
-password = os.getenv('password')
-host = os.getenv('host')
-port = os.getenv('port')
 try:
     # PostgreSQL connection
     conn = psycopg2.connect(
-        dbname=database,
-        user=user,
-        password=password,
-        host=host,
-        port=port
+        dbname="envacare_project",
+        user="postgres",
+        password="postgres",
+        host="localhost",
     )
     cur = conn.cursor()
 
