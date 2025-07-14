@@ -14,6 +14,7 @@ if "login" not in st.session_state:
 def filter_quotations(data, search_term):
     return [quote for quote in data if search_term.lower() in quote['customer_name'].lower()]
 
+@st.cache_data(show_spinner="Fetching data...", ttl=600)
 # ✅ Multi-API Call Function
 def get_complete_quotation_data():
     try:

@@ -7,7 +7,7 @@ load_dotenv()
 
 API_BASE_URL = os.getenv('API_BASE_URL')
 
-
+@st.cache_data(show_spinner="Fetching data...", ttl=600)
 # --- API Functions ---
 def get_employees():
     response = requests.get(f"{API_BASE_URL}/employee/")
@@ -41,6 +41,7 @@ st.title("👨‍💼 Employee Management System")
 # --- Add Employee Form ---
 with st.form("add_employee_form"):
     st.header("➕ Add Employee")
+
     name = st.text_input("Name")
     email = st.text_input("Email")
     password = st.text_input("Password", type="password")
@@ -48,9 +49,17 @@ with st.form("add_employee_form"):
 
     # Department Dropdown
     dept_list = get_departments()
-    dept_options = {dept["name"]: dept["id"] for dept in dept_list}
-    dept_name = st.selectbox("Select Department", list(dept_options.keys()))
-    dept_id = dept_options[dept_name]
+
+    if dept_list:
+        dept_options = {dept["name"]: dept["id"] for dept in dept_list}
+        dept_names = list(dept_options.keys())
+        dept_name = st.selectbox("Select Department", dept_names)
+
+        # Safely get dept_id without KeyError
+        dept_id = dept_options.get(dept_name)
+    else:
+        st.warning("No departments found. Please add departments first.")
+        dept_id = None
 
     submitted = st.form_submit_button("Add")
 

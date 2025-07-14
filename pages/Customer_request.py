@@ -27,6 +27,7 @@ parent_parameters = [p for p in parameters if p["price"] is None]
 
 # Create child mapping by parent_id
 child_map = {}
+
 for p in parameters:
     parent_id = p.get("parent_id")
     if parent_id is not None:
@@ -40,6 +41,7 @@ if "selected_customer_id" not in st.session_state:
 if "customer_to_edit" not in st.session_state:
     st.session_state.customer_to_edit = None
 
+@st.cache_data(show_spinner="Fetching data...", ttl=600)
 def fetch_customers_with_orders():
     try:
         customer_response = requests.get(CUSTOMER_API)

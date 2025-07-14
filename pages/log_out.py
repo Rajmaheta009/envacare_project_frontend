@@ -2,7 +2,11 @@ import requests
 import streamlit as st
 from component.nav import login_nav
 from component.local_store import LocalStorageManager
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
+API_BASE_URL = os.getenv('API_BASE_URL')
 storage=LocalStorageManager("user_login_status")
 
 col1 ,col2  = st.columns([1,2])
@@ -17,7 +21,4 @@ if col3.button("No"):
     st.navigation([st.Page("pages/Dashboard.py")])
     st.rerun()
 
-re=requests.get("http://localhost:8000/customer_request/")
-
-if re:
-    st.write(re.json())
+re=requests.get(f"{API_BASE_URL}/customer_request/")

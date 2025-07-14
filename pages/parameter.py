@@ -31,6 +31,7 @@ def create_parameter(data):
     else:
         st.error(f"Failed to add parameter: {response.text}")
 
+@st.cache_data(show_spinner="Fetching data...", ttl=600)
 def fetch_parameters():
     response = requests.get(f"{PARAMETER_URL}/")
     return response.json() if response.status_code == 200 else []

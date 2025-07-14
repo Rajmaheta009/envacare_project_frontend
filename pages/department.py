@@ -4,11 +4,12 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-API_BASE_URL = os.getenv('API_BASE_URL')
-
+@st.cache_data(show_spinner="Fetching data...", ttl=600)
 def get_departments():
     response = requests.get(f"{API_BASE_URL}/department/")
     return response.json() if response.status_code == 200 else []
+
+API_BASE_URL = os.getenv('API_BASE_URL')
 
 def add_department(department):
     return requests.post(f"{API_BASE_URL}/department", json=department)

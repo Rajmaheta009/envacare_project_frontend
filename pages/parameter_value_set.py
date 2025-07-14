@@ -13,11 +13,12 @@ PARAM_API = f"{API_BASE_URL}/parameter"
 
 st.title("Edit Parameter Values")
 
-# Fetch parameter data
-response = requests.get(PARAM_API)
-if response.status_code != 200:
-    st.error("Failed to fetch parameters.")
-    st.stop()
+with st.spinner("fetch parameters."):
+    # Fetch parameter data
+    response = requests.get(PARAM_API)
+    if response.status_code != 200:
+        st.error("Failed to fetch parameters.")
+        st.stop()
 
 data = response.json()
 
