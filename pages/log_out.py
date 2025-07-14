@@ -14,9 +14,10 @@ if col2.button("Yes"):
     storage.set_item("login_status",False)
     st.rerun()
 if col3.button("No"):
-    st.navigation([st.Page("Pages/Dashboard.py")])
+    st.navigation([st.Page("pages/Dashboard.py")])
     st.rerun()
 
 re=requests.get("http://localhost:8000/customer_request/")
+
 if re:
     st.write(re.json())

@@ -3,6 +3,8 @@ import requests
 from dotenv import load_dotenv
 import os
 
+from sqlalchemy import Nullable
+
 # Load environment variables
 load_dotenv()
 API_BASE_URL = os.getenv("API_BASE_URL")
@@ -26,7 +28,7 @@ id_to_name = {p["id"]: p["name"] for p in data}
 used_as_parent = {p.get("parent_id") for p in data if p.get("parent_id") is not None}
 leaf_params = [p for p in data if p["id"] not in used_as_parent]
 
-# Build dropdown list: parameter name (parent name)
+# Build dropdown list
 display_names = []
 param_lookup = {}
 
@@ -36,9 +38,24 @@ for p in leaf_params:
     display_names.append(display_name)
     param_lookup[display_name] = p
 
-# Dropdown
-selected_display = st.selectbox("Select Parameter", display_names)
-selected_param = param_lookup[selected_display]
+selected_param = None  # Always define it
+
+if display_names:
+    selected_display = st.selectbox("Select Parameter", display_names)
+    selected_param = param_lookup.get(selected_display)
+
+    if selected_param is None:
+        st.error("Selected parameter not found.")
+        st.stop()  # ✅ stop everything if it's invalid
+    else:
+        st.success(f"Selected: {selected_display}")
+        # safe to use selected_param["..."] here
+        st.write("Selected param name:", selected_param["name"])
+else:
+    st.warning("No parameters available.")
+    st.stop()  # ✅ stop so you don’t hit undefined values
+
+
 
 # Form to edit min, max, and protocol
 with st.form("parameter_form"):
