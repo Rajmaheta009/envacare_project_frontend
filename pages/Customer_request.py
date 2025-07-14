@@ -1,3 +1,4 @@
+import base64
 import os
 from datetime import datetime
 
@@ -8,6 +9,7 @@ from streamlit import session_state
 from pages.parameter import fetch_parameters
 from dotenv import load_dotenv
 load_dotenv()
+
 
 current_date = datetime.now()
 
@@ -197,7 +199,7 @@ def render_filtered_parameters():
 
 def create_quotation(order_id,pdf):
     if pdf:
-        pdf_u = "pdf"
+        pdf_u = pdf
     else:
         pdf_u = "that is coming soon"
     payload = {
@@ -211,6 +213,7 @@ def create_quotation(order_id,pdf):
 
     else:
         st.error("Failed to create quotation")
+        st.write(payload)
         return None
 
 def save_selected_parameters_to_api(quotation_id):
@@ -385,12 +388,27 @@ if session_state.login:
                         if st.button("📨 Submit Quotation"):
                             order = fetch_order_by_customer_id(customer_id)
                             if order:
-                                quotation_id = create_quotation(order_id=order["id"], pdf=None)
+                                # Read the static PDF file as binary
+                                uploaded_file = st.file_uploader("Upload a file", type=["pdf"])
+
+                                if uploaded_file is not None:
+                                    file_to_use = uploaded_file
+                                    st.success("✅ File uploaded successfully.")
+                                else:
+                                    # Use a static file from your project folder
+                                    file_path = "envacare_quotation.pdf"
+                                    file_to_use = open(file_path, "rb")
+                                    st.warning("⚠️ No file uploaded. Using default.pdf")
+
+                                # Call create_quotation with PDF content
+                                quotation_id = create_quotation(order_id=order["id"], pdf=file_to_use)
+
                                 if quotation_id:
                                     save_selected_parameters_to_api(quotation_id)
                                     st.success("✅ Quotation submitted successfully!")
                                     st.session_state.selected_customer_id = None
                                     st.session_state.selected_parameters = {}
+
                                     # st.rerun()
 
                 # ✅ Edit Form
