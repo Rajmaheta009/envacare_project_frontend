@@ -197,24 +197,27 @@ def render_filtered_parameters():
                 selected_parameters.pop(p["id"], None)
 
 
-def create_quotation(order_id,pdf):
-    if pdf:
-        pdf_u = pdf
-    else:
-        pdf_u = "that is coming soon"
-    payload = {
-        "order_id": order_id,
-        "pdf_url":pdf_u
-    }
-    response = requests.post(QUOTATION_API, json=payload)
+# ✅ Create Quotation with Static File Upload
+def create_quotation(order_id, pdf_path):
+    try:
+        with open(pdf_path, "rb") as f:
+            files = {
+                "pdf_url": ("envacare_quotation.pdf", f, "application/pdf")
+            }
+            data = {"order_id": str(order_id)}
+            response = requests.post(QUOTATION_API, data=data, files=files)
 
-    if response.status_code == 200:
-        return response.json()["id"]  # get the quotation_id
-
-    else:
-        st.error("Failed to create quotation")
-        st.write(payload)
+        if response.status_code == 200:
+            return response.json()["id"]
+        else:
+            st.error("❌ Failed to create quotation")
+            st.write(response.text)
+            return None
+    except Exception as e:
+        st.error(f"⚠️ Error: {e}")
         return None
+
+
 
 def save_selected_parameters_to_api(quotation_id):
     selected = st.session_state.get("selected_parameters", {})
@@ -387,29 +390,14 @@ if session_state.login:
 
                         if st.button("📨 Submit Quotation"):
                             order = fetch_order_by_customer_id(customer_id)
-                            if order:
-                                # Read the static PDF file as binary
-                                uploaded_file = st.file_uploader("Upload a file", type=["pdf"])
+                            static_pdf_path = "envacare_quotation.pdf"
+                            quotation_id = create_quotation(order_id=order["id"], pdf_path=static_pdf_path)
 
-                                if uploaded_file is not None:
-                                    file_to_use = uploaded_file
-                                    st.success("✅ File uploaded successfully.")
-                                else:
-                                    # Use a static file from your project folder
-                                    file_path = "envacare_quotation.pdf"
-                                    file_to_use = open(file_path, "rb")
-                                    st.warning("⚠️ No file uploaded. Using default.pdf")
-
-                                # Call create_quotation with PDF content
-                                quotation_id = create_quotation(order_id=order["id"], pdf=file_to_use)
-
-                                if quotation_id:
-                                    save_selected_parameters_to_api(quotation_id)
-                                    st.success("✅ Quotation submitted successfully!")
-                                    st.session_state.selected_customer_id = None
-                                    st.session_state.selected_parameters = {}
-
-                                    # st.rerun()
+                            if quotation_id:
+                                save_selected_parameters_to_api(quotation_id)
+                                st.success("✅ Quotation submitted successfully!")
+                                st.session_state.selected_customer_id = None
+                                st.session_state.selected_parameters = {}
 
                 # ✅ Edit Form
                 if st.session_state.show_form and st.session_state.customer_to_edit and \

@@ -97,7 +97,7 @@ if st.session_state.login:
                 st.write(f"**Customer Name**: {quote['customer_name']}")
                 st.write(f"**Customer Email**: {quote['customer_email']}")
                 st.write(f"**Order Number**: {quote['order_number']}")
-                st.write(f"[📄 Download PDF]({quote['pdf_url']})")
+                st.write(f"[📄 Download PDF] f'{API_BASE_URL}/static/Quotation/{quote['pdf_url']})")
 
                 st.markdown("**🧪 Parameters Selected:**")
                 for param in quote['parameters']:
