@@ -64,6 +64,12 @@ def delete_parameter(p_id, message_placeholder):
 
 # Fetch data once
 display_parameters = fetch_parameters()
+# --- Filter Section ---
+search_query = st.text_input("🔍 Search Parameter by Name")
+
+# Apply search filter
+if search_query:
+    display_parameters = [param for param in display_parameters if search_query.lower() in param['name'].lower()]
 
 # Add Parameter Form
 with st.form("add_parameter_form"):

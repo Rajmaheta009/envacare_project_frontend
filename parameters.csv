@@ -1,0 +1,56 @@
+name,protocol,min_range,max_range
+pH (Pollution & Environment),APHA 24th Edition,1.0,14.0
+1988 (Pollution & Environment),Unknown,1.0,1000.0
+5to 1000 (Pollution & Environment),2.09@,5.0,1000.0
+1991 (Pollution & Environment),Unknown,1.0,1000.0
+8to 10000 (Pollution & Environment),4.14@ 199,8.0,10000.0
+1.0to 10 (Pollution & Environment),0.90@,1.0,10.0
+1.00 mg/L to 50.00 (Pollution & Environment),Unknown,1.0,50.0
+0.03 mg/L to 20.00 (Pollution & Environment),Unknown,0.03,20.0
+1994 (Pollution & Environment),Unknown,1.0,1000.0
+2021 (Pollution & Environment),Unknown,1.0,500.0
+1 umhos/cm to 20000 (Pollution & Environment),Unknown,1.0,20000.0
+1986 (Pollution & Environment),Unknown,5.0,1000.0
+1984 (Pollution & Environment),Unknown,5.0,10000.0
+1984 (Pollution & Environment),Unknown,1.0,1000.0
+1991 (Water),Unknown,1.0,500.0
+1988 (Water),Unknown,1.0,1000.0
+1989 (Water),Unknown,3.0,10.0
+1984 (Water),Unknown,1.0,500.0
+Drinking Water (Water),pH,4.0,10.0
+2021 (Water),Unknown,0.2,20.0
+Drinking Water (Water),Sulphate,1.0,1000.0
+1984 (Water),Unknown,10.0,50.0
+1986 (Water),Unknown,1.0,500.0
+1986 (Water),Unknown,1.0,1000.0
+2023 (Water),Unknown,1.0,2500.0
+2009 (Water),Unknown,1.0,1500.0
+1984 (Water),Unknown,0.1,10.0
+Ground Water (Water),Calcium as Ca,1.0,2500.0
+Ground Water (Water),Chloride as Cl,1.0,5000.0
+4500-O C: 2022 (Water),2 mg/L to 10 mg/L,2.0,10.0
+Ground Water (Water),Magnesium as Mg,1.0,2500.0
+Ground Water (Water),pH,4.0,10.0
+Ground Water (Water),Residual Chlorine,0.2,100.0
+Ground Water (Water),Sulphate as SO4,1.0,5000.0
+2550 B: 2022 (Water),Unknown,10.0,50.0
+2310 B: 2022 (Water),Unknown,1.0,2500.0
+2320 B: 2022 (Water),Unknown,1.0,5000.0
+2540 C: 2022 (Water),Unknown,1.0,15000.0
+2340 C: 2022 (Water),Unknown,1.0,10000.0
+2130 B: 2022 (Water),Unknown,0.1,100.0
+0.3 mg/L to 100 mg/L (Water),Unknown,0.3,100.0
+Surface Water (Water),Calcium as Ca,1.0,2500.0
+Surface Water (Water),Chloride as Cl,1.0,5000.0
+4500-O C: 2022 (Water),2 mg/L to 10 mg/L,2.0,10.0
+0.5 mS/cm to 50 (Water),Unknown,0.5,50.0
+Surface Water (Water),Magnesium as Mg,1.0,2500.0
+Surface Water (Water),pH,4.0,10.0
+Surface Water (Water),Residual Chlorine,0.2,100.0
+Surface Water (Water),Sulphate as SO4,1.0,5000.0
+2550 B: 2022 (Water),Unknown,10.0,50.0
+2310 B: 2022 (Water),Unknown,1.0,2500.0
+2320 B: 2022 (Water),Unknown,1.0,5000.0
+2540 C: 2022 (Water),Unknown,1.0,15000.0
+2340 C: 2022 (Water),Unknown,1.0,10000.0
+2130 B: 2022 (Water),Unknown,0.1,100.0
