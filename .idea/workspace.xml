@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eadcb144-9374-4d19-8c29-4c69757b0ecd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/static/protocol_and_range.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/Dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/Dashboard.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/Result.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/Result.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/invoice_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/invoice_list.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/parameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/parameter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/parameter_value_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/parameter_value_set.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,16 +53,18 @@
     "Python.add_parameter.executor": "Run",
     "Python.inseet_parameter_databse.executor": "Run",
     "Python.main.executor": "Run",
+    "Python.p-1.executor": "Run",
     "Python.test.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/RaJ/PycharmProjects/envacare_project_frontend/static"
+    "last_opened_file_path": "C:/Users/RaJ/PycharmProjects/envacare_project_frontend"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\RaJ\PycharmProjects\envacare_project_frontend" />
       <recent name="C:\Users\RaJ\PycharmProjects\envacare_project_frontend\static" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -73,7 +76,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-598b0484d0b5-e2d783800521-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.26927.74" />
+        <option value="bundled-python-sdk-4c141bd692a7-e2d783800521-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.26927.90" />
       </set>
     </attachedChunks>
   </component>

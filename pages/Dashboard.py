@@ -53,31 +53,45 @@ if st.session_state.get("login", False):
         st.error(f"⚠️ Error: {e}")
 
     # ✅ Customer Quotations Section
-    st.subheader("💰 Customer Quotations")
     try:
         with st.spinner("Fetching quotations..."):
             response = requests.get(f"{API_BASE_URL}/quotations/")
             if response.status_code == 200:
                 data = response.json()
+
                 if data:
-                    df = pd.DataFrame(data)
-                    df = df.drop("id", axis=1, errors='ignore')
+                    enriched_data = []
 
-                    if "created_at" in df.columns:
-                        df["created_at"] = pd.to_datetime(df["created_at"])
+                    for quotation in data:
+                        # Get order info
+                        order_id = quotation.get("order_id")
+                        order_resp = requests.get(f"{API_BASE_URL}/order/order_id/{order_id}")
+                        order_number = None
+                        if order_resp.status_code == 200:
+                            order_info = order_resp.json()
+                            if isinstance(order_info, dict):
+                                order_number = order_info.get("order_number")
 
-                        # Date range filter
-                        col_date1, col_date2 = st.columns(2)
-                        start_date = col_date1.date_input("📅 Start Date", df["created_at"].min().date())
-                        end_date = col_date2.date_input("📅 End Date", df["created_at"].max().date())
-                        df = df[(df["created_at"].dt.date >= start_date) & (df["created_at"].dt.date <= end_date)]
+                        # Build full pdf_url
+                        pdf_filename = quotation.get("pdf_url", "")
+                        pdf_url = f"{API_BASE_URL}/static/Quotation/{pdf_filename}" if pdf_filename else ""
 
-                    # Exact order ID search
-                    order_search = st.text_input("🔍 Search by Exact Order ID").strip().lower()
-                    if order_search and "order_id" in df.columns:
-                        df = df[df["order_id"].astype(str).str.lower() == order_search]
+                        # Add data with extra fields
+                        enriched_data.append({
+                            **quotation,
+                            "order_number": order_number,
+                            "pdf_url": pdf_url
+                        })
 
-                    st.dataframe(df, use_container_width=True)
+                    # Convert to DataFrame
+                    df = pd.DataFrame(enriched_data)
+
+                    # Display links to PDF below
+                    st.markdown("### 📄 Quotation PDF Links")
+                    for index, row in df.iterrows():
+                        if row.get("pdf_url"):
+                            st.markdown(f"🔗 [{row.get('order_number', 'Order')}]({row['pdf_url']})", unsafe_allow_html=True)
+
                 else:
                     st.warning("⚠️ No quotations found")
             else:
@@ -108,8 +122,6 @@ if st.session_state.get("login", False):
                 st.error("❌ Failed to fetch sample details")
     except Exception as e:
         st.error(f"⚠️ Error: {e}")
-
-
 
 else:
     st.warning("⚠️ Please login first")

@@ -32,7 +32,7 @@ def fetch_all_data():
 
 
 if st.session_state.login:
-    st.title("📋 Full Quotation Viewer")
+    st.title("📋 Full Order Viewer")
 
     # Fetch data from cache (or API if expired)
     data = fetch_all_data()

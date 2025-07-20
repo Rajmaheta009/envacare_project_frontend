@@ -40,12 +40,13 @@ if selected_order_number:
 
     with st.form("submit_results"):
         # Table Header
-        cols = st.columns([3, 1, 1, 2, 2])
+        cols = st.columns([3, 1, 1, 3, 2, 2])
         cols[0].markdown("**Parameter Name**")
         cols[1].markdown("**Min**")
         cols[2].markdown("**Max**")
-        cols[3].markdown("**Protocol**")
-        cols[4].markdown("**Result**")
+        cols[3].markdown("**Protocol Selection**")
+        cols[4].markdown("**Method Used**")
+        cols[5].markdown("**Result**")
 
         for param in order_params:
             param_id = param['parameter_id']
@@ -55,25 +56,64 @@ if selected_order_number:
             name = param_data["name"]
             min_val = param_data.get("min_range", "-")
             max_val = param_data.get("max_range", "-")
-            protocol = param_data.get("protocol", "-")
+            is_method = param_data.get("is_3025_method")
+            apha_method = param_data.get("apha_24th_edition_method")
 
-            row = st.columns([3, 1, 1, 2, 2])
+            row = st.columns([3, 1, 1, 3, 2, 2])
             row[0].markdown(name)
             row[1].markdown(str(min_val) if min_val else "-")
             row[2].markdown(str(max_val) if max_val else "-")
-            row[3].markdown(protocol if protocol else "-")
 
-            result_input = row[4].text_input("Result", key=f"result_{quotation_id}_{param_id}")
+            protocol_key = f"protocol_{quotation_id}_{param_id}"
+            method_key = f"method_{quotation_id}_{param_id}"
+            result_key = f"result_{quotation_id}_{param_id}"
+
+            # Protocol Section
+            if is_method and apha_method:
+                with row[3]:
+                    st.markdown("**IS 3025 / APHA**")
+                    selected_protocol = st.radio(
+                        label="",
+                        options=["IS 3025", "APHA"],
+                        key=protocol_key,
+                        horizontal=True,
+                        label_visibility="collapsed"
+                    )
+            elif is_method:
+                row[3].markdown("IS 3025")
+                selected_protocol = "IS 3025"
+            elif apha_method:
+                row[3].markdown("APHA")
+                selected_protocol = "APHA"
+            else:
+                row[3].markdown("-")
+                selected_protocol = None
+
+            method_used_input = row[4].text_input("Method Used", key=method_key)
+            result_input = row[5].text_input("Result", key=result_key)
+
+            # Final result value is selected protocol + result
+            final_result = f"{selected_protocol} - {result_input}" if selected_protocol and result_input else result_input
 
             results_payload.append({
                 "order_param_id": param["id"],
-                "result": result_input
+                "result": final_result.strip(),
+                "protocol": selected_protocol,
+                "method_used": method_used_input.strip()
             })
 
         submitted = st.form_submit_button("✅ Submit Results")
 
         if submitted:
-            payload = [r for r in results_payload if r["result"].strip()]
+            payload = [
+                {
+                    "order_param_id": r["order_param_id"],
+                    "result": r["result"],
+                    "protocol": r["protocol"],
+                    "method_used": r["method_used"]
+                }
+                for r in results_payload if r["result"]
+            ]
             if not payload:
                 st.warning("Please enter at least one result.")
             else:
@@ -95,15 +135,14 @@ if selected_order_number:
                 if isinstance(res, dict) and res.get("result") not in [None, "None"]:
                     param_info = requests.get(f"{BASE_API}/parameter/p_id/{res['parameter_id']}").json()
                     param_data = param_info[0]
-
-                    st.markdown(f"**🔹 Parameter ID:** {res['parameter_id']}")
                     st.markdown(f"**🔹 Parameter Name:** {param_data['name']}")
-                    st.markdown(f"**Result:** {res['result']}")
+                    st.markdown(f"**🔹 Protocol Used:** {res.get('protocol', 'N/A')}")
+                    st.markdown(f"**🔹 Method Used:** {res.get('method_used', 'N/A')}")
+                    st.markdown(f"**🔹 Result:** {res['result']}")
                     st.markdown("---")
                 else:
                     st.write("Result is not filled, so no data is shown.")
 
-            # One set of buttons at the end
             col1, col2 = st.columns(2)
             with col2:
                 if st.button("⬇️ Download PDF"):
