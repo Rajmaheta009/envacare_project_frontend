@@ -43,7 +43,7 @@ if "selected_customer_id" not in st.session_state:
 if "customer_to_edit" not in st.session_state:
     st.session_state.customer_to_edit = None
 
-@st.cache_data(show_spinner="Fetching data...", ttl=600)
+# @st.cache_data(show_spinner="Fetching data...", ttl=600)
 def fetch_customers_with_orders():
     try:
         customer_response = requests.get(CUSTOMER_API)

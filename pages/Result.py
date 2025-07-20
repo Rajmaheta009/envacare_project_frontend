@@ -2,8 +2,10 @@ import streamlit as st
 import requests
 import os
 from dotenv import load_dotenv
+import pandas as pd
+from io import BytesIO
 
-# --- Load API base URL ---
+# Load environment variables
 load_dotenv()
 BASE_API = os.getenv("API_BASE_URL")
 
@@ -36,115 +38,160 @@ if selected_order_number:
     order_params = requests.get(f"{BASE_API}/order_parameters/op_id/{quotation_id}").json()
 
     st.subheader("🔬 Enter Results for Each Parameter")
+
     results_payload = []
 
     with st.form("submit_results"):
         # Table Header
-        cols = st.columns([3, 1, 1, 3, 2, 2])
-        cols[0].markdown("**Parameter Name**")
-        cols[1].markdown("**Min**")
-        cols[2].markdown("**Max**")
-        cols[3].markdown("**Protocol Selection**")
-        cols[4].markdown("**Method Used**")
-        cols[5].markdown("**Result**")
+        header = st.columns([0.5, 2.5, 1, 1, 1, 2.5, 2.5, 2])
+        header[0].markdown("**No.**")
+        header[1].markdown("**Parameter Name**")
+        header[2].markdown("**Min**")
+        header[3].markdown("**Max**")
+        header[4].markdown("**Unit**")
+        header[5].markdown("**Protocol**")
+        header[6].markdown("**Home Method**")
+        header[7].markdown("**Result**")
 
-        for param in order_params:
+        # We keep track of param info for export later
+        param_info_map = {}
+
+        for i, param in enumerate(order_params, start=1):
             param_id = param['parameter_id']
             param_details = requests.get(f"{BASE_API}/parameter/p_id/{param_id}").json()
-            param_data = param_details[0]  # assume one
+            param_data = param_details[0]
 
             name = param_data["name"]
+            unit = param_data.get("unit", "-")
             min_val = param_data.get("min_range", "-")
             max_val = param_data.get("max_range", "-")
             is_method = param_data.get("is_3025_method")
             apha_method = param_data.get("apha_24th_edition_method")
 
-            row = st.columns([3, 1, 1, 3, 2, 2])
-            row[0].markdown(name)
-            row[1].markdown(str(min_val) if min_val else "-")
-            row[2].markdown(str(max_val) if max_val else "-")
+            row = st.columns([0.5, 2.5, 1, 1, 1, 2.5, 2.5, 2])
+            row[0].markdown(str(i))
+            row[1].markdown(name)
+            row[2].markdown(str(min_val) if min_val else "-")
+            row[3].markdown(str(max_val) if max_val else "-")
+            row[4].markdown(unit or "-")
 
-            protocol_key = f"protocol_{quotation_id}_{param_id}"
-            method_key = f"method_{quotation_id}_{param_id}"
+            # --- Dynamic protocol display from DB ---
+            protocol_options = []
+            if is_method:
+                protocol_options.append(is_method)
+            if apha_method:
+                protocol_options.append(apha_method)
+
+            protocol_radio_key = f"radio_protocol_{quotation_id}_{param_id}"
+            selected_protocol = row[5].radio(
+                label="",
+                options=protocol_options,
+                key=protocol_radio_key,
+                horizontal=True,
+                label_visibility="collapsed"
+            )
+
+            # Home protocol input
+            home_protocol_key = f"home_protocol_{quotation_id}_{param_id}"
+            home_protocol = row[6].text_input(
+                label="",
+                key=home_protocol_key,
+                label_visibility="collapsed",
+                placeholder="Type home protocol"
+            )
+
+            # Result input
             result_key = f"result_{quotation_id}_{param_id}"
-
-            # Protocol Section
-            if is_method and apha_method:
-                with row[3]:
-                    st.markdown("**IS 3025 / APHA**")
-                    selected_protocol = st.radio(
-                        label="",
-                        options=["IS 3025", "APHA"],
-                        key=protocol_key,
-                        horizontal=True,
-                        label_visibility="collapsed"
-                    )
-            elif is_method:
-                row[3].markdown("IS 3025")
-                selected_protocol = "IS 3025"
-            elif apha_method:
-                row[3].markdown("APHA")
-                selected_protocol = "APHA"
-            else:
-                row[3].markdown("-")
-                selected_protocol = None
-
-            method_used_input = row[4].text_input("Method Used", key=method_key)
-            result_input = row[5].text_input("Result", key=result_key)
-
-            # Final result value is selected protocol + result
-            final_result = f"{selected_protocol} - {result_input}" if selected_protocol and result_input else result_input
+            result = row[7].text_input("Result", key=result_key)
 
             results_payload.append({
                 "order_param_id": param["id"],
-                "result": final_result.strip(),
-                "protocol": selected_protocol,
-                "method_used": method_used_input.strip()
+                "parameter_id": param_id,
+                "result": result.strip(),
+                "protocol_used": selected_protocol,
+                "home_protocol": home_protocol.strip(),
+                "name": name,
+                "unit": unit or "-"
             })
 
-        submitted = st.form_submit_button("✅ Submit Results")
+            # Save param info for export filtering
+            param_info_map[param["id"]] = {
+                "name": name,
+                "unit": unit or "-"
+            }
+
+        submitted = st.form_submit_button("✅ Save Result")
 
         if submitted:
-            payload = [
-                {
-                    "order_param_id": r["order_param_id"],
-                    "result": r["result"],
-                    "protocol": r["protocol"],
-                    "method_used": r["method_used"]
-                }
-                for r in results_payload if r["result"]
-            ]
-            if not payload:
-                st.warning("Please enter at least one result.")
-            else:
-                response = requests.put(f"{BASE_API}/order_parameters/submit_results", json={"results": payload})
-                if response.status_code == 200:
-                    st.success("Results submitted successfully.")
-                else:
-                    st.error("Failed to submit results.")
+            success_count = 0
+            for res_data in results_payload:
+                if res_data["result"]:
+                    url = f"{BASE_API}/order_parameters/result/{quotation_id}/{res_data['parameter_id']}"
 
-    # --- View Submitted Results ---
-    st.subheader("📄 Submitted Results with PDF Options")
-    submitted_results = requests.get(f"{BASE_API}/order_parameters/submitted_results/{quotation_id}").json()
+                    # ✅ Correct logic
+                    if res_data["home_protocol"]:
+                        st.write("hlpppp")# If Home Method is filled
+                        protocol_used = res_data["home_protocol"]  # Save home protocol as the official protocol
+                        home_protocol = res_data["home_protocol"]
+                    else:  # If Home Method is empty
+                        # st.write("hlpppp")
+                        protocol_used = res_data["protocol_used"]  # Save selected radio button
+                        home_protocol = ""  # Nothing typed in home
 
-    if not submitted_results:
-        st.info("No submitted results found.")
-    else:
-        with st.expander(f"🧪 Order: {selected_order_number} - {len(submitted_results)} Parameters Submitted"):
-            for res in submitted_results:
-                if isinstance(res, dict) and res.get("result") not in [None, "None"]:
-                    param_info = requests.get(f"{BASE_API}/parameter/p_id/{res['parameter_id']}").json()
-                    param_data = param_info[0]
-                    st.markdown(f"**🔹 Parameter Name:** {param_data['name']}")
-                    st.markdown(f"**🔹 Protocol Used:** {res.get('protocol', 'N/A')}")
-                    st.markdown(f"**🔹 Method Used:** {res.get('method_used', 'N/A')}")
-                    st.markdown(f"**🔹 Result:** {res['result']}")
-                    st.markdown("---")
-                else:
-                    st.write("Result is not filled, so no data is shown.")
+                    payload = {
+                        "result": res_data["result"],
+                        "protocol_used": protocol_used,
+                        "home_protocol": home_protocol
+                    }
 
-            col1, col2 = st.columns(2)
-            with col2:
-                if st.button("⬇️ Download PDF"):
-                    download_url = f"{BASE_API}/download_pdf/{quotation_id}"
-                    st.markdown(f"[💾 Download PDF]({download_url})", unsafe_allow_html=True)
+                    res = requests.put(url, json=payload)
+
+                    if res.status_code == 200:
+                        success_count += 1
+                    else:
+                        st.warning(f"⚠️ Failed for Parameter ID {res_data['parameter_id']}")
+
+            st.success(f"✅ Successfully updated {success_count} result(s).")
+
+    # --- Expander to show saved results where result is NOT NULL ---
+    saved_results = [r for r in results_payload if r["result"]]
+
+    if saved_results:
+        with st.expander("📄 View Saved Results"):
+            # Create dataframe for display and export
+            data_for_export = []
+            for idx, res in enumerate(saved_results, start=1):
+                # ✅ Decide which protocol to show
+                protocol_display = res["home_protocol"] if res["home_protocol"] else res["protocol_used"]
+
+                # ✅ Append row to export data
+                data_for_export.append({
+                    "Sr. No": idx,
+                    "Parameter": res["name"],
+                    "Result": res["result"],
+                    "Unit": res["unit"],
+                    "Protocol": protocol_display
+                })
+
+            df = pd.DataFrame(data_for_export)
+            st.table(df)
+
+
+            def to_excel(df):
+                output = BytesIO()
+                with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
+                    df.to_excel(writer, index=False, sheet_name='Results')
+                processed_data = output.getvalue()
+                return processed_data
+
+
+            # Generate the Excel binary
+            excel_data = to_excel(df)
+
+            # Streamlit download button
+            st.download_button(
+                label="📥 Download Excel",
+                data=excel_data,
+                file_name=f"saved_results_order_{selected_order_number}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
