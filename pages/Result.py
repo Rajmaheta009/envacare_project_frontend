@@ -104,6 +104,7 @@ if selected_order_number:
             result_key = f"result_{quotation_id}_{param_id}"
             result = row[7].text_input("Result", key=result_key)
 
+
             results_payload.append({
                 "order_param_id": param["id"],
                 "parameter_id": param_id,
@@ -123,7 +124,14 @@ if selected_order_number:
         submitted = st.form_submit_button("✅ Save Result")
 
         if submitted:
-            success_count = 0
+            missing_results = [res for res in results_payload if not res["result"]]
+
+            if missing_results:
+                st.error("❌ Please fill in the Result field for all parameters before submitting.")
+                st.stop()
+            else:
+                success_count = 0
+
             for res_data in results_payload:
                 if res_data["result"]:
                     url = f"{BASE_API}/order_parameters/result/{quotation_id}/{res_data['parameter_id']}"
@@ -192,6 +200,6 @@ if selected_order_number:
             st.download_button(
                 label="📥 Download Excel",
                 data=excel_data,
-                file_name=f"saved_results_order_{selected_order_number}.xlsx",
+                file_name=f"saved_results_order_{order_numbers}.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )

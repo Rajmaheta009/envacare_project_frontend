@@ -10,6 +10,7 @@ nav_pages=[
     st.Page("pages/parameter.py", title= "Parameter"),
     st.Page("pages/parameter_value_set.py", title= "Set Parameter Protocol And Range"),
     st.Page("pages/Result.py", title= "Result"),
+    st.Page("pages/quick_result.py", title="Set Quick Result"),
     st.Page("pages/log_out.py", title= "Log Out"),
 ]
 
