@@ -16,6 +16,8 @@ if 'selected_params' not in st.session_state:
     st.session_state.selected_params = []
 if 'saved_results' not in st.session_state:
     st.session_state.saved_results = []
+if "recent_batch_results" not in st.session_state:
+    st.session_state.recent_batch_results = []
 if "show_history" not in st.session_state:
     st.session_state.show_history = False
 if "selected_group_data" not in st.session_state:
@@ -40,9 +42,11 @@ with main_col:
     st.markdown("### ✅ Select Parameters to Enter Result")
     with st.container(height=400):
         for param in filtered:
-            if st.checkbox(param["name"], key=f"check_{param['id']}"):
-                if param not in st.session_state.selected_params:
-                    st.session_state.selected_params.append(param)
+            checkbox_state = st.checkbox(param["name"], key=f"check_{param['id']}", value=param in st.session_state.selected_params)
+            if checkbox_state and param not in st.session_state.selected_params:
+                st.session_state.selected_params.append(param)
+            elif not checkbox_state and param in st.session_state.selected_params:
+                st.session_state.selected_params.remove(param)
 
     if st.session_state.selected_params:
         st.markdown("---")
@@ -73,12 +77,20 @@ with main_col:
             with row_cols[6]: st.text_input("Home Method", key=f"method_{param['id']}", label_visibility="collapsed")
             with row_cols[7]: st.text_input("Result", key=f"result_{param['id']}", label_visibility="collapsed")
 
+        # ✅ Save Result Button with Reset Logic
         if st.button("✅ Save Result"):
+            recent_batch = []
+            successful_params = []
+
             for param in st.session_state.selected_params:
-                result = st.session_state.get(f"result_{param['id']}", "").strip()
+                result_key = f"result_{param['id']}"
+                method_key = f"method_{param['id']}"
+                protocol_key = f"protocol_{param['id']}"
+
+                result = st.session_state.get(result_key, "").strip()
                 unit = param.get("unit", "")
-                method = st.session_state.get(f"method_{param['id']}", "").strip()
-                protocol = st.session_state.get(f"protocol_{param['id']}", "").strip()
+                method = st.session_state.get(method_key, "").strip()
+                protocol = st.session_state.get(protocol_key, "").strip()
 
                 if not result:
                     st.warning(f"⚠️ Please enter result for: {param['name']}")
@@ -97,24 +109,45 @@ with main_col:
                     res = requests.post(f"{BASE_API}/quick_result/re", json=payload)
                     if res.status_code == 200:
                         st.success(f"✅ Saved: {param['name']}")
-                        store_protocol = method or protocol or ""
-                        st.session_state.saved_results.append({
+                        store_protocol = final_protocol
+                        entry = {
                             "Name": param["name"],
                             "Min": param.get("min_value", ""),
                             "Max": param.get("max_value", ""),
                             "Unit": unit,
                             "Protocol": store_protocol,
                             "Result": result
-                        })
+                        }
+                        st.session_state.saved_results.append(entry)
+                        recent_batch.append(entry)
+                        successful_params.append(param)
                     else:
                         st.error(f"❌ Failed to save: {param['name']}")
                 except Exception as e:
                     st.error(f"⚠️ Error for {param['name']}: {e}")
 
+            # ✅ Add recent batch and clean up UI for saved
+            if recent_batch:
+                st.session_state.recent_batch_results = recent_batch
+
+            # ✅ Clear saved parameters' form controls
+            for param in successful_params:
+                for key in [f"check_{param['id']}", f"protocol_{param['id']}", f"method_{param['id']}",
+                            f"result_{param['id']}"]:
+                    if key in st.session_state:
+                        del st.session_state[key]
+
+            # ✅ Only keep unsaved ones for next form render
+            st.session_state.selected_params = [
+                p for p in st.session_state.selected_params if p not in successful_params
+            ]
+
+            st.rerun()  # rerender UI clean
+
     if st.session_state.saved_results:
         st.markdown("### 📊 Submitted Results")
         df = pd.DataFrame(st.session_state.saved_results)
-        st.dataframe(df)
+        st.dataframe(df, use_container_width=True)
 
         def to_excel(df):
             output = BytesIO()
@@ -125,16 +158,32 @@ with main_col:
         excel_data = to_excel(df)
         st.download_button("📥 Download Excel", data=excel_data, file_name="results.xlsx")
 
+    if st.session_state.recent_batch_results:
+        st.markdown("### 🆕 Recently Saved Parameters")
+        df_recent = pd.DataFrame(st.session_state.recent_batch_results)
+        st.dataframe(df_recent, use_container_width=True)
+
+        def to_excel_recent(df):
+            output = BytesIO()
+            with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
+                df.to_excel(writer, index=False)
+            return output.getvalue()
+
+        excel_recent_data = to_excel_recent(df_recent)
+        st.download_button("📥 Download Recent Batch", data=excel_recent_data, file_name="recent_results.xlsx")
+
 # ------------------------ HISTORY PANEL ------------------------ #
 with side_col:
     col1, col2 = st.columns([7, 2])
 
     if col2.button("🔄"):
-        st.session_state.selected_params = []
-        st.session_state.saved_results = []
-        st.session_state.show_history = False
-        st.session_state.selected_group_data = []
-        st.rerun()
+        with st.spinner("🔄 Resetting the app. Please wait..."):
+            st.session_state.selected_params = []
+            st.session_state.saved_results = []
+            st.session_state.recent_batch_results = []
+            st.session_state.show_history = False
+            st.session_state.selected_group_data = []
+            st.rerun()
 
     if col1.button("📜 Toggle History"):
         st.session_state.show_history = not st.session_state.show_history
@@ -142,17 +191,17 @@ with side_col:
     if st.session_state.show_history:
         st.markdown("## 📚 Filter History")
         try:
-            res = requests.get(f"{BASE_API}/quick_result/")
-            if res.status_code == 200:
-                df_hist = pd.DataFrame(res.json())
+            res = requests.get(f"{BASE_API}/quick_result/")  # Fetch history data from API
+            res.raise_for_status()
+            df_hist = pd.DataFrame(res.json())
 
-                # Convert UTC to IST
-                utc = timezone('UTC')
+            if df_hist.empty:
+                st.info("ℹ️ No records available.")
+            else:
                 ist = timezone('Asia/Kolkata')
                 df_hist["parsed_time"] = pd.to_datetime(df_hist["current_time_date"]).dt.tz_localize('UTC').dt.tz_convert(ist)
                 df_hist["timestamp_group"] = df_hist["parsed_time"].dt.strftime("%d-%m-%Y %I:%M:%S %p")
 
-                # Filter section
                 with st.container(height=400):
                     colf1, colf2 = st.columns(2)
                     with colf1:
@@ -182,7 +231,6 @@ with side_col:
                                     "result": "Result"
                                 }).to_dict(orient="records")
 
-                # Show the selected group table below
                 if st.session_state.selected_group_data:
                     st.markdown("### 📊 Selected Group Table")
                     df_group = pd.DataFrame(st.session_state.selected_group_data)
@@ -196,7 +244,12 @@ with side_col:
 
                     excel_group_data = to_excel_group(df_group)
                     st.download_button("📥 Download Group", data=excel_group_data, file_name="group_result.xlsx")
-            else:
-                st.warning("⚠️ No history found.")
+
+        except requests.exceptions.HTTPError as errh:
+            st.error(f"❌ Server error: {errh}")
+        except requests.exceptions.ConnectionError:
+            st.error("❌ Connection failed. Please check your network.")
+        except requests.exceptions.Timeout:
+            st.error("❌ Request timed out.")
         except Exception as e:
-            st.error(f"❌ Failed to fetch history: {e}")
+            st.error(f"❌ Unexpected error: {e}")
