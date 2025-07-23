@@ -1,24 +1,19 @@
-# Frontend Dockerfile for envacare_project
-FROM node:18-alpine
+# Python Dockerfile for envacare_project_frontend (Streamlit)
+
+FROM python:3.12-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy package.json and install dependencies
-COPY package*.json ./
-RUN npm install
+# Copy requirements and install dependencies
+COPY requirements.txt ./
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# Copy the rest of the application code
+# Copy project files
 COPY . .
 
-# Build the frontend
-RUN npm run build
+# Expose the Streamlit default port (8501)
+EXPOSE 8501
 
-# Install serve to run the production build
-RUN npm install -g serve
-
-# Expose port
-EXPOSE 3000
-
-# Start the frontend using serve
-CMD ["serve", "-s", "dist", "-l", "3000"]
+# Run the Streamlit app (replace main.py with your actual Streamlit script if different)
+CMD ["streamlit", "run", "main.py", "--server.port=8501", "--server.address=0.0.0.0"]

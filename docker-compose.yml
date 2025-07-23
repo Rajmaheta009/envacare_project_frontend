@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  envacare-frontend:
+    build: .
+    container_name: envacare-frontend
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    restart: unless-stopped
+    volumes:
+      - .:/app
+    command: streamlit run main.py --server.port=8501 --server.address=0.0.0.0
