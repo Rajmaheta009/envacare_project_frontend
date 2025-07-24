@@ -10,7 +10,9 @@ def insert_parameter_in_database():
             dbname="envacare_project",
             user="postgres",
             password="postgres",
-            host="localhost",
+            host="192.168.1.37",
+            port=5454
+
         )
         cur = conn.cursor()
 
@@ -101,3 +103,5 @@ def insert_parameter_in_database():
     except Exception as e:
         st.warning(f"❌ Something went wrong: {e}")
 
+
+insert_parameter_in_database()
