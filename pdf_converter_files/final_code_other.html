@@ -8,48 +8,68 @@
 
     <style>
         @page {
-          size: A4;
-          margin: 15mm 20mm; /* top/right/bottom/left */
+            margin: 0;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        header,
+        footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+            background: #fff;
+            z-index: 999;
         }
 
         header {
-          position: fixed;
-          top: 0;
-          left: 0; right: 0;
-          height: 15mm;
-          /* your header styling */
+            top: 0;
+            padding: 20px;
+            text-align: center;
+            height: 100px;
         }
 
         footer {
-          position: fixed;
-          bottom: 0;
-          left: 0; right: 0;
-          height: 15mm;
-          margin-bottom: -15mm;
-          /* your footer styling */
+            bottom: 0;
+            padding: 0px 40px 0;
+            border-top: 3px solid #003d1a;
+            height: 100px;
         }
 
-        body {
-          margin: 0;
-          padding: 0;
+        .top-logo {
+            position: absolute;
+            top: 10px;
+            left: 30px;
         }
+
+        .top-logo img {
+            width: 200px;
+            opacity: 0.8;
+        }
+
         .content {
-          /* no extra padding needed—page margins take care of it */
+            padding: 130px 50px 130px;
         }
+
         .quotation-header {
             display: flex;
             justify-content: space-between;
             font-size: 15px;
             margin-bottom: 20px;
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
             font-size: 14px;
             background: transparent;
         }
-        
+
         th,
         td {
             border: 1px solid #000;
@@ -57,68 +77,69 @@
             vertical-align: top;
             text-align: left;
         }
-        
+
         th {
             background-color: #f5f5f5;
             font-weight: bold;
         }
-        
-        tbody tr,
+
+        thead {
+            display: table-header-group;
+        }
+
         table,
         tr,
         td,
         th {
             page-break-inside: avoid !important;
-            break-inside: avoid !important;
+            break-inside: avoid;
         }
-        
+
         .terms-container {
             display: flex;
             border: 1px solid #000;
             margin-top: 25px;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            page-break-before: auto !important;
         }
-        
+
         .terms-left,
         .terms-right {
             padding: 15px;
             text-align: center;
+            /*break-inside: avoid;
+            page-break-inside: avoid;*/
         }
-        
+
         .terms-left {
             width: 70%;
             border-right: 1px solid #000;
         }
-        
+
         .terms-left b {
             display: block;
             font-size: 16px;
             margin-bottom: 10px;
         }
-        
+
         .terms-left p {
             margin: 5px 0;
         }
-        
+
         .terms-right {
             width: 30%;
         }
-        
+
         .terms-right img {
             max-width: 70%;
         }
-        
+
         .signature-label {
             font-weight: bold;
             margin-top: 10px;
         }
-        
-        .footer-container {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #fff;
-            padding: 20px 40px 0;
-            border-top: 3px solid #003d1a;
-        }
-        
+
         .footer-content {
             display: flex;
             justify-content: space-between;
@@ -126,30 +147,30 @@
             border-bottom: 3px solid #003d1a;
             padding-bottom: 15px;
         }
-        
+
         .footer-column {
             flex: 1;
-            min-width: 100px;
+            min-width: 50px;
         }
-        
+
         .footer-header {
             display: flex;
             align-items: center;
             margin-bottom: 5px;
             color: #003d1a;
         }
-        
+
         .footer-header img {
             width: 20px;
             margin-right: 8px;
         }
-        
+
         .footer-text {
             margin-left: 28px;
             color: #999;
             line-height: 1.4;
         }
-        
+
         .footer-accreditation {
             background-color: #003d1a;
             color: white;
@@ -158,6 +179,31 @@
             border-radius: 0 0 25px 25px;
             font-weight: bold;
             font-size: 14px;
+            margin-top: 10px;
+        }
+
+        @media print {
+            body {
+                margin-bottom: 150px;
+            }
+            header,
+            footer {
+                position: fixed;
+            }
+            .content {
+                padding-top: 130px;
+                padding-bottom: 130px;
+            }
+            table,
+            tr,
+            td,
+            th {
+                page-break-inside: avoid !important;
+                break-inside: avoid;
+            }
+            .terms-container {
+                page-break-before: always;
+            }
         }
     </style>
 </head>
@@ -167,10 +213,10 @@
         <div class="top-logo">
             <img src="static/logo.png" alt="Logo">
         </div>
-        <h4 style="margin: 0; padding-top: 10px;">Quotation</h4>
+        <h4 style="margin: 0; padding-top: 10px; font-size: 45px">Quotation</h4>
     </header>
 
-    <div class="container">
+    <div class="content">
         <div class="quotation-header">
             <div><strong>Quo. No.:</strong> EC/2425/QU/017</div>
             <div><strong>Dated:</strong> 23-09-2024</div>
@@ -206,8 +252,8 @@
                     <th>Amount (Rs.)</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Sample Rows -->
+            <tbody id="quotation-body">
+                <!-- You can insert rows dynamically here -->
                 <tr>
                     <td>1</td>
                     <td>Ambient sample Analysis of Work Place Air Quality</td>
@@ -222,6 +268,12 @@
                     <td>4</td>
                     <td>48000</td>
                 </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Ambient sample Analysis of Work Place Air Quality</td>
+                    <td>12000</td>
+                    <td>4</td>
+                    <td>48000</td>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -230,6 +282,12 @@
                     <td>4</td>
                     <td>48000</td>
                 </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Ambient sample Analysis of Work Place Air Quality</td>
+                    <td>12000</td>
+                    <td>4</td>
+                    <td>48000</td>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -238,6 +296,12 @@
                     <td>4</td>
                     <td>48000</td>
                 </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Ambient sample Analysis of Work Place Air Quality</td>
+                    <td>12000</td>
+                    <td>4</td>
+                    <td>48000</td>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -246,7 +310,13 @@
                     <td>4</td>
                     <td>48000</td>
                 </tr>
-                <!-- Repeat as needed -->
+                <tr>
+                    <td>1</td>
+                    <td>Ambient sample Analysis of Work Place Air Quality</td>
+                    <td>12000</td>
+                    <td>4</td>
+                    <td>48000</td>
+                </tr>
             </tbody>
             <tr>
                 <td colspan="2">
@@ -287,7 +357,8 @@
             </tr>
         </table>
 
-        <div class="terms-container">
+        <!-- <div style="page-break-inside: avoid; break-inside: avoid;"> -->
+        <div class="terms-container" style="margin-top: 25px;">
             <div class="terms-left">
                 <b>Terms & Conditions</b>
                 <p><strong>Delivery Term:</strong> 15 days after monitoring</p>
@@ -303,8 +374,9 @@
             </div>
         </div>
     </div>
+    <!-- </div> -->
 
-    <footer class="footer-container">
+    <footer>
         <div class="footer-content">
             <div class="footer-column">
                 <div class="footer-header">
@@ -325,12 +397,11 @@
                     <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Address Icon">
                     <strong>Address</strong>
                 </div>
-                <div class="footer-text">Shop No.51–52, Shree Sharan Business Park,<br>Changodar, Sanand, Ahmedabad,<br>Gujarat – 382213</div>
+                <div class="footer-text">Shop No.51–52, Shree Sharan Business Park,Changodar, Sanand, Ahmedabad,<br>Gujarat – 382213</div>
             </div>
         </div>
         <div class="footer-accreditation">(NABL ACCREDITATION LABORATORY)</div>
     </footer>
-
 </body>
 
 </html>
