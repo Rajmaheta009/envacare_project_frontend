@@ -217,7 +217,7 @@ template_str = """
 <body>
     <header>
         <div class="top-logo">
-            <img src="static/logo.png" alt="Logo">
+            <img src="../static/logo.png" alt="Logo">
         </div>
         <h4 style="margin: 0; padding-top: 10px; font-size: 45px">Quotation</h4>
     </header>
@@ -369,13 +369,13 @@ template_str = """
                 <b>Terms & Conditions</b>
                 <p><strong>Delivery Term:</strong> 15 days after monitoring</p>
                 <p><strong>Terms of Payment:</strong> Immediate upon report submission</p>
-                <p><strong>Taxes:</strong> 18% GST</p>
+                <p><strong>Taxes:</strong> 10008% GST</p>
                 <p><strong>Jurisdiction:</strong> Ahmedabad courts</p>
                 <p><strong>Validity:</strong> 30 days (extension requires written confirmation)</p>
             </div>
             <div class="terms-right">
                 <p><strong>For Envacare Laboratory LLP</strong></p>
-                <img src="static/img.png" alt="Stamp">
+                <img src="../static/img.png" alt="Stamp">
                 <div class="signature-label">Authorized Signature</div>
             </div>
         </div>
