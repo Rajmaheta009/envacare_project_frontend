@@ -2,6 +2,8 @@ import os
 import streamlit as st
 import requests
 from dotenv import load_dotenv
+from test_for_extraconcept.add_parameter import insert_parameter_in_database
+
 
 load_dotenv()
 
@@ -23,6 +25,14 @@ def create_parameter(data):
 def fetch_parameters():
     response = requests.get(f"{PARAMETER_URL}/")
     return response.json() if response.status_code == 200 else []
+
+para = fetch_parameters()
+# st.code(para)
+if not para :
+    if st.button("insert Parameter in Database"):
+        insert_parameter_in_database()
+        st.cache_data.clear()  # 🚨 This clears all st.cache_data caches
+        st.rerun()  # Optional: reruns the app to reflect cache-cleared state
 
 def update_parameter(inx, parameter_id, message_placeholder):
     apha = st.session_state.get(f"edit_apha_{inx}", "")

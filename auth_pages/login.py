@@ -76,7 +76,7 @@ else:
 
             main = st.Page("main.py", title="main")
             pg = st.navigation([main], position="hidden")
-            pg.run()
+            # pg.run()
             st.rerun()
         else:
             st.error("❌ Invalid credentials. Try again.")
