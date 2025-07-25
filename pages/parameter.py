@@ -3,7 +3,7 @@ import streamlit as st
 import requests
 from dotenv import load_dotenv
 from test_for_extraconcept.add_parameter import insert_parameter_in_database
-
+from test_for_extraconcept.unit_and_method_add import insert_unit_and_protocol
 
 load_dotenv()
 
@@ -31,6 +31,7 @@ para = fetch_parameters()
 if not para :
     if st.button("insert Parameter in Database"):
         insert_parameter_in_database()
+        insert_unit_and_protocol()
         st.cache_data.clear()  # 🚨 This clears all st.cache_data caches
         st.rerun()  # Optional: reruns the app to reflect cache-cleared state
 
