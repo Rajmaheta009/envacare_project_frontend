@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotation - {{ quotation_number | default('EC/2425/QU/017') }}</title>
+    <style>
+        /* CSS Reset and Base Setup */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Page Setup for A4 */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @page :first {
+            margin-top: 0;
+        }
+
+        /* Base document styling */
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #333;
+            background: white;
+        }
+
+        /* Page container */
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 0;
+            margin: 0 auto;
+            background: white;
+            position: relative;
+            page-break-after: always;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        /* Header for print */
+        @media print {
+            .header-print {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 80px;
+                background: white;
+                border-bottom: 1px solid #ddd;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0 30px;
+            }
+
+            .footer-print {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 120px;
+                background: white;
+                border-top: 3px solid #003d1a;
+                padding: 10px 30px 0;
+            }
+
+            /* Content area with proper margins for print */
+            .content-print {
+                margin-top: 100px;
+                margin-bottom: 140px;
+                padding: 0 30px;
+            }
+
+            /* Ensure tables break properly */
+            table {
+                page-break-inside: auto;
+            }
+
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+
+            thead {
+                display: table-header-group;
+            }
+
+            tbody {
+                display: table-row-group;
+            }
+
+            tfoot {
+                display: table-footer-group;
+            }
+        }
+
+        /* Header styles */
+        .header {
+            height: 80px;
+            background: white;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 30px;
+            position: relative;
+        }
+
+        .header-logo {
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .header-logo img {
+            width: 160px;
+            height: auto;
+            opacity: 0.8;
+        }
+
+        .header-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+
+        /* Footer styles */
+        .footer {
+            height: 120px;
+            background: white;
+            border-top: 3px solid #003d1a;
+            padding: 10px 30px 0;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #003d1a;
+            height: 70px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .footer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3px;
+            color: #003d1a;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .footer-header img {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+        }
+
+        .footer-text {
+            margin-left: 22px;
+            color: #666;
+            font-size: 10px;
+            line-height: 1.3;
+        }
+
+        .footer-accreditation {
+            background-color: #003d1a;
+            color: white;
+            text-align: center;
+            padding: 6px;
+            border-radius: 0 0 15px 15px;
+            font-weight: bold;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        /* Content area */
+        .content {
+            padding: 20px 30px 140px;
+            min-height: calc(297mm - 200px);
+        }
+
+        /* Quotation Header Info */
+        .quotation-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 13px;
+            font-weight: bold;
+            page-break-inside: avoid;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 11px;
+        }
+
+        th, td {
+            border: 1px solid #333;
+            padding: 6px 8px;
+            vertical-align: top;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Company info table */
+        .company-info-table {
+            page-break-inside: avoid;
+        }
+
+        .company-info-table td {
+            padding: 10px;
+        }
+
+        /* Items table */
+        .items-table th {
+            text-align: center;
+            background-color: #e8e8e8;
+        }
+
+        .items-table td:nth-child(1),
+        .items-table td:nth-child(3),
+        .items-table td:nth-child(4),
+        .items-table td:nth-child(5) {
+            text-align: center;
+        }
+
+        .items-table td:nth-child(2) {
+            text-align: left;
+        }
+
+        /* Summary section */
+        .summary-section {
+            page-break-inside: avoid;
+            margin-top: 20px;
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .summary-table td {
+            border: 1px solid #333;
+            padding: 4px 8px;
+            font-size: 11px;
+        }
+
+        .summary-table td:first-child {
+            font-weight: bold;
+        }
+
+        .summary-table td:last-child {
+            text-align: right;
+        }
+
+        /* Terms and Conditions */
+        .terms-container {
+            border: 1px solid #333;
+            margin-top: 20px;
+            display: flex;
+            page-break-inside: avoid;
+        }
+
+        .terms-left {
+            width: 70%;
+            padding: 15px;
+            border-right: 1px solid #333;
+        }
+
+        .terms-left h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .terms-left p {
+            margin: 4px 0;
+            font-size: 11px;
+        }
+
+        .terms-right {
+            width: 30%;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .terms-right img {
+            max-width: 80px;
+            height: auto;
+            margin: 10px 0;
+        }
+
+        .signature-label {
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 11px;
+        }
+
+        /* Force page break */
+        .page-break {
+            page-break-before: always;
+        }
+
+        /* Keep content together */
+        .keep-together {
+            page-break-inside: avoid;
+        }
+
+        /* Screen preview */
+        @media screen {
+            body {
+                background: #e0e0e0;
+                padding: 20px 0;
+            }
+
+            .page {
+                margin: 0 auto 20px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- For print media -->
+    <div class="header-print">
+        <div class="header-logo">
+            <img src="{{ logo_url | default('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMjAwIDUwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjMDAzZDFhIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iMzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkVOVkFDQVJFIExBQjwvdGV4dD4KPC9zdmc+') }}" alt="Envacare Laboratory Logo">
+        </div>
+        <h1 class="header-title">QUOTATION</h1>
+    </div>
+
+    <div class="footer-print">
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-header">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM2LjM0IDIgNSAzLjM0IDUgNUM1IDYuNjYgNi4zNCA4IDggOEM5LjY2IDggMTEgNi42NiAxMSA1QzExIDMuMzQgOS42NiAyIDggMlpNOCA2QzcuNDUgNiA3IDUuNTUgNyA1QzcgNC40NSA3LjQ1IDQgOCA0QzguNTUgNCA5IDQuNDUgOSA1QzkgNS41NSA4LjU1IDYgOCA2WiIgZmlsbD0iIzAwM2QxYSIvPgo8cGF0aCBkPSJNOCAxNEMxMC43NiAxNSAxMyAxMi43NiAxMyAxMEM4IDE0IDMgMTQgMyAxMEMzIDEyLjc2IDUuMjQgMTUgOCAxNFoiIGZpbGw9IiMwMDNkMWEiLz4KPC9zdmc+" alt="Phone">
+                    <span>Phone</span>
+                </div>
+                <div class="footer-text">{{ phone | default('+91 99240 85245') }}</div>
+            </div>
+            <div class="footer-column">
+                <div class="footer-header">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEzIDNIM0MyLjQ1IDMgMiAzLjQ1IDIgNFYxMkMyIDEyLjU1IDIuNDUgMTMgMyAxM0gxM0MxMy41NSAxMyAxNCAxMi41NSAxNCAxMlY0QzE0IDMuNDUgMTMuNTUgMyAxMyAzWk0xMyA1TDggOEwzIDVWNEw4IDdMMTMgNFY1WiIgZmlsbD0iIzAwM2QxYSIvPgo8L3N2Zz4=" alt="Email">
+                    <span>Email & Website</span>
+                </div>
+                <div class="footer-text">
+                    {{ email | default('info@envacarelaboratoryllp.in') }}<br>
+                    {{ website | default('www.envacarelaboratoryllp.in') }}
+                </div>
+            </div>
+            <div class="footer-column">
+                <div class="footer-header">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM1LjI0IDIgMyA0LjI0IDMgN0MzIDEwLjc1IDggMTQgOCAxNEM4IDE0IDEzIDEwLjc1IDEzIDdDMTMgNC4yNCAxMC43NiAyIDggMlpNOCA5QzYuODkgOSA2IDguMTEgNiA3QzYgNS44OSA2Ljg5IDUgOCA1QzkuMTEgNSAxMCA1Ljg5IDEwIDdDMTAgOC4xMSA5LjExIDkgOCA5WiIgZmlsbD0iIzAwM2QxYSIvPgo8L3N2Zz4=" alt="Address">
+                    <span>Address</span>
+                </div>
+                <div class="footer-text">
+                    {{ address_line1 | default('Shop No.51–52, Shree Sharan Business Park,') }}<br>
+                    {{ address_line2 | default('Changodar, Sanand, Ahmedabad,') }}<br>
+                    {{ address_line3 | default('Gujarat – 382213') }}
+                </div>
+            </div>
+        </div>
+        <div class="footer-accreditation">
+            {{ accreditation | default('(NABL ACCREDITATION LABORATORY)') }}
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="page">
+        <!-- Header for screen -->
+        <div class="header">
+            <div class="header-logo">
+                <img src="{{ logo_url | default('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMjAwIDUwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjMDAzZDFhIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iMzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkVOVkFDQVJFIExBQjwvdGV4dD4KPC9zdmc+') }}" alt="Envacare Laboratory Logo">
+            </div>
+            <h1 class="header-title">QUOTATION</h1>
+        </div>
+
+        <div class="content content-print">
+            <!-- Quotation Header Info -->
+            <div class="quotation-header">
+                <div><strong>Quo. No.:</strong> {{ quotation_number | default('EC/2425/QU/017') }}</div>
+                <div><strong>Dated:</strong> {{ date | default('23-09-2024') }}</div>
+            </div>
+
+            <!-- Company Information Table -->
+            <table class="company-info-table">
+                <tr>
+                    <th style="width: 50%;">{{ company_name | default('Envacare Laboratory LLP') }}</th>
+                    <th style="width: 50%;">Buyer</th>
+                </tr>
+                <tr>
+                    <td>
+                        {{ company_address | default('Shop No-51,52, Shree Sharan Business Park<br>Sanand Changodar GIDC<br>Ahmedabad-382213') | safe }}<br><br>
+                        <strong>GSTIN/UIN:</strong> {{ company_gstin | default('24AAKFE7625D1ZL') }}<br>
+                        <strong>Email:</strong> {{ company_email | default('info@envacarelaboratoryllp.in') }}
+                    </td>
+                    <td>
+                        <strong>{{ buyer_name | default('METTUBE COPPER INDIA PRIVATE LIMITED') }}</strong><br>
+                        {{ buyer_address | default('Plot No.SM-9/5, Sanand - II Industrial Estate,<br>Village Bol, Taluka Sanand, District Ahmedabad,<br>Gujarat - 382170') | safe }}<br><br>
+                        <strong>GSTIN/UIN:</strong> {{ buyer_gstin | default('24AAQCM2685Q1ZK') }}<br>
+                        <strong>Email:</strong> {{ buyer_email | default('rajagopal@mettubeindia.com') }}
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Items Table -->
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th style="width: 8%;">Sr. No.</th>
+                        <th style="width: 50%;">Product</th>
+                        <th style="width: 15%;">Charges Per Unit</th>
+                        <th style="width: 12%;">Quantity</th>
+                        <th style="width: 15%;">Amount (Rs.)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ item.product }}</td>
+                        <td>{{ "{:,}".format(item.unit_price) }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ "{:,}".format(item.amount) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- Summary Section -->
+            <div class="summary-section">
+                <table>
+                    <tr>
+                        <td style="width: 50%; vertical-align: top;">
+                            <strong>Bank Details</strong><br><br>
+                            <strong>A/c Name:</strong> {{ bank_account_name | default('ENVACARE LABORATORY LLP') }}<br>
+                            <strong>Bank:</strong> {{ bank_name | default('BANK OF BARODA') }}<br>
+                            <strong>A/c No.:</strong> {{ bank_account_number | default('03200200001364') }}<br>
+                            <strong>IFSC:</strong> {{ bank_ifsc | default('BARBOAMBAWA') }}<br>
+                            <strong>PAN:</strong> {{ pan_number | default('AAKFE7625D') }}
+                        </td>
+                        <td style="width: 50%; vertical-align: top;">
+                            <table class="summary-table">
+                                <tr>
+                                    <td><strong>Subtotal</strong></td>
+                                    <td><strong>{{ "{:,}".format(subtotal) }}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>SGST @ {{ sgst_rate }}%</td>
+                                    <td>{{ "{:,}".format(sgst_amount) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>CGST @ {{ cgst_rate }}%</td>
+                                    <td>{{ "{:,}".format(cgst_amount) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Round Off</td>
+                                    <td>{{ round_off }}</td>
+                                </tr>
+                                <tr style="background-color: #f0f0f0;">
+                                    <td><strong>Total Amount</strong></td>
+                                    <td><strong>{{ "{:,}".format(total_amount) }}</strong></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <strong>Amount in Words:</strong> {{ amount_in_words }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="terms-container">
+                <div class="terms-left">
+                    <h4>Terms & Conditions</h4>
+                    {% for term in terms_conditions %}
+                    <p><strong>{{ term.label }}:</strong> {{ term.value }}</p>
+                    {% endfor %}
+                </div>
+                <div class="terms-right">
+                    <p><strong>For {{ company_name | default('Envacare Laboratory LLP') }}</strong></p>
+                    <img src="{{ stamp_image | default('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA4MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZjBmMGYwIiBzdHJva2U9IiMzMzMiLz4KPHN2ZyB4PSIxMCIgeT0iMTAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIyMCI+Cjx0ZXh0IHg9IjMwIiB5PSIxNSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwIiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5bU1RBTVBdPC90ZXh0Pgo8L3N2Zz4KPC9zdmc+') }}" alt="Company Stamp">
+                    <div class="signature-label">Authorized Signature</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer for screen -->
+        <div class="footer">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-header">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM2LjM0IDIgNSAzLjM0IDUgNUM1IDYuNjYgNi4zNCA4IDggOEM5LjY2IDggMTEgNi42NiAxMSA1QzExIDMuMzQgOS42NiAyIDggMlpNOCA2QzcuNDUgNiA3IDUuNTUgNyA1QzcgNC40NSA3LjQ1IDQgOCA0QzguNTUgNCA5IDQuNDUgOSA1QzkgNS41NSA4LjU1IDYgOCA2WiIgZmlsbD0iIzAwM2QxYSIvPgo8cGF0aCBkPSJNOCAxNEMxMC43NiAxNSAxMyAxMi43NiAxMyAxMEM4IDE0IDMgMTQgMyAxMEMzIDEyLjc2IDUuMjQgMTUgOCAxNFoiIGZpbGw9IiMwMDNkMWEiLz4KPC9zdmc+" alt="Phone">
+                        <span>Email & Website</span>
+                    </div>
+                    <div class="footer-text">
+                        {{ email | default('info@envacarelaboratoryllp.in') }}<br>
+                        {{ website | default('www.envacarelaboratoryllp.in') }}
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <div class="footer-header">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM1LjI0IDIgMyA0LjI0IDMgN0MzIDEwLjc1IDggMTQgOCAxNEM4IDE0IDEzIDEwLjc1IDEzIDdDMTMgNC4yNCAxMC43NiAyIDggMlpNOCA5QzYuODkgOSA2IDguMTEgNiA3QzYgNS44OSA2Ljg5IDUgOCA1QzkuMTEgNSAxMCA1Ljg5IDEwIDdDMTAgOC4xMSA5LjExIDkgOCA5WiIgZmlsbD0iIzAwM2QxYSIvPgo8L3N2Zz4=" alt="Address">
+                        <span>Address</span>
+                    </div>
+                    <div class="footer-text">
+                        {{ address_line1 | default('Shop No.51–52, Shree Sharan Business Park,') }}<br>
+                        {{ address_line2 | default('Changodar, Sanand, Ahmedabad,') }}<br>
+                        {{ address_line3 | default('Gujarat – 382213') }}
+                    </div>
+                </div>
+            </div>
+            <div class="footer-accreditation">
+                {{ accreditation | default('(NABL ACCREDITATION LABORATORY)') }}
+            </div>
+        </div>
+    </div>
+</body>
+</html>>Phone</span>
+                    </div>
+                    <div class="footer-text">{{ phone | default('+91 99240 85245') }}</div>
+                </div>
+                <div class="footer-column">
+                    <div class="footer-header">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEzIDNIM0MyLjQ1IDMgMiAzLjQ1IDIgNFYxMkMyIDEyLjU1IDIuNDUgMTMgMyAxM0gxM0MxMy41NSAxMyAxNCAxMi41NSAxNCAxMlY0QzE0IDMuNDUgMTMuNTUgMyAxMyAzWk0xMyA1TDggOEwzIDVWNEw4IDdMMTMgNFY1WiIgZmlsbD0iIzAwM2QxYSIvPgo8L3N2Zz4=" alt="Email">
+                        <span
