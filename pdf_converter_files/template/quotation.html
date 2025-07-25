@@ -2,13 +2,19 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <title>Quotation Format</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotation Format - A4 Print Ready</title>
     <style>
+        /* A4 Page Setup */
+        
         @page {
+            size: A4;
             margin: 0;
+        }
+        
+        * {
+            box-sizing: border-box;
         }
         
         html,
@@ -16,64 +22,136 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
+            background: white;
         }
+        /* Header - Fixed on all pages */
         
-        header,
-        footer {
+        .header {
             position: fixed;
+            top: 0;
             left: 0;
             right: 0;
-            background: #fff;
-            z-index: 999;
+            height: 80px;
+            background: white;
+            z-index: 1000;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 30px;
         }
         
-        header {
-            top: 0;
-            padding: 20px;
-            text-align: center;
-            height: 100px;
-        }
-        
-        footer {
-            bottom: 0;
-            padding: 0px 40px 0;
-            border-top: 3px solid #003d1a;
-            height: 100px;
-        }
-        
-        .top-logo {
+        .header-logo {
             position: absolute;
-            top: 10px;
             left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
         }
         
-        .top-logo img {
-            width: 200px;
+        .header-logo img {
+            width: 160px;
+            height: auto;
             opacity: 0.8;
         }
         
-        .content {
-            padding: 130px 50px 130px;
+        .header-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
         }
+        /* Footer - Fixed on all pages */
+        
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: white;
+            z-index: 1000;
+            border-top: 3px solid #003d1a;
+            padding: 10px 30px 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #003d1a;
+            height: 70px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .footer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3px;
+            color: #003d1a;
+            font-weight: bold;
+            font-size: 11px;
+        }
+        
+        .footer-header img {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+        }
+        
+        .footer-text {
+            margin-left: 22px;
+            color: #666;
+            font-size: 10px;
+            line-height: 1.3;
+        }
+        
+        .footer-accreditation {
+            background-color: #003d1a;
+            color: white;
+            text-align: center;
+            padding: 6px;
+            border-radius: 0 0 15px 15px;
+            font-weight: bold;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+        /* Main Content Area */
+        
+        .content {
+            margin-top: 80px;
+            margin-bottom: 120px;
+            padding: 20px 30px;
+            min-height: calc(100vh - 200px);
+        }
+        /* Quotation Header */
         
         .quotation-header {
             display: flex;
             justify-content: space-between;
-            font-size: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            font-weight: bold;
         }
+        /* Tables */
         
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 14px;
-            background: transparent;
+            margin-bottom: 15px;
+            font-size: 11px;
         }
         
         th,
         td {
-            border: 1px solid #000;
-            padding: 6px;
+            border: 1px solid #333;
+            padding: 6px 8px;
             vertical-align: top;
             text-align: left;
         }
@@ -81,189 +159,170 @@
         th {
             background-color: #f5f5f5;
             font-weight: bold;
+            text-align: center;
         }
         
-        thead {
-            display: table-header-group;
+        .company-info-table td {
+            padding: 10px;
         }
         
-        table,
-        tr,
-        td,
-        th {
-            page-break-inside: avoid !important;
-            break-inside: avoid;
+        .items-table th {
+            text-align: center;
         }
+        
+        .items-table td:nth-child(1),
+        .items-table td:nth-child(3),
+        .items-table td:nth-child(4),
+        .items-table td:nth-child(5) {
+            text-align: center;
+        }
+        
+        .items-table td:nth-child(2) {
+            text-align: left;
+        }
+        /* Summary table in the totals section */
+        
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .summary-table td {
+            border: 1px solid #333;
+            padding: 4px 8px;
+            font-size: 11px;
+        }
+        
+        .summary-table td:first-child {
+            font-weight: bold;
+        }
+        
+        .summary-table td:last-child {
+            text-align: right;
+        }
+        /* Terms and Conditions */
         
         .terms-container {
+            border: 1px solid #333;
+            margin-top: 20px;
             display: flex;
-            border: 1px solid #000;
-            margin-top: 25px;
-            page-break-inside: avoid !important;
-            break-inside: avoid !important;
-            page-break-before: auto !important;
-        }
-        
-        .terms-left,
-        .terms-right {
-            padding: 15px;
-            text-align: center;
-            /*break-inside: avoid;
-            page-break-inside: avoid;*/
+            page-break-inside: avoid;
         }
         
         .terms-left {
             width: 70%;
-            border-right: 1px solid #000;
+            padding: 15px;
+            border-right: 1px solid #333;
         }
         
-        .terms-left b {
-            display: block;
-            font-size: 16px;
-            margin-bottom: 10px;
+        .terms-left h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            text-align: center;
         }
         
         .terms-left p {
-            margin: 5px 0;
+            margin: 4px 0;
+            font-size: 11px;
         }
         
         .terms-right {
             width: 30%;
+            padding: 15px;
+            text-align: center;
         }
         
         .terms-right img {
-            max-width: 70%;
+            max-width: 80px;
+            height: auto;
+            margin: 10px 0;
         }
         
         .signature-label {
             font-weight: bold;
             margin-top: 10px;
+            font-size: 11px;
         }
-        
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            border-bottom: 3px solid #003d1a;
-            padding-bottom: 15px;
-        }
-        
-        .footer-column {
-            flex: 1;
-            min-width: 50px;
-        }
-        
-        .footer-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 5px;
-            color: #003d1a;
-        }
-        
-        .footer-header img {
-            width: 20px;
-            margin-right: 8px;
-        }
-        
-        .footer-text {
-            margin-left: 28px;
-            color: #999;
-            line-height: 1.4;
-        }
-        
-        .footer-accreditation {
-            background-color: #003d1a;
-            color: white;
-            text-align: center;
-            padding: 8px;
-            border-radius: 0 0 25px 25px;
-            font-weight: bold;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-        
-        .watermark {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-            opacity: 0.12;
-            pointer-events: none;
-            width: 60%;
-            text-align: center;
-        }
-        
-        .watermark img {
-            max-width: 100%;
-            height: auto;
-        }
-        
-        .watermark-text {
-            font-size: 80px;
-            color: #003d1a;
-            opacity: 0.12;
-            font-weight: bold;
-        }
-        
-        header,
-        .content,
-        footer {
-            position: relative;
-            z-index: 1;
-        }
+        /* Print Optimizations */
         
         @media print {
             body {
-                margin-bottom: 150px;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
-            header,
-            footer {
+            .header,
+            .footer {
                 position: fixed;
             }
             .content {
-                padding-top: 130px !important;
-                padding-bottom: 130px !important;
+                margin-top: 80px;
+                margin-bottom: 120px;
             }
-            .terms-container {
-                page-break-before: always;
-                margin-top: 130px !important;
-                /* Ensure space below header after page break */
-            }
-            table,
-            tr,
-            td,
-            th {
-                page-break-inside: avoid !important;
+            /* Prevent page breaks inside important elements */
+            .terms-container,
+            .quotation-header,
+            tr {
+                page-break-inside: avoid;
                 break-inside: avoid;
+            }
+            /* Ensure tables don't break awkwardly */
+            table {
+                page-break-inside: auto;
+            }
+            thead {
+                display: table-header-group;
+            }
+            tfoot {
+                display: table-footer-group;
+            }
+        }
+        /* Responsive adjustments for smaller screens */
+        
+        @media screen and (max-width: 768px) {
+            .header-title {
+                font-size: 24px;
+            }
+            .header-logo img {
+                width: 120px;
+            }
+            .content {
+                padding: 15px 20px;
+            }
+            .footer-content {
+                flex-direction: column;
+                height: auto;
+            }
+            .footer {
+                height: auto;
+                min-height: 120px;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="watermark">
-        <!-- Replace src with your watermark image or use text below -->
-        <img src="../static/logo.png" alt="Watermark" />
-        <!-- <div class="watermark-text">Your Watermark</div> -->
-    </div>
-    <header>
-        <div class="top-logo">
-            <img src="../static/logo.png" alt="Logo">
+    <!-- Fixed Header -->
+    <div class="header">
+        <div class="header-logo">
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMjAwIDUwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjMDAzZDFhIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iMzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkVOVkFDQVJFIExBQjwvdGV4dD4KPHN2Zz4="
+                alt="Envacare Laboratory Logo">
         </div>
-        <h4 style="margin: 0; padding-top: 10px; font-size: 45px">Quotation</h4>
-    </header>
+        <h1 class="header-title">QUOTATION</h1>
+    </div>
 
+    <!-- Main Content -->
     <div class="content">
+        <!-- Quotation Header Info -->
         <div class="quotation-header">
             <div><strong>Quo. No.:</strong> EC/2425/QU/017</div>
             <div><strong>Dated:</strong> 23-09-2024</div>
         </div>
 
-        <table>
+        <!-- Company Information Table -->
+        <table class="company-info-table">
             <tr>
-                <th>Envacare Laboratory LLP</th>
-                <th>Buyer</th>
+                <th style="width: 50%;">Envacare Laboratory LLP</th>
+                <th style="width: 50%;">Buyer</th>
             </tr>
             <tr>
                 <td>
@@ -273,35 +332,214 @@
                     <strong>Email:</strong> info@envacarelaboratoryllp.in
                 </td>
                 <td>
-                    <strong>METTUBE COPPER INDIA PRIVATE LIMITED</strong><br> Plot No.SM-9/5, Sanand - II Industrial Estate, Village Bol,<br> Taluka Sanand, District Ahmedabad, Gujarat - 382170<br><br>
+                    <strong>METTUBE COPPER INDIA PRIVATE LIMITED</strong><br> Plot No.SM-9/5, Sanand - II Industrial Estate,<br> Village Bol, Taluka Sanand, District Ahmedabad,<br> Gujarat - 382170<br><br>
                     <strong>GSTIN/UIN:</strong> 24AAQCM2685Q1ZK<br>
                     <strong>Email:</strong> rajagopal@mettubeindia.com
                 </td>
             </tr>
         </table>
 
-        <table class="mt-4">
+        <!-- Items Table -->
+        <table class="items-table">
             <thead>
                 <tr>
-                    <th>Sr. No.</th>
-                    <th>Product</th>
-                    <th>Charges Per Unit</th>
-                    <th>Quantity</th>
-                    <th>Amount (Rs.)</th>
+                    <th style="width: 8%;">Sr. No.</th>
+                    <th style="width: 50%;">Product</th>
+                    <th style="width: 15%;">Charges Per Unit</th>
+                    <th style="width: 12%;">Quantity</th>
+                    <th style="width: 15%;">Amount (Rs.)</th>
                 </tr>
             </thead>
-            <tbody id="quotation-body">
-                <!-- You can insert rows dynamically here -->
+            <tbody>
                 <tr>
                     <td>1</td>
                     <td>Ambient sample Analysis of Work Place Air Quality</td>
-                    <td>12000</td>
+                    <td>12,000</td>
                     <td>4</td>
-                    <td>48000</td>
+                    <td>48,000</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Water Quality Testing - Physical & Chemical Parameters</td>
+                    <td>8,500</td>
+                    <td>6</td>
+                    <td>51,000</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Soil Contamination Analysis</td>
+                    <td>15,000</td>
+                    <td>3</td>
+                    <td>45,000</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Noise Level Monitoring & Assessment</td>
+                    <td>6,000</td>
+                    <td>8</td>
+                    <td>48,000</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Indoor Air Quality Assessment</td>
+                    <td>10,000</td>
+                    <td>5</td>
+                    <td>50,000</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Stack Emission Monitoring</td>
+                    <td>18,000</td>
+                    <td>2</td>
+                    <td>36,000</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Hazardous Waste Characterization</td>
+                    <td>22,000</td>
+                    <td>3</td>
+                    <td>66,000</td>
+                </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Water Quality Testing - Physical & Chemical Parameters</td>
+                    <td>8,500</td>
+                    <td>6</td>
+                    <td>51,000</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Soil Contamination Analysis</td>
+                    <td>15,000</td>
+                    <td>3</td>
+                    <td>45,000</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Noise Level Monitoring & Assessment</td>
+                    <td>6,000</td>
+                    <td>8</td>
+                    <td>48,000</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Indoor Air Quality Assessment</td>
+                    <td>10,000</td>
+                    <td>5</td>
+                    <td>50,000</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Stack Emission Monitoring</td>
+                    <td>18,000</td>
+                    <td>2</td>
+                    <td>36,000</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Hazardous Waste Characterization</td>
+                    <td>22,000</td>
+                    <td>3</td>
+                    <td>66,000</td>
+                </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Water Quality Testing - Physical & Chemical Parameters</td>
+                    <td>8,500</td>
+                    <td>6</td>
+                    <td>51,000</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Soil Contamination Analysis</td>
+                    <td>15,000</td>
+                    <td>3</td>
+                    <td>45,000</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Noise Level Monitoring & Assessment</td>
+                    <td>6,000</td>
+                    <td>8</td>
+                    <td>48,000</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Indoor Air Quality Assessment</td>
+                    <td>10,000</td>
+                    <td>5</td>
+                    <td>50,000</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Stack Emission Monitoring</td>
+                    <td>18,000</td>
+                    <td>2</td>
+                    <td>36,000</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Hazardous Waste Characterization</td>
+                    <td>22,000</td>
+                    <td>3</td>
+                    <td>66,000</td>
+                </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Water Quality Testing - Physical & Chemical Parameters</td>
+                    <td>8,500</td>
+                    <td>6</td>
+                    <td>51,000</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Soil Contamination Analysis</td>
+                    <td>15,000</td>
+                    <td>3</td>
+                    <td>45,000</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Noise Level Monitoring & Assessment</td>
+                    <td>6,000</td>
+                    <td>8</td>
+                    <td>48,000</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Indoor Air Quality Assessment</td>
+                    <td>10,000</td>
+                    <td>5</td>
+                    <td>50,000</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Stack Emission Monitoring</td>
+                    <td>18,000</td>
+                    <td>2</td>
+                    <td>36,000</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Hazardous Waste Characterization</td>
+                    <td>22,000</td>
+                    <td>3</td>
+                    <td>66,000</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Environmental Impact Assessment Support</td>
+                    <td>25,000</td>
+                    <td>2</td>
+                    <td>50,000</td>
                 </tr>
             </tbody>
+        </table>
+
+        <!-- Bank Details and Totals -->
+        <table>
             <tr>
-                <td colspan="2">
+                <td style="width: 50%; vertical-align: top;">
                     <strong>Bank Details</strong><br><br>
                     <strong>A/c Name:</strong> ENVACARE LABORATORY LLP<br>
                     <strong>Bank:</strong> BANK OF BARODA<br>
@@ -309,81 +547,95 @@
                     <strong>IFSC:</strong> BARBOAMBAWA<br>
                     <strong>PAN:</strong> AAKFE7625D
                 </td>
-                <td colspan="3">
-                    <table style="width: 100%;">
+                <td style="width: 50%; vertical-align: top;">
+                    <table class="summary-table">
                         <tr>
-                            <td><strong>Total</strong></td>
-                            <td>1164200</td>
+                            <td><strong>Subtotal</strong></td>
+                            <td><strong>3,94,000</strong></td>
                         </tr>
                         <tr>
-                            <td>SGST @9%</td>
-                            <td>104778</td>
+                            <td>SGST @ 9%</td>
+                            <td>35,460</td>
                         </tr>
                         <tr>
-                            <td>CGST @9%</td>
-                            <td>104778</td>
+                            <td>CGST @ 9%</td>
+                            <td>35,460</td>
                         </tr>
                         <tr>
                             <td>Round Off</td>
                             <td>0</td>
                         </tr>
-                        <tr>
-                            <td><strong>Balance Due</strong></td>
-                            <td><strong>1373756</strong></td>
+                        <tr style="background-color: #f0f0f0;">
+                            <td><strong>Total Amount</strong></td>
+                            <td><strong>4,64,920</strong></td>
                         </tr>
                     </table>
                 </td>
             </tr>
             <tr>
-                <td colspan="5"><strong>In Words:</strong> Rupees thirteen lakh seventy-three thousand seven hundred fifty-six only</td>
+                <td colspan="2">
+                    <strong>Amount in Words:</strong> Rupees Four Lakh Sixty-Four Thousand Nine Hundred Twenty Only
+                </td>
             </tr>
         </table>
 
-        <!-- <div style="page-break-inside: avoid; break-inside: avoid;"> -->
-        <div class="terms-container" style="margin-top: 25px;">
+        <!-- Terms and Conditions -->
+        <div class="terms-container">
             <div class="terms-left">
-                <b>Terms & Conditions</b>
+                <h4>Terms & Conditions</h4>
                 <p><strong>Delivery Term:</strong> 15 days after monitoring</p>
                 <p><strong>Terms of Payment:</strong> Immediate upon report submission</p>
-                <p><strong>Taxes:</strong> 18% GST</p>
+                <p><strong>Taxes:</strong> 18% GST (SGST 9% + CGST 9%)</p>
                 <p><strong>Jurisdiction:</strong> Ahmedabad courts</p>
-                <p><strong>Validity:</strong> 30 days (extension requires written confirmation)</p>
+                <p><strong>Validity:</strong> 30 days from quote date (extension requires written confirmation)</p>
+                <p><strong>Sample Collection:</strong> As per standard protocols and regulatory requirements</p>
+                <p><strong>Reporting:</strong> Digital and hard copy reports provided</p>
             </div>
             <div class="terms-right">
                 <p><strong>For Envacare Laboratory LLP</strong></p>
-                <img src="../static/img.png" alt="Stamp">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA4MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZjBmMGYwIiBzdHJva2U9IiMzMzMiLz4KPHN2ZyB4PSIxMCIgeT0iMTAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIyMCI+Cjx0ZXh0IHg9IjMwIiB5PSIxNSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwIiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5bU1RBTVBdPC90ZXh0Pgo8L3N2Zz4KPC9zdmc+"
+                    alt="Company Stamp">
                 <div class="signature-label">Authorized Signature</div>
             </div>
         </div>
     </div>
-    <!-- </div> -->
 
-    <footer>
+    <!-- Fixed Footer -->
+    <div class="footer">
         <div class="footer-content">
             <div class="footer-column">
                 <div class="footer-header">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="Phone Icon">
-                    <strong>Phone</strong>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM2LjM0IDIgNSAzLjM0IDUgNUM1IDYuNjYgNi4zNCA4IDggOEM5LjY2IDggMTEgNi42NiAxMSA1QzExIDMuMzQgOS42NiAyIDggMlpNOCA2QzcuNDUgNiA3IDUuNTUgNyA1QzcgNC40NSA3LjQ1IDQgOCA0QzguNTUgNCA5IDQuNDUgOSA1QzkgNS41NSA4LjU1IDYgOCA2WiIgZmlsbD0iIzAwM2QxYSIvPgo8cGF0aCBkPSJNOCAxNEMxMC43NiAxNSAxMyAxMi43NiAxMyAxMEM4IDE0IDMgMTQgMyAxMEMzIDEyLjc2IDUuMjQgMTUgOCAxNFoiIGZpbGw9IiMwMDNkMWEiLz4KPC9zdmc+"
+                        alt="Phone">
+                    <span>Phone</span>
                 </div>
                 <div class="footer-text">+91 99240 85245</div>
             </div>
             <div class="footer-column">
                 <div class="footer-header">
-                    <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email Icon">
-                    <strong>Email & Website</strong>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEzIDNIM0MyLjQ1IDMgMiAzLjQ1IDIgNFYxMkMyIDEyLjU1IDIuNDUgMTMgMyAxM0gxM0MxMy41NSAxMyAxNCAxMi41NSAxNCAxMlY0QzE0IDMuNDUgMTMuNTUgMyAxMyAzWk0xMyA1TDggOEwzIDVWNEw4IDdMMTMgNFY1WiIgZmlsbD0iIzAwM2QxYSIvPgo8L3N2Zz4="
+                        alt="Email">
+                    <span>Email & Website</span>
                 </div>
-                <div class="footer-text">info@envacarelaboratoryllp.in<br>www.envacarelaboratoryllp.in</div>
+                <div class="footer-text">
+                    info@envacarelaboratoryllp.in<br> www.envacarelaboratoryllp.in
+                </div>
             </div>
-            <div class="footer-column address-column">
+            <div class="footer-column">
                 <div class="footer-header">
-                    <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Address Icon">
-                    <strong>Address</strong>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMkM1LjI0IDIgMyA0LjI0IDMgN0MzIDEwLjc1IDggMTQgOCAxNEM4IDE0IDEzIDEwLjc1IDEzIDdDMTMgNC4yNCAxMC43NiAyIDggMlpNOCA5QzYuODkgOSA2IDguMTEgNiA3QzYgNS44OSA2Ljg5IDUgOCA1QzkuMTEgNSAxMCA1Ljg5IDEwIDdDMTAgOC4xMSA5LjExIDkgOCA5WiIgZmlsbD0iIzAwM2QxYSIvPgo8L3N2Zz4="
+                        alt="Address">
+                    <span>Address</span>
                 </div>
-                <div class="footer-text">Shop No.51–52, Shree Sharan Business Park,Changodar, Sanand, Ahmedabad,<br>Gujarat – 382213</div>
+                <div class="footer-text">
+                    Shop No.51–52, Shree Sharan Business Park,<br> Changodar, Sanand, Ahmedabad,<br> Gujarat – 382213
+                </div>
             </div>
         </div>
-        <div class="footer-accreditation">(NABL ACCREDITATION LABORATORY)</div>
-    </footer>
+        <div class="footer-accreditation">
+            (NABL ACCREDITATION LABORATORY)
+        </div>
+    </div>
 </body>
 
 </html>
