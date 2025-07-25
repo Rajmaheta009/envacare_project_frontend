@@ -6,8 +6,6 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-
-fsdgdfgh
 Host = os.getenv('Host')
 
 def insert_parameter_in_database():
