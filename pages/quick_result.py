@@ -23,13 +23,10 @@ if "show_history" not in st.session_state:
 if "selected_group_data" not in st.session_state:
     st.session_state.selected_group_data = []
 
-# Page title
 st.title("🧪 Lab Parameter Entry")
 
-# Layout
 main_col, side_col = st.columns([4, 2], gap="large")
 
-# ------------------------ MAIN COLUMN ------------------------ #
 with main_col:
     search = st.text_input("🔍 Search Parameter")
     try:
@@ -52,7 +49,6 @@ with main_col:
         st.markdown("---")
         st.markdown("### ✍️ Result Entry Table")
 
-        # Removed Min and Max columns
         header_cols = st.columns([0.5, 2.5, 0.7, 2, 1.5, 1.5])
         headers = ["No.", "Parameter Name", "Unit", "Protocol Use For Analysis", "Home Method", "Result"]
         for col, h in zip(header_cols, headers):
@@ -62,8 +58,6 @@ with main_col:
             row_cols = st.columns([0.5, 2.5, 0.7, 2, 1.5, 1.5])
             with row_cols[0]: st.markdown(str(idx))
             with row_cols[1]: st.markdown(param["name"])
-            # with row_cols[2]: st.markdown(str(param.get("min_value", "•")))
-            # with row_cols[3]: st.markdown(str(param.get("max_value", "•")))
             with row_cols[2]: st.markdown(param.get("unit", "•"))
 
             protocol_options = []
@@ -79,7 +73,6 @@ with main_col:
             with row_cols[4]: st.text_input("Home Method", key=f"method_{param['id']}", label_visibility="collapsed")
             with row_cols[5]: st.text_input("Result", key=f"result_{param['id']}", label_visibility="collapsed")
 
-        # ✅ Save Result Button with Reset Logic
         if st.button("✅ Save Result"):
             recent_batch = []
             successful_params = []
@@ -114,11 +107,9 @@ with main_col:
                         store_protocol = final_protocol
                         entry = {
                             "Name": param["name"],
-                            # "Min": param.get("min_value", ""),
-                            # "Max": param.get("max_value", ""),
+                            "Result": result,
                             "Unit": unit,
                             "Protocol": store_protocol,
-                            "Result": result
                         }
                         st.session_state.saved_results.append(entry)
                         recent_batch.append(entry)
@@ -128,27 +119,23 @@ with main_col:
                 except Exception as e:
                     st.error(f"⚠️ Error for {param['name']}: {e}")
 
-            # ✅ Add recent batch and clean up UI for saved
             if recent_batch:
                 st.session_state.recent_batch_results = recent_batch
 
-            # ✅ Clear saved parameters' form controls
             for param in successful_params:
-                for key in [f"check_{param['id']}", f"protocol_{param['id']}", f"method_{param['id']}",
-                            f"result_{param['id']}"]:
+                for key in [f"check_{param['id']}", f"protocol_{param['id']}", f"method_{param['id']}", f"result_{param['id']}"]:
                     if key in st.session_state:
                         del st.session_state[key]
 
-            # ✅ Only keep unsaved ones for next form render
             st.session_state.selected_params = [
                 p for p in st.session_state.selected_params if p not in successful_params
             ]
 
-            st.rerun()  # rerender UI clean
+            st.rerun()
 
     if st.session_state.saved_results:
         st.markdown("### 📊 Submitted Results")
-        df = pd.DataFrame(st.session_state.saved_results)
+        df = pd.DataFrame(st.session_state.saved_results)[["Name", "Result", "Unit", "Protocol"]]
         st.dataframe(df, use_container_width=True)
 
         def to_excel(df):
@@ -162,7 +149,7 @@ with main_col:
 
     if st.session_state.recent_batch_results:
         st.markdown("### 🆕 Recently Saved Parameters")
-        df_recent = pd.DataFrame(st.session_state.recent_batch_results)
+        df_recent = pd.DataFrame(st.session_state.recent_batch_results)[["Name", "Result", "Unit", "Protocol"]]
         st.dataframe(df_recent, use_container_width=True)
 
         def to_excel_recent(df):
@@ -174,7 +161,6 @@ with main_col:
         excel_recent_data = to_excel_recent(df_recent)
         st.download_button("📥 Download Recent Batch", data=excel_recent_data, file_name="recent_results.xlsx")
 
-# ------------------------ HISTORY PANEL ------------------------ #
 with side_col:
     col1, col2 = st.columns([7, 2])
 
@@ -193,7 +179,7 @@ with side_col:
     if st.session_state.show_history:
         st.markdown("## 📚 Filter History")
         try:
-            res = requests.get(f"{BASE_API}/quick_result/")  # Fetch history data from API
+            res = requests.get(f"{BASE_API}/quick_result/")
             res.raise_for_status()
             df_hist = pd.DataFrame(res.json())
 
@@ -225,7 +211,7 @@ with side_col:
 
                             if st.button(f"📊 View Table - {group_time}", key=f"view_table_{group_time}"):
                                 st.session_state.selected_group_data = group_df[[
-                                    "parameter_name", "unit", "protocol_use_for_analysis", "result"
+                                    "parameter_name", "result", "unit", "protocol_use_for_analysis"
                                 ]].rename(columns={
                                     "parameter_name": "Name",
                                     "unit": "Unit",
@@ -240,7 +226,6 @@ with side_col:
 
                     def to_excel(df):
                         output = BytesIO()
-                        # Min/Max already excluded from this group table
                         with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
                             df.to_excel(writer, index=False)
                         return output.getvalue()
