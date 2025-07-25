@@ -5,11 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eadcb144-9374-4d19-8c29-4c69757b0ecd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pdf_converter_files/template/quotation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_for_extraconcept/test_databse_port.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/envacare_quotation.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/envacare_quotation.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_converter_files/pdf_desing_maker.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_converter_files/envacare_quotation_with_watermark.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_converter_files/envacare_quotation_with_watermark.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_converter_files/qoutation_invoice_maker.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_converter_files/qoutation_invoice_maker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_converter_files/template/quotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_converter_files/template/quotation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_for_extraconcept/add_parameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_for_extraconcept/add_parameter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,12 +63,13 @@
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/RaJ/PycharmProjects/envacare_project_frontend",
+    "last_opened_file_path": "C:/Users/RaJ/PycharmProjects/test/envacare_project_frontend",
     "settings.editor.selected.configurable": "preferences.fileTypes"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\RaJ\PycharmProjects\test\envacare_project_frontend\test_for_extraconcept" />
       <recent name="C:\Users\RaJ\PycharmProjects\envacare_project_frontend" />
       <recent name="C:\Users\RaJ\PycharmProjects\envacare_project_frontend\static" />
     </key>

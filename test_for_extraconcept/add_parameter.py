@@ -2,6 +2,11 @@ import pandas as pd
 import streamlit as st
 import psycopg2
 import re
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+Host = os.getenv('Host')
 
 def insert_parameter_in_database():
     try:
@@ -10,7 +15,9 @@ def insert_parameter_in_database():
             dbname="envacare_project",
             user="postgres",
             password="postgres",
-            host="localhost",
+            host=f"{Host}",
+            port=5454
+
         )
         cur = conn.cursor()
 
@@ -101,3 +108,5 @@ def insert_parameter_in_database():
     except Exception as e:
         st.warning(f"❌ Something went wrong: {e}")
 
+
+insert_parameter_in_database()
