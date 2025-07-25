@@ -235,7 +235,7 @@ with side_col:
 
                 if st.session_state.selected_group_data:
                     st.markdown("### 📊 Selected Group Table")
-                    df_group = pd.DataFrame(st.session_state.selected_group_data)
+                    df_group = pd.DataFrame(st.session_state.selected_group_data)[["Name", "Result", "Unit", "Protocol"]]
                     st.dataframe(df_group)
 
                     def to_excel(df):
