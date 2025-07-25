@@ -106,6 +106,7 @@ with main_col:
                         st.success(f"✅ Saved: {param['name']}")
                         store_protocol = final_protocol
                         entry = {
+                            "Sr. No.": len(st.session_state.saved_results) + len(recent_batch) + 1,
                             "Name": param["name"],
                             "Result": result,
                             "Unit": unit,
@@ -135,7 +136,7 @@ with main_col:
 
     if st.session_state.saved_results:
         st.markdown("### 📊 Submitted Results")
-        df = pd.DataFrame(st.session_state.saved_results)[["Name", "Result", "Unit", "Protocol"]]
+        df = pd.DataFrame(st.session_state.saved_results)[["Sr. No.", "Name", "Result", "Unit", "Protocol"]]
         st.dataframe(df, use_container_width=True)
 
         def to_excel(df):
@@ -149,7 +150,7 @@ with main_col:
 
     if st.session_state.recent_batch_results:
         st.markdown("### 🆕 Recently Saved Parameters")
-        df_recent = pd.DataFrame(st.session_state.recent_batch_results)[["Name", "Result", "Unit", "Protocol"]]
+        df_recent = pd.DataFrame(st.session_state.recent_batch_results)[["Sr. No.", "Name", "Result", "Unit", "Protocol"]]
         st.dataframe(df_recent, use_container_width=True)
 
         def to_excel_recent(df):
@@ -210,7 +211,7 @@ with side_col:
                                 st.markdown(f"- **{row['parameter_name']}** — `{row['protocol_use_for_analysis']}`")
 
                             if st.button(f"📊 View Table - {group_time}", key=f"view_table_{group_time}"):
-                                st.session_state.selected_group_data = group_df[[
+                                selected = group_df[[
                                     "parameter_name", "result", "unit", "protocol_use_for_analysis"
                                 ]].rename(columns={
                                     "parameter_name": "Name",
@@ -218,10 +219,13 @@ with side_col:
                                     "protocol_use_for_analysis": "Protocol",
                                     "result": "Result"
                                 }).to_dict(orient="records")
+                                for idx, row in enumerate(selected, 1):
+                                    row["Sr. No."] = idx
+                                st.session_state.selected_group_data = selected
 
                 if st.session_state.selected_group_data:
                     st.markdown("### 📊 Selected Group Table")
-                    df_group = pd.DataFrame(st.session_state.selected_group_data)[["Name", "Result", "Unit", "Protocol"]]
+                    df_group = pd.DataFrame(st.session_state.selected_group_data)[["Sr. No.", "Name", "Result", "Unit", "Protocol"]]
                     st.dataframe(df_group)
 
                     def to_excel(df):
