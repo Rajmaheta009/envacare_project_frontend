@@ -5,7 +5,8 @@ import os
 
 # Load environment variables
 load_dotenv()
-DB_URL = os.getenv("DATABASE_URL")  # Example: postgresql://user:password@localhost/dbname
+DB_URL = os.getenv("DATABASE_URL")
+# Example: postgresql://user:password@localhost/dbname
 def insert_unit_and_protocol():
     # Step 1: Read Excel File
     excel_file = "test_for_extraconcept/processed_parameters.xlsx"  # Update path if needed
@@ -50,10 +51,12 @@ def insert_unit_and_protocol():
                 unmatched.append(row["Parameter"])
 
     # Step 3: Save unmatched parameter names
-    pd.DataFrame(unmatched, columns=["Unmatched Parameter"]).to_csv("unmatched_parameters.csv", index=False)
+    pd.DataFrame(unmatched, columns=["Unmatched Parameter"])
 
     # Step 4: Print summary
     print("\n✅ Update Summary")
     print(f"✔️  Updated rows: {updated}")
     print(f"❌ Not found in DB: {len(unmatched)}")
     print("📄 Unmatched names saved to: unmatched_parameters.csv")
+
+# insert_unit_and_protocol()
