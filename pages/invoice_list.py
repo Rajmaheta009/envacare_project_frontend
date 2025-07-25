@@ -3,6 +3,7 @@ import requests
 import streamlit as st
 from dotenv import load_dotenv
 from collections import defaultdict
+import json
 
 # Load .env and API
 load_dotenv()
@@ -56,9 +57,24 @@ if st.session_state.login:
 
         # Group parameters by quotation_id
         # ✅ Group by order_id
+        from collections import defaultdict
+
         order_param_map = defaultdict(list)
+
         for op in order_parameters:
-            order_param_map[op["quotation_id"]].append(op["parameter_id"])
+            # Safely parse if JSON string
+            if isinstance(op, str):
+                try:
+                    op = json.loads(op)
+                except json.JSONDecodeError:
+                    st.warning(f"⚠️ Skipping invalid order_parameter entry: {op}")
+                    continue
+
+            # Ensure it's a dict and has required keys
+            if isinstance(op, dict) and "quotation_id" in op and "parameter_id" in op:
+                order_param_map[op["quotation_id"]].append(op["parameter_id"])
+            else:
+                st.warning(f"⚠️ Skipping malformed order_parameter: {op}")
 
         # Remove duplicate quotations (if API sends duplicates)
         unique_quotations = []
