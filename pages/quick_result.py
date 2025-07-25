@@ -235,16 +235,16 @@ with side_col:
                     st.markdown("### 📊 Selected Group Table")
                     df_group = pd.DataFrame(st.session_state.selected_group_data)
                     st.dataframe(df_group)
-                    df_group.drop("MIN")
-                    df_group.drop("MAX")
 
-                    def to_excel_group(df):
+                    def to_excel(df):
                         output = BytesIO()
+                        df = df.drop(columns=["Min", "Max"], errors="ignore")  # ✅ Drop min/max
                         with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
                             df.to_excel(writer, index=False)
                         return output.getvalue()
 
-                    excel_group_data = to_excel_group(df_group)
+
+                    excel_group_data = to_excel(df_group)
                     st.download_button("📥 Download Group", data=excel_group_data, file_name="group_result.xlsx")
 
         except requests.exceptions.HTTPError as errh:
