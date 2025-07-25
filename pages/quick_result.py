@@ -235,8 +235,8 @@ with side_col:
                     st.markdown("### 📊 Selected Group Table")
                     df_group = pd.DataFrame(st.session_state.selected_group_data)
                     st.dataframe(df_group)
-                    df_group.drop("min")
-                    df_group.drop("max")
+                    df_group.drop("MIN")
+                    df_group.drop("MAX")
 
                     def to_excel_group(df):
                         output = BytesIO()
