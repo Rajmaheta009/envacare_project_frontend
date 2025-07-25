@@ -15,7 +15,11 @@ def insert_parameter_in_database():
             dbname="envacare_project",
             user="postgres",
             password="postgres",
+<<<<<<< HEAD
             host=f"{Host}",
+=======
+            host="192.168.1.37",
+>>>>>>> 378cd4ca6506a927337facb1984b119ac425c259
             port=5454
 
         )
