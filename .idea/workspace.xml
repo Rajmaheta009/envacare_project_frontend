@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eadcb144-9374-4d19-8c29-4c69757b0ecd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/test_for_extraconcept/test_databse_port.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_converter_files/envacare_quotation_with_watermark.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_converter_files/envacare_quotation_with_watermark.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_converter_files/qoutation_invoice_maker.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_converter_files/qoutation_invoice_maker.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_converter_files/template/quotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_converter_files/template/quotation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_for_extraconcept/add_parameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_for_extraconcept/add_parameter.py" afterDir="false" />
-    </list>
+    <list default="true" id="eadcb144-9374-4d19-8c29-4c69757b0ecd" name="Changes" comment="add host on env and set in parameter adding file" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,6 +87,19 @@
       <option name="presentableId" value="Default" />
       <updated>1744718592996</updated>
     </task>
+    <task id="LOCAL-00001" summary="add host on env and set in parameter adding file">
+      <option name="closed" value="true" />
+      <created>1753427016386</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1753427016386</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add host on env and set in parameter adding file" />
+    <option name="LAST_COMMIT_MESSAGE" value="add host on env and set in parameter adding file" />
   </component>
 </project>
