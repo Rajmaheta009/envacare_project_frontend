@@ -51,31 +51,33 @@ with main_col:
     if st.session_state.selected_params:
         st.markdown("---")
         st.markdown("### ✍️ Result Entry Table")
-        header_cols = st.columns([0.5, 2.5, 0.7, 0.7, 0.7, 2, 1.5, 1.5])
-        headers = ["No.", "Parameter Name", "Min", "Max", "Unit", "Protocol Use For Analysis", "Home Method", "Result"]
+
+        # Removed Min and Max columns
+        header_cols = st.columns([0.5, 2.5, 0.7, 2, 1.5, 1.5])
+        headers = ["No.", "Parameter Name", "Unit", "Protocol Use For Analysis", "Home Method", "Result"]
         for col, h in zip(header_cols, headers):
             col.markdown(f"**{h}**")
 
         for idx, param in enumerate(st.session_state.selected_params, start=1):
-            row_cols = st.columns([0.5, 2.5, 0.7, 0.7, 0.7, 2, 1.5, 1.5])
+            row_cols = st.columns([0.5, 2.5, 0.7, 2, 1.5, 1.5])
             with row_cols[0]: st.markdown(str(idx))
             with row_cols[1]: st.markdown(param["name"])
-            with row_cols[2]: st.markdown(str(param.get("min_value", "•")))
-            with row_cols[3]: st.markdown(str(param.get("max_value", "•")))
-            with row_cols[4]: st.markdown(param.get("unit", "•"))
+            # with row_cols[2]: st.markdown(str(param.get("min_value", "•")))
+            # with row_cols[3]: st.markdown(str(param.get("max_value", "•")))
+            with row_cols[2]: st.markdown(param.get("unit", "•"))
 
             protocol_options = []
             if param.get("is_3025_method"):
                 protocol_options.append(param.get("is_3025_method"))
             if param.get("apha_24th_edition_method"):
                 protocol_options.append(param.get("apha_24th_edition_method"))
-            with row_cols[5]:
+            with row_cols[3]:
                 if protocol_options:
                     st.radio(" ", protocol_options, key=f"protocol_{param['id']}", horizontal=True, label_visibility="collapsed")
                 else:
                     st.markdown("`No options to select.`")
-            with row_cols[6]: st.text_input("Home Method", key=f"method_{param['id']}", label_visibility="collapsed")
-            with row_cols[7]: st.text_input("Result", key=f"result_{param['id']}", label_visibility="collapsed")
+            with row_cols[4]: st.text_input("Home Method", key=f"method_{param['id']}", label_visibility="collapsed")
+            with row_cols[5]: st.text_input("Result", key=f"result_{param['id']}", label_visibility="collapsed")
 
         # ✅ Save Result Button with Reset Logic
         if st.button("✅ Save Result"):
@@ -112,8 +114,8 @@ with main_col:
                         store_protocol = final_protocol
                         entry = {
                             "Name": param["name"],
-                            "Min": param.get("min_value", ""),
-                            "Max": param.get("max_value", ""),
+                            # "Min": param.get("min_value", ""),
+                            # "Max": param.get("max_value", ""),
                             "Unit": unit,
                             "Protocol": store_protocol,
                             "Result": result
@@ -238,11 +240,10 @@ with side_col:
 
                     def to_excel(df):
                         output = BytesIO()
-                        df = df.drop(columns=["Min", "Max"], errors="ignore")  # ✅ Drop min/max
+                        # Min/Max already excluded from this group table
                         with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
                             df.to_excel(writer, index=False)
                         return output.getvalue()
-
 
                     excel_group_data = to_excel(df_group)
                     st.download_button("📥 Download Group", data=excel_group_data, file_name="group_result.xlsx")
