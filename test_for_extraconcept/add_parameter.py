@@ -109,4 +109,4 @@ def insert_parameter_in_database():
         st.warning(f"❌ Something went wrong: {e}")
 
 
-insert_parameter_in_database()
+# insert_parameter_in_database()
