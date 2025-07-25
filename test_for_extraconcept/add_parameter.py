@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-Host = os.getenv('Host')
+Host = os.getenv('HOST')
 
 def insert_parameter_in_database():
     try:
