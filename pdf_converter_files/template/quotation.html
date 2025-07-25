@@ -21,6 +21,7 @@
         header,
         footer {
             position: fixed;
+            left: 0;
             right: 0;
             background: #fff;
             z-index: 999;
@@ -181,18 +182,53 @@
             margin-top: 10px;
         }
         
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            opacity: 0.12;
+            pointer-events: none;
+            width: 60%;
+            text-align: center;
+        }
+        
+        .watermark img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .watermark-text {
+            font-size: 80px;
+            color: #003d1a;
+            opacity: 0.12;
+            font-weight: bold;
+        }
+        
+        header,
+        .content,
+        footer {
+            position: relative;
+            z-index: 1;
+        }
+        
         @media print {
             body {
-                margin-bottom: 170px !important;
+                margin-bottom: 150px;
             }
             header,
             footer {
                 position: fixed;
             }
             .content {
-                padding-top: 140px !important;
-                padding-bottom: 200px !important;
-                min-height: calc(100vh - 340px);
+                padding-top: 130px !important;
+                padding-bottom: 130px !important;
+            }
+            .terms-container {
+                page-break-before: always;
+                margin-top: 130px !important;
+                /* Ensure space below header after page break */
             }
             table,
             tr,
@@ -201,25 +237,19 @@
                 page-break-inside: avoid !important;
                 break-inside: avoid;
             }
-            .terms-container {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-                margin-top: 25px !important;
-                margin-bottom: 200px !important;
-                min-height: 250px;
-            }
-            .terms-break {
-                break-before: page;
-                page-break-before: always;
-            }
         }
     </style>
 </head>
 
 <body>
+    <div class="watermark">
+        <!-- Replace src with your watermark image or use text below -->
+        <img src="../static/logo.png" alt="Watermark" />
+        <!-- <div class="watermark-text">Your Watermark</div> -->
+    </div>
     <header>
         <div class="top-logo">
-            <img src="static/logo.png" alt="Logo">
+            <img src="../static/logo.png" alt="Logo">
         </div>
         <h4 style="margin: 0; padding-top: 10px; font-size: 45px">Quotation</h4>
     </header>
@@ -269,28 +299,6 @@
                     <td>4</td>
                     <td>48000</td>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Ambient sample Analysis of Work Place Air Quality</td>
-                    <td>12000</td>
-                    <td>4</td>
-                    <td>48000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Ambient sample Analysis of Work Place Air Quality</td>
-                    <td>12000</td>
-                    <td>4</td>
-                    <td>48000</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Ambient sample Analysis of Work Place Air Quality</td>
-                    <td>12000</td>
-                    <td>4</td>
-                    <td>48000</td>
-                </tr>
-
             </tbody>
             <tr>
                 <td colspan="2">
