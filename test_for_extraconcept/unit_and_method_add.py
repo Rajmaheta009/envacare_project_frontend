@@ -8,7 +8,7 @@ load_dotenv()
 DB_URL = os.getenv("DATABASE_URL")  # Example: postgresql://user:password@localhost/dbname
 def insert_unit_and_protocol():
     # Step 1: Read Excel File
-    excel_file = "processed_parameters.xlsx"  # Update path if needed
+    excel_file = "test_for_extraconcept/processed_parameters.xlsx"  # Update path if needed
     df = pd.read_excel(excel_file)
 
     # Clean parameter names for matching
