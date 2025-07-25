@@ -6,18 +6,13 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-Host = os.getenv('HOST')
+DATABASE_URL = os.getenv('DATABASE_URL')
 
 def insert_parameter_in_database():
     try:
         # PostgreSQL connection
         conn = psycopg2.connect(
-            dbname="envacare_project",
-            user="postgres",
-            password="postgres",
-            host=f"{Host}",
-            port=5454
-
+            DATABASE_URL
         )
         cur = conn.cursor()
 
