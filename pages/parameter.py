@@ -2,8 +2,8 @@ import os
 import streamlit as st
 import requests
 from dotenv import load_dotenv
-from test_for_extraconcept.add_parameter import insert_parameter_in_database
-from test_for_extraconcept.unit_and_method_add import insert_unit_and_protocol
+from perameter_add_in_database_shoertcut.add_parameter import insert_parameter_in_database
+from perameter_add_in_database_shoertcut.unit_and_method_add import insert_unit_and_protocol
 
 load_dotenv()
 

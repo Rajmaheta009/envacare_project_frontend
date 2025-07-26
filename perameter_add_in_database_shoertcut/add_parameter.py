@@ -22,7 +22,7 @@ def insert_parameter_in_database():
             return text.strip()
 
         # Read input file
-        with open("test_for_extraconcept/Untitled-2.txt", "r", encoding="utf-8") as file:
+        with open("perameter_add_in_database_shoertcut/Untitled-2.txt", "r", encoding="utf-8") as file:
             lines = file.readlines()
 
         output_data = []

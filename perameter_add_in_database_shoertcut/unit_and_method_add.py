@@ -9,7 +9,7 @@ DB_URL = os.getenv("DATABASE_URL")
 # Example: postgresql://user:password@localhost/dbname
 def insert_unit_and_protocol():
     # Step 1: Read Excel File
-    excel_file = "test_for_extraconcept/processed_parameters.xlsx"  # Update path if needed
+    excel_file = "perameter_add_in_database_shoertcut/processed_parameters.xlsx"  # Update path if needed
     df = pd.read_excel(excel_file)
 
     # Clean parameter names for matching
