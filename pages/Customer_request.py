@@ -2,10 +2,11 @@ import base64
 import os
 from datetime import datetime
 
+import pandas as pd
 import streamlit as st
 import requests
 from streamlit import session_state
-# from pages.test import render_parameters
+from pdf_converter_files.qoutation_invoice_maker import main
 from pages.parameter import fetch_parameters
 from dotenv import load_dotenv
 load_dotenv()
@@ -21,19 +22,45 @@ ORDER_API = f"{API_BASE_URL}/order/"
 QUOTATION_API = f"{API_BASE_URL}/quotations/"
 ORDER_PARAMETER = f"{API_BASE_URL}/order_parameters/"
 
-
-# Fetch all parameters
+## Fetch all parameters
 parameters = fetch_parameters()
-# Split parent and child parameters
-parent_parameters = [p for p in parameters if p["price"] is None]
+# st.write(parameters)
 
-# Create child mapping by parent_id
+# Prepare filtered list and child map
+filtered_params = []
 child_map = {}
 
-for p in parameters:
-    parent_id = p.get("parent_id")
-    if parent_id is not None:
-        child_map.setdefault(parent_id, []).append(p)
+for param in parameters:
+    price = param.get("price")
+    if price is None:
+        continue  # Skip parameters without a price
+
+    name = param.get("name", "Unnamed")
+    parent_name = param.get("parent_name")
+    child_name = param.get("child_name")
+    parent_id = param.get("parent_id")
+
+    # Build display title
+    if parent_name and child_name:
+        title = f"{parent_name} > {child_name}"
+    elif parent_name:
+        title = f"{parent_name} - {name}"
+    else:
+        title = name
+
+    # Add to filtered list
+    filtered_params.append({
+        "id": param["id"],
+        "title": title,
+        "name": param["name"],
+        "price": param["price"],  # ← Consistent field name
+        "parent_id": param.get("parent_id")
+    })
+
+    # Map children to parent ID
+    if parent_id:
+        child_map.setdefault(parent_id, []).append(param)
+
 
 # Initialize session state variables
 if "show_form" not in st.session_state:
@@ -42,6 +69,13 @@ if "selected_customer_id" not in st.session_state:
     st.session_state.selected_customer_id = None
 if "customer_to_edit" not in st.session_state:
     st.session_state.customer_to_edit = None
+if "selected_parameters" not in st.session_state:
+    st.session_state.selected_parameters = {}
+if "filter_mode" not in st.session_state:
+    st.session_state.filter_mode = False
+if "search_term" not in st.session_state:
+    st.session_state.search_term = ""
+
 
 # @st.cache_data(show_spinner="Fetching data...", ttl=600)
 def fetch_customers_with_orders():
@@ -165,53 +199,81 @@ def delete_customer_with_order(c_id, o_id):
     else:
         st.error("❌ Failed to delete Customer Request.")
 
-def render_parameters(parent_id):
-    children = child_map.get(parent_id, [])
-    for child in children:
-        if child["price"] is None:
-            st.markdown(f"**{child['name']}**")
-            render_parameters(child["id"])
-        else:
-            key = f"{child['id']}_{child['name']}"
-            if st.checkbox(f"{child['name']} ₹{child['price']}", key=key):
-                selected_parameters[child["id"]] = {
-                    "name": child["name"],
-                    "cost": child["price"]
+# ✅ Updated function to include quantity and safe deselection
+def render_parameters(parent_id=None, level=0):
+    children = [p for p in parameters if p.get("parent_id") == parent_id]
+
+    for p in children:
+        param_id = p["id"]
+        name = p["name"]
+        price = p.get("price")
+        key = f"{param_id}_{name}"
+        qty_key = f"qty_{param_id}"
+        indent = " " * level  # use em-space for better spacing (visual indent)
+
+        if price is not None:
+            checked = st.checkbox(f"{indent}{name} ₹{price}", key=key)
+
+            if checked:
+                qty = st.number_input(f"{indent}Enter Quantity for {name}", min_value=1, step=1, key=qty_key)
+                total_cost = int(price) * int(qty)
+                st.markdown(f"**{indent}Total: ₹{price} × {qty} = ₹{total_cost}**")
+
+                st.session_state.selected_parameters[param_id] = {
+                    "name": name,
+                    "cost": int(price),
+                    "quantity": int(qty),
+                    "total": total_cost
                 }
             else:
-                selected_parameters.pop(child["id"], None)
+                st.session_state.selected_parameters.pop(param_id, None)
+        else:
+            st.markdown(f"**{indent}{name}**")  # just label
 
-            # html(select_parameter, height=100, scrolling=True)
+        # 🔁 Recurse for children
+        render_parameters(parent_id=param_id, level=level + 1)
 
-# MODE 2: Filtered flat list view
+# ✅ Updated: render_filtered_parameters() Function
 def render_filtered_parameters():
     for p in parameters:
-        if p["price"] is not None and search_term in p["name"].lower():
-            key = f"{p['id']}_{p['name']}"
-            if st.checkbox(f"{p['name']} ₹{p['price']}", key=key):
-                selected_parameters[p["id"]] = {
-                    "name": p["name"],
-                    "cost": p["price"]
-                }
-            else:
-                selected_parameters.pop(p["id"], None)
+        price = p.get("price")
+        if price is None or st.session_state.search_term not in p["name"].lower():
+            continue  # Skip if no price or doesn't match search
 
+        key = f"{p['id']}_{p['name']}"
+        qty_key = f"qty_{p['id']}"
+        checked = st.checkbox(f"{p['name']} ₹{price}", key=key)
+
+        if checked:
+            qty = st.number_input(f"Qty for {p['name']}", min_value=1, step=1, key=qty_key)
+            st.session_state.selected_parameters[p["id"]] = {
+                "name": p["name"],
+                "cost": int(price),
+                "quantity": int(qty),
+                "total": int(price) * int(qty)
+            }
+        else:
+            st.session_state.selected_parameters.pop(p["id"], None)
 
 # ✅ Create Quotation with Static File Upload
-def create_quotation(order_id, pdf_path):
+def create_quotation(customer_id,order_id, selected_param_data):
     try:
-        with open(pdf_path, "rb") as f:
-            files = {
-                "pdf_url": ("envacare_quotation.pdf", f, "application/pdf")
-            }
-            data = {"order_id": str(order_id)}
-            response = requests.post(QUOTATION_API, data=data, files=files)
+        payload = {
+            "customer_id": customer_id,
+            "order_id": order_id,
+            "parameter_info": selected_param_data
+        }
+
+        response = requests.post(QUOTATION_API, json=payload)
 
         if response.status_code == 200:
-            return response.json()["id"]
+            all_info = response.json()
+            q_id = all_info.get('quotation_id')
+            return q_id
         else:
             st.error("❌ Failed to create quotation")
             st.write(response.text)
+            st.write(payload)
             return None
     except Exception as e:
         st.error(f"⚠️ Error: {e}")
@@ -369,29 +431,70 @@ if session_state.login:
                                         if parent["parent_id"] is None:
                                             st.markdown(f"### {parent['name']}")
                                             render_parameters(parent["id"])
+
                                 else:
                                     render_filtered_parameters()
 
                     with col3:
                         st.subheader("🧾 Selected Parameters")
-                        if "selected_parameters" not in st.session_state:
-                            st.session_state.selected_parameters = {}
-                        with st.container(height=400) :
-                            # Update the session state with selected parameters
-                            for key, value in selected_parameters.items():
-                                    st.session_state.selected_parameters[key] = value
 
+                        selected = st.session_state.get("selected_parameters", {})
+                        if selected:
                             total = 0
-                            for pid, param in st.session_state.selected_parameters.items():
-                                st.write(f"✔️ {param['name']} - ₹{param['cost']}")
-                                total += int(param["cost"])
+                            table_data = []
 
-                        st.markdown(f"### 💰 Total: ₹{total}")
+                            for param in selected.values():
+                                name = param.get("name", "Unnamed")
+                                qty = int(param.get("quantity", 0))
+                                price = int(param.get("cost", 0))
+                                subtotal = qty * price
+                                total += subtotal
 
-                        if st.button("📨 Submit Quotation"):
+                                table_data.append([name, qty, f"₹{price}"])
+
+                            st.markdown("#### ✅ Current Selection")
+
+                            selected = st.session_state.get("selected_parameters", {})
+                            total = 0
+
+                            # Header row
+                            header1, header2, header3 = st.columns([4, 1, 1])
+                            header1.markdown("**Parameter Name**")
+                            header2.markdown("**Qty**")
+                            header3.markdown("**Price (₹)**")
+
+                            # Data rows
+                            for param in selected.values():
+                                col1, col2, col3 = st.columns([4, 1, 1])
+                                col1.write(param.get('name', 'Unnamed'))
+                                col2.write(param.get('quantity', 0))
+                                price = int(param.get('cost', 0))
+                                col3.write(f"₹{price}")
+                                total += int(param.get('quantity', 0)) * price
+
+                            # Total
+                            st.markdown("---")
+                            st.markdown(f"### 💰 Grand Total: ₹{total}")
+
+                        else:
+                            st.info("⚠️ No parameters selected.")
+
+                        if st.button("Generate Quotation"):
+                            selected_param_data = []
+                            for param_id, param_info in st.session_state.selected_parameters.items():
+                                cost = param_info.get("cost") or 0
+                                quantity = param_info.get("quantity") or 1  # default to 1 if missing
+                                selected_param_data.append({
+                                    "parameter_id": param_id,
+                                    "name": param_info["name"],
+                                    "cost": int(cost),
+                                    "quantity": int(quantity)
+                                })
+
+                            customer_id = st.session_state.selected_customer_id
                             order = fetch_order_by_customer_id(customer_id)
-                            static_pdf_path = "envacare_quotation.pdf"
-                            quotation_id = create_quotation(order_id=order["id"], pdf_path=static_pdf_path)
+                            order_id = order.get("id")
+                            quotation_id = create_quotation(customer_id,order_id,selected_param_data)
 
                             if quotation_id:
                                 save_selected_parameters_to_api(quotation_id)

@@ -118,7 +118,8 @@ if st.session_state.login:
 
                 st.markdown("### 🧾 Quotation PDF")
                 if pdf_url:
-                    st.markdown(f"[📄 Download Quotation PDF]({pdf_url})")
+                    # st.write(pdf_url)
+                    st.markdown(f"[📄 Download Quotation PDF]({API_BASE_URL}/static/Quotation/{pdf_url})")
 
                 if sample:
                     st.markdown("### 🧫 Sample Info")
