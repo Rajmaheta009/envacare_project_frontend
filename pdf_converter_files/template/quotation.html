@@ -1,62 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quotation - {{ quotation_number }}</title>
     <style>
         /* Reset and base styles */
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         /* Watermark styling */
+        
         .watermark {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            opacity: 0.1;  /* 10% opacity for subtle watermark */
+            opacity: 0.1;
+            /* 10% opacity for subtle watermark */
             z-index: -1;
             pointer-events: none;
         }
-
+        
         .watermark img {
             width: 400px;
             height: auto;
             max-width: 80%;
         }
-
         /* Ensure watermark appears on all pages */
+        
         @page {
             size: A4;
             margin: 100px 0 150px 0;
-
             @top-center {
                 content: element(header);
             }
-
             @bottom-center {
                 content: element(footer);
             }
         }
-
         /* Base document styling */
+        
         html {
             font-family: Arial, sans-serif;
             font-size: 11px;
             line-height: 1.4;
             color: #000;
         }
-
+        
         body {
             margin: 0;
             padding: 0;
         }
-
         /* Running header */
+        
         .header {
             position: running(header);
             width: 100%;
@@ -64,43 +65,43 @@
             margin-bottom: 20px;
             background: white;
         }
-
+        
         .header-content {
             width: 100%;
             height: 100%;
             display: table;
             padding: 0 30px;
         }
-
+        
         .header-row {
             display: table-row;
         }
-
+        
         .header-logo-cell {
             display: table-cell;
             width: 200px;
             vertical-align: top;
             padding-top: 10px;
         }
-
+        
         .header-title-cell {
             display: table-cell;
             vertical-align: middle;
             text-align: center;
         }
-
+        
         .header-spacer-cell {
             display: table-cell;
             width: 200px;
         }
-
+        
         .header-logo img {
             height: 60px;
             width: auto;
             max-width: 180px;
             object-fit: contain;
         }
-
+        
         .header-title {
             font-size: 32px;
             font-weight: bold;
@@ -108,8 +109,8 @@
             text-align: center;
             letter-spacing: 2px;
         }
-
         /* Running footer */
+        
         .footer {
             position: running(footer);
             width: 100%;
@@ -117,7 +118,7 @@
             background: white;
             padding-bottom: 5px;
         }
-
+        
         .footer-page-number {
             text-align: right;
             font-size: 10px;
@@ -125,30 +126,30 @@
             padding-right: 30px;
             margin-bottom: 5px;
         }
-
+        
         .footer-page-number::after {
             content: "Page No.:" counter(page) " of " counter(pages);
         }
-
+        
         .footer-main {
             border-top: 2px solid #e0e0e0;
             padding: 10px 30px 0;
         }
-
+        
         .footer-content {
             display: table;
             width: 100%;
             table-layout: fixed;
             margin-bottom: 10px;
         }
-
+        
         .footer-column {
             display: table-cell;
             width: 33.33%;
             padding: 0 20px;
             vertical-align: top;
         }
-
+        
         .footer-header {
             display: flex;
             align-items: center;
@@ -157,37 +158,37 @@
             font-size: 11px;
             color: #000;
         }
-
+        
         .footer-icon {
             width: 20px;
             height: 20px;
             margin-right: 8px;
             display: inline-block;
         }
-
         /* SVG icons for footer */
+        
         .icon-phone {
             background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300695c'%3E%3Cpath d='M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z'/%3E%3C/svg%3E") no-repeat center;
             background-size: contain;
         }
-
+        
         .icon-email {
             background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300695c'%3E%3Cpath d='M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'/%3E%3C/svg%3E") no-repeat center;
             background-size: contain;
         }
-
+        
         .icon-location {
             background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300695c'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/%3E%3C/svg%3E") no-repeat center;
             background-size: contain;
         }
-
+        
         .footer-text {
             margin-left: 28px;
             color: #333;
             font-size: 10px;
             line-height: 1.3;
         }
-
+        
         .footer-accreditation {
             background-color: #00695c;
             color: white;
@@ -196,17 +197,18 @@
             font-weight: bold;
             font-size: 12px;
             border-radius: 15px 15px 0 0;
-            margin: 0 -30px 10px;  /* Added bottom margin */
+            margin: 0 -30px 10px;
+            /* Added bottom margin */
             letter-spacing: 1px;
         }
-
         /* Main content */
+        
         .content {
             width: 100%;
             padding: 0 30px;
         }
-
         /* Quotation header info */
+        
         .quotation-info {
             display: table;
             width: 100%;
@@ -214,152 +216,153 @@
             font-size: 12px;
             font-weight: bold;
         }
-
+        
         .quotation-info-left,
         .quotation-info-right {
             display: table-cell;
             width: 50%;
         }
-
+        
         .quotation-info-right {
             text-align: right;
         }
-
         /* Tables */
+        
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
             font-size: 11px;
         }
-
-        th, td {
+        
+        th,
+        td {
             border: 1px solid #000;
             padding: 8px;
             text-align: left;
         }
-
+        
         th {
             background-color: #f5f5f5;
             font-weight: bold;
             text-align: center;
             border: 1px solid #000;
         }
-
         /* Company info table */
+        
         .company-table {
             border: 2px solid #000;
         }
-
+        
         .company-table td {
             vertical-align: top;
             padding: 12px;
         }
-
+        
         .company-table th {
             width: 50%;
             background-color: #e0e0e0;
             padding: 10px;
             font-size: 12px;
         }
-
         /* Items table */
+        
         .items-table {
             page-break-inside: auto;
             border: 1px solid #000;
         }
-
+        
         .items-table thead {
             display: table-header-group;
         }
-
+        
         .items-table tbody {
             display: table-row-group;
         }
-
+        
         .items-table tr {
             page-break-inside: avoid;
         }
-
+        
         .items-table th {
             background-color: #e0e0e0;
             font-size: 11px;
             padding: 8px;
         }
-
+        
         .items-table td {
             text-align: center;
             padding: 6px;
         }
-
+        
         .items-table td:nth-child(2) {
             text-align: left;
         }
-
         /* Summary section */
+        
         .summary-section {
             page-break-inside: avoid;
         }
-
+        
         .summary-row {
             display: table;
             width: 100%;
         }
-
+        
         .summary-left,
         .summary-right {
             display: table-cell;
             width: 50%;
             vertical-align: top;
         }
-
+        
         .bank-details-box {
             border: 1px solid #000;
             padding: 15px;
             margin-right: 10px;
             min-height: 150px;
         }
-
+        
         .bank-details-box strong {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 2px;
             font-size: 12px;
         }
-
+        
         .bank-details-box p {
-            margin: 3px 0;
+            margin: 8px 0;
             font-size: 11px;
         }
-
+        
         .summary-table {
             width: 100%;
             margin: 0;
             border: 1px solid #000;
         }
-
+        
         .summary-table td {
             padding: 6px 10px;
             border: 1px solid #000;
         }
-
+        
         .summary-table td:first-child {
             font-weight: bold;
             width: 60%;
         }
-
+        
         .summary-table td:last-child {
             text-align: right;
             font-weight: normal;
         }
-
+        
         .summary-table tr:last-child {
             background-color: #e0e0e0;
         }
-
+        
         .summary-table tr:last-child td {
             font-weight: bold;
         }
-
+        
         .amount-words {
             margin-top: 10px;
             padding: 10px;
@@ -367,23 +370,23 @@
             border: 1px solid #000;
             font-size: 11px;
         }
-
+        
         .amount-words strong {
             font-weight: bold;
         }
-
         /* Terms and conditions */
+        
         .terms-section {
             page-break-inside: avoid;
             margin-top: 20px;
             border: 2px solid #000;
         }
-
+        
         .terms-content {
             display: table;
             width: 100%;
         }
-
+        
         .terms-left {
             display: table-cell;
             width: 65%;
@@ -391,7 +394,7 @@
             border-right: 1px solid #000;
             vertical-align: top;
         }
-
+        
         .terms-right {
             display: table-cell;
             width: 35%;
@@ -399,7 +402,7 @@
             text-align: center;
             vertical-align: middle;
         }
-
+        
         .terms-title {
             font-size: 14px;
             font-weight: bold;
@@ -407,18 +410,18 @@
             margin-bottom: 15px;
             text-decoration: underline;
         }
-
+        
         .terms-item {
             margin-bottom: 8px;
             font-size: 11px;
             line-height: 1.4;
         }
-
+        
         .terms-item strong {
             display: inline;
             font-weight: bold;
         }
-
+        
         .stamp-area {
             margin: 20px auto;
             width: 120px;
@@ -430,13 +433,13 @@
             justify-content: center;
             position: relative;
         }
-
+        
         .stamp-area img {
             max-width: 100px;
             max-height: 100px;
             object-fit: contain;
         }
-
+        
         .signature-label {
             margin-top: 20px;
             font-weight: bold;
@@ -446,8 +449,8 @@
             display: inline-block;
             min-width: 200px;
         }
-
         /* Print specific */
+        
         @media print {
             body {
                 -webkit-print-color-adjust: exact;
@@ -456,6 +459,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Watermark -->
     <div class="watermark">
@@ -497,8 +501,7 @@
                         <span>Email & Website</span>
                     </div>
                     <div class="footer-text">
-                        {{ email }}<br>
-                        {{ website }}
+                        {{ email }}<br> {{ website }}
                     </div>
                 </div>
                 <div class="footer-column">
@@ -507,9 +510,7 @@
                         <span>Address</span>
                     </div>
                     <div class="footer-text">
-                        {{ address_line1 }}<br>
-                        {{ address_line2 }}<br>
-                        {{ address_line3 }}
+                        {{ address_line1 }}<br> {{ address_line2 }}<br> {{ address_line3 }}
                     </div>
                 </div>
             </div>
@@ -548,8 +549,7 @@
                         <strong>E-Mail:</strong> {{ company_email }}
                     </td>
                     <td>
-                        <strong>{{ buyer_name }}</strong><br>
-                        {{ buyer_address | safe }}
+                        <strong>{{ buyer_name }}</strong><br> {{ buyer_address | safe }}
                         <br><br>
                         <strong>GSTIN/UIN:</strong> {{ buyer_gstin | default('') }}<br>
                         <strong>E-Mail:</strong> {{ buyer_email | default('') }}
@@ -588,7 +588,7 @@
                 <div class="summary-left">
                     <div class="bank-details-box">
                         <strong>Bank Details</strong>
-                        <p><strong>A/c Name:</strong> {{ bank_account_name }}</p>
+                        <p><strong>A/c Name:</strong>{{ bank_account_name }}</p>
                         <p><strong>Bank:</strong> {{ bank_name }}</p>
                         <p><strong>A/c No.:</strong> {{ bank_account_number }}</p>
                         <p><strong>IFSC:</strong> {{ bank_ifsc }}</p>
@@ -641,8 +641,7 @@
                     <div><strong>For {{ company_name_short | default(company_name) }}</strong></div>
                     <div class="stamp-area">
                         {% if stamp_image %}
-                        <img src="{{ stamp_image }}" alt="Company Stamp">
-                        {% else %}
+                        <img src="{{ stamp_image }}" alt="Company Stamp"> {% else %}
                         <div style="text-align: center; color: #00695c; font-size: 10px;">
                             <strong>{{ company_name_short | default('ENVACARE') }}</strong><br>
                             <span style="font-size: 8px;">LABORATORY</span><br>
@@ -661,8 +660,8 @@
         <div style="page-break-before: always;">
             {{ page.content | safe }}
         </div>
-        {% endfor %}
-        {% endif %}
+        {% endfor %} {% endif %}
     </div>
 </body>
+
 </html>

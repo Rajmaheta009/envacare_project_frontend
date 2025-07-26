@@ -207,66 +207,66 @@ class QuotationGenerator:
             ]
         }
 
-    def generate_pdf(self, data=None, output_filename='quotation.pdf'):
-        """Generate PDF quotation"""
-        # Use default data if none provided
-        if data is None:
-            data = self.get_default_data()
+    # def generate_pdf(self, data=None, output_filename='quotation.pdf'):
+    #     """Generate PDF quotation"""
+    #     # Use default data if none provided
+    #     if data is None:
+    #         data = self.get_default_data()
+    #
+    #     # Calculate totals
+    #     totals = self.calculate_totals(data['items'])
+    #     data.update(totals)
+    #
+    #     # Load and render template
+    #     template = self.env.get_template('quotation.html')
+    #
+    #     # Add built-in functions to template context
+    #     template.globals['abs'] = abs
+    #
+    #     html_content = template.render(**data)
+    #
+    #     # Set base URL to the file system root for proper image loading
+    #     base_url = 'pdf_converter_files'
+    #
+    #     # Generate PDF
+    #     HTML(string=html_content, base_url=base_url).write_pdf(
+    #         output_filename,
+    #         stylesheets=[],  # CSS is embedded in HTML
+    #     )
+    #
+    #     return output_filename
 
-        # Calculate totals
-        totals = self.calculate_totals(data['items'])
-        data.update(totals)
-
-        # Load and render template
-        template = self.env.get_template('quotation.html')
-
-        # Add built-in functions to template context
-        template.globals['abs'] = abs
-
-        html_content = template.render(**data)
-
-        # Set base URL to the file system root for proper image loading
-        base_url = 'file:///'
-
-        # Generate PDF
-        HTML(string=html_content, base_url=base_url).write_pdf(
-            output_filename,
-            stylesheets=[],  # CSS is embedded in HTML
-        )
-
-        return output_filename
-
-    def generate_test_multipage(self, output_filename='quotation_multipage.pdf'):
-        """Generate a multi-page quotation for testing"""
-        data = self.get_default_data()
-
-        # Generate many items to test pagination
-        test_items = []
-        products = [
-            'Air Quality Monitoring - Location {}',
-            'Water Sample Analysis - Point {}',
-            'Soil Testing - Sample {}',
-            'Noise Assessment - Area {}',
-            'Environmental Audit - Section {}',
-            'Emission Testing - Stack {}',
-            'Waste Analysis - Batch {}',
-            'Contamination Study - Site {}',
-        ]
-
-        # Create 40 items to ensure multi-page
-        for i in range(40):
-            product_template = products[i % len(products)]
-            test_items.append({
-                'product': product_template.format(i + 1),
-                'unit_price': 5000 + (i * 500),
-                'quantity': 2 + (i % 5),
-                'amount': (5000 + (i * 500)) * (2 + (i % 5))
-            })
-
-        data['items'] = test_items
-        data['quotation_number'] = 'EC/2425/QU/TEST-MULTIPAGE'
-
-        return self.generate_pdf(data, output_filename)
+    # def generate_test_multipage(self, output_filename='quotation_multipage.pdf'):
+    #     """Generate a multi-page quotation for testing"""
+    #     data = self.get_default_data()
+    #
+    #     # Generate many items to test pagination
+    #     test_items = []
+    #     products = [
+    #         'Air Quality Monitoring - Location {}',
+    #         'Water Sample Analysis - Point {}',
+    #         'Soil Testing - Sample {}',
+    #         'Noise Assessment - Area {}',
+    #         'Environmental Audit - Section {}',
+    #         'Emission Testing - Stack {}',
+    #         'Waste Analysis - Batch {}',
+    #         'Contamination Study - Site {}',
+    #     ]
+    #
+    #     # Create 40 items to ensure multi-page
+    #     for i in range(40):
+    #         product_template = products[i % len(products)]
+    #         test_items.append({
+    #             'product': product_template.format(i + 1),
+    #             'unit_price': 5000 + (i * 500),
+    #             'quantity': 2 + (i % 5),
+    #             'amount': (5000 + (i * 500)) * (2 + (i % 5))
+    #         })
+    #
+    #     data['items'] = test_items
+    #     data['quotation_number'] = 'EC/2425/QU/TEST-MULTIPAGE'
+    #
+    #     return self.generate_pdf(data, output_filename)
 
 
 def main():
@@ -278,14 +278,14 @@ def main():
     generator = QuotationGenerator()
 
     # Generate standard quotation
-    print("Generating standard quotation...")
-    pdf_file = generator.generate_pdf(output_filename='envacare_quotation.pdf')
-    print(f"✅ Generated: {pdf_file}")
+    # print("Generating standard quotation...")
+    # pdf_file = generator.generate_pdf(output_filename='../envacare_quotation.pdf')
+    # print(f"✅ Generated: {pdf_file}")
 
     # Generate multi-page quotation
-    print("\nGenerating multi-page test quotation...")
-    multipage_file = generator.generate_test_multipage()
-    print(f"✅ Generated: {multipage_file}")
+    # print("\nGenerating multi-page test quotation...")
+    # multipage_file = generator.generate_test_multipage()
+    # print(f"✅ Generated: {multipage_file}")
 
     # Example with custom data
     print("\nGenerating custom quotation...")
