@@ -113,8 +113,11 @@ with st.form("add_parameter_form"):
 
 # --- Display Parameters ---
 st.markdown("### 📄 Parameters List")
+parent_name_map = {param["id"]: param["name"] for param in para}
+
 for ind, param in enumerate(display_parameters):
-    with st.expander(f"Details of {param['name']}"):
+    parent_name = parent_name_map.get(param["parent_id"], "Unknown Parent")
+    with st.expander(f"🔗 Parent: {parent_name} ➤ Parameter: {param['name']}"):
         st.markdown(f"**🆔 ID:** {param['id']}")
         st.markdown(f"**🧩 Parent ID:** {param['parent_id']}")
         st.markdown(f"**📏 Unit:** {param.get('unit', 'N/A')}")

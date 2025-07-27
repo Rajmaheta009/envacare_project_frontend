@@ -19,7 +19,7 @@ REGISTER_URL = f"{API_BASE_URL}/auth/register"
 
 # App Title and Logo
 col1, col2, col3 = st.columns([1.3, 1, 1])
-col1.image("static/logo.png", width=150)
+col1.image("static/ui_ux_image/logo.png", width=150)
 
 # Page title
 col4, col5 = st.columns([2, 3])

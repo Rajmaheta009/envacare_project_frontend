@@ -11,9 +11,7 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 def insert_parameter_in_database():
     try:
         # PostgreSQL connection
-        conn = psycopg2.connect(
-            DATABASE_URL
-        )
+        conn = psycopg2.connect(f'{DATABASE_URL}')
         cur = conn.cursor()
 
         def clean_text(text):
@@ -58,7 +56,8 @@ def insert_parameter_in_database():
                 "id": id_counter,
                 "name": name,
                 "parent_id": parent_id,
-                "price": price if price else None
+                "price": price if price else None,
+                "is_delete": False
             }
             output_data.append(record)
 
@@ -80,8 +79,8 @@ def insert_parameter_in_database():
         # Insert into parameters table
         for item in output_data:
             cur.execute(
-                "INSERT INTO parameters (name, parent_id, price) VALUES (%s, %s, %s)",
-                (item['name'], item['parent_id'], item['price'])
+                "INSERT INTO parameters (name, parent_id, price,is_delete) VALUES (%s, %s, %s,%s)",
+                (item['name'], item['parent_id'], item['price'],item['is_delete'])
             )
 
         conn.commit()
@@ -91,7 +90,7 @@ def insert_parameter_in_database():
         # Fetch and display all data from parameters table
         cur.execute("SELECT id, name, parent_id, price FROM parameters ORDER BY id")
         rows = cur.fetchall()
-        df = pd.DataFrame(rows, columns=["ID", "Name", "Parent ID", "Price"])
+        df = pd.DataFrame(rows, columns=["ID", "Name", "Parent ID", "Price","is_delete"])
 
         st.subheader("📋 Parameters Table")
         st.dataframe(df)
@@ -104,4 +103,5 @@ def insert_parameter_in_database():
         st.warning(f"❌ Something went wrong: {e}")
 
 
-# insert_parameter_in_database()
+# if __name__ == "__main__":
+#     insert_parameter_in_database()
