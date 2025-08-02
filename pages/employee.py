@@ -42,7 +42,9 @@ st.title("👨‍💼 Employee Management System")
 with st.form("add_employee_form"):
     st.header("➕ Add Employee")
 
-    name = st.text_input("Name")
+    first_name = st.text_input("First Name")
+    middle_name = st.text_input("Middle Name", value="", help="Optional")
+    last_name = st.text_input("Last Name")
     email = st.text_input("Email")
     password = st.text_input("Password", type="password")
     phone = st.text_input("Phone Number")
@@ -64,9 +66,9 @@ with st.form("add_employee_form"):
     submitted = st.form_submit_button("Add")
 
     if submitted:
-        if name and email and password and phone:
+        if first_name and last_name and email and password and phone:
             employee = {
-                "name": name,
+                "name": f"{first_name} {middle_name} {last_name}".strip(),
                 "email": email,
                 "password": password,
                 "phone_number": phone,
@@ -90,10 +92,11 @@ if employees:
             if st.session_state.emp_edit_id == emp['id']:
                 # Edit Form
                 with st.form(f"edit_emp_form_{emp['id']}"):
-                    name = st.text_input("Name", value=emp['name'], key=f"name_{emp['id']}")
+                    first_name = st.text_input("First Name", value=emp['name'].split()[0], key=f"first_name_{emp['id']}")
+                    middle_name = st.text_input("Middle Name", value=" ".join(emp['name'].split()[1:-1]), key=f"middle_name_{emp['id']}")
+                    last_name = st.text_input("Last Name", value=emp['name'].split()[-1], key=f"last_name_{emp['id']}")
                     email = st.text_input("Email", value=emp['email'], key=f"email_{emp['id']}")
-                    password = st.text_input("Password", type="password", value=emp['password'],
-                                             key=f"pass_{emp['id']}")
+                    password = st.text_input("Password", type="password", value=emp['password'], key=f"pass_{emp['id']}")
                     phone = st.text_input("Phone Number", value=emp['phone_number'], key=f"phone_{emp['id']}")
 
                     dept_name = next((d["name"] for d in dept_list if d["id"] == emp["dept_id"]), None)
@@ -102,7 +105,7 @@ if employees:
 
                     if st.form_submit_button("✅ Update"):
                         updated = {
-                            "name": name,
+                            "name": f"{first_name} {middle_name} {last_name}".strip(),
                             "email": email,
                             "password": password,
                             "phone_number": phone,

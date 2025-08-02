@@ -28,7 +28,7 @@ def fetch_all_data():
         }
         return response
     except Exception as e:
-        st.error(f"❌ Error: {e}")
+        st.error(f"❌ Erroqr: {e}")
         return {}
 
 
@@ -100,6 +100,8 @@ if st.session_state.login:
                 st.markdown("### 👤 Customer Info")
                 st.write(f"**Name**: {customer.get('name')}")
                 st.write(f"**Email**: {customer.get('email')}")
+                st.write(f"GST Number: {customer.get('gst','Not Found')}")
+                st.write(f"GST Number: {customer.get('gst', None)}")
                 st.write(f"**Phone**: {customer.get('phone_number')}")
                 st.write(f"**WhatsApp**: {customer.get('whatsapp_number')}")
                 st.write(f"**Address**: {customer.get('address')}")

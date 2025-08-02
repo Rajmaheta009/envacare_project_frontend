@@ -7,3 +7,5 @@ requests~=2.32.4
 pytz~=2024.1
 sqlalchemy
 openpyxl
+xlsxwriter
+regex

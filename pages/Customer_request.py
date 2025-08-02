@@ -1,3 +1,4 @@
+import re
 import os
 from datetime import datetime
 import streamlit as st
@@ -5,6 +6,7 @@ import requests
 from streamlit import session_state
 from pages.parameter import fetch_parameters
 from dotenv import load_dotenv
+
 load_dotenv()
 
 
@@ -19,6 +21,8 @@ ORDER_PARAMETER = f"{API_BASE_URL}/order_parameters/"
 ## Fetch all parameters
 parameters = fetch_parameters()
 # st.write(parameters)
+
+GST_REGEX = r'^[A-Z]{2}[0-9]{10}[A-Z]{1}[0-9A-Z]{1}$'
 
 # Prepare filtered list and child map
 filtered_params = []
@@ -292,6 +296,15 @@ def save_selected_parameters_to_api(quotation_id):
             st.write(payload)
     st.success(f"✅ Parameter saved")
 
+# Function to validate GST number using regex
+def validate_gst_number(gst_number):
+    if gst_number:  # Check if there's any input for GST
+        if re.match(GST_REGEX, gst_number):  # Match the GST format
+            return True
+        else:
+            st.error("❌ Invalid GST Number format. Please enter a valid GST number.")
+            return False
+    return True
 
 # ✅ Main App Logic
 if session_state.login:
@@ -303,8 +316,10 @@ if session_state.login:
     if st.session_state.show_form:
         with st.form("customer_form"):
             st.markdown("### 🛠️ Add New Customer Request")
+            col7, col8 = st.columns(2)
+            c_name = col7.text_input("Company Name",placeholder="Enter company name",max_chars=50)
+            gst = col8.text_input("GST NUMBER",placeholder="GST NUMBER")
 
-            c_name = st.text_input("Company Name",placeholder="Enter company name",max_chars=50)
             col1, col2 = st.columns(2)
             name = col1.text_input("Person Name", placeholder="Enter person name", max_chars=50)
             email = col2.text_input("Email ID", placeholder="Enter customer email")
@@ -323,7 +338,12 @@ if session_state.login:
             cancel_btn = st.form_submit_button("❌ Cancel")
 
         if submit_btn:
+
+
             if name and email and phone and (comment or document):
+                if gst and not validate_gst_number(gst):
+                    st.stop()
+
                 new_customer = {
                     "c_name" : c_name,
                     "name": name,
@@ -331,6 +351,7 @@ if session_state.login:
                     "phone_number": phone,
                     "whatsapp_number": whatsapp,
                     "address": address,
+                    "gst_number": gst,
                     "is_delete": False
                 }
                 create_customer_and_order(new_customer, comment, document)
@@ -357,10 +378,15 @@ if session_state.login:
     if customers:
         for customer in filtered_customers:
             customer_id = customer.get("id")
+
+            # Check if 'gst' is missing or null
+            if not customer.get('gst'):  # If 'gst' is None, empty string, or falsy
+                customer['gst'] = "Not Found"  # Assign default value to 'gst'
             # session_state.c_id=customer_id
             with st.expander(f"{customer['name']} - {customer['email']}"):
                 st.write(f"**Order Number :** {customer['o_number']}")
                 st.write(f"**Company Name :** {customer['c_name']}")
+                st.write(f"**GST Number :** {customer['gst']}")
                 st.write(f"**Address:** {customer['address']}")
                 st.write(f"**Phone:** {customer['phone_number']}")
                 st.write(f"**WhatsApp:** {customer['whatsapp_number']}")
@@ -398,6 +424,7 @@ if session_state.login:
                         st.subheader("Customer Info")
                         st.write(f"Name: {customer['name']}")
                         st.write(f"Email: {customer['email']}")
+                        st.write(f"GST Number: {customer['gst']}")
                         st.write(f"Phone: {customer['phone_number']}")
                         st.write(f"WhatsApp: {customer['whatsapp_number']}")
                         st.write(f"Comment: {customer['order_req_comment']}")
