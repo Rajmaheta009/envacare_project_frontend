@@ -1,12 +1,8 @@
-import base64
 import os
 from datetime import datetime
-
-import pandas as pd
 import streamlit as st
 import requests
 from streamlit import session_state
-from pdf_converter_files.qoutation_invoice_maker import main
 from pages.parameter import fetch_parameters
 from dotenv import load_dotenv
 load_dotenv()
@@ -14,8 +10,6 @@ load_dotenv()
 
 current_date = datetime.now()
 
-# API URLs
-# API_BASE_URL = "http://localhost:8000"
 API_BASE_URL = os.getenv('API_BASE_URL')
 CUSTOMER_API = f"{API_BASE_URL}/customer_request/"
 ORDER_API = f"{API_BASE_URL}/order/"
