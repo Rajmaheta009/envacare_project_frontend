@@ -28,7 +28,7 @@ def fetch_all_data():
         }
         return response
     except Exception as e:
-        st.error(f"❌ Erroqr: {e}")
+        st.error(f"❌ Error: {e}")
         return {}
 
 
@@ -47,7 +47,7 @@ if st.session_state.login:
         samples = data.get("samples", [])
         order_parameters = data.get("order_parameters", [])
 
-        # Create parameter map
+        # Create parameter map (ID -> parameter details)
         param_map = {param["id"]: {"name": param["name"], "price": param["price"]} for param in parameters}
 
         # Map customer, order, and sample
@@ -56,13 +56,11 @@ if st.session_state.login:
         sample_map = {samp["order_id"]: samp for samp in samples}
 
         # Group parameters by quotation_id
-        # ✅ Group by order_id
-        from collections import defaultdict
-
         order_param_map = defaultdict(list)
 
+        # Loop through the order_parameters and group them by quotation_id
         for op in order_parameters:
-            # Safely parse if JSON string
+            # Safely parse if JSON string (handling malformed entries)
             if isinstance(op, str):
                 try:
                     op = json.loads(op)
@@ -90,18 +88,22 @@ if st.session_state.login:
             customer = cust_map.get(order.get("customer_id"), {})
             sample = sample_map.get(order.get("order_number"))  # Using order_number to find sample
             pdf_url = quote.get("pdf_url", "")
-            selected_param_ids = order_param_map.get(quote.get("order_id"), [])
+            selected_param_ids = order_param_map.get(quote.get("id"), [])  # Fixing `quotation_id` reference
+
+            # Fetching the parameter details based on parameter_id
             selected_params = [
                 {"name": param_map[param_id]["name"], "price": param_map[param_id]["price"]}
                 for param_id in selected_param_ids if param_id in param_map
             ]
 
+            # Debug: Print the selected parameters for each quotation
+            # st.write(f"Selected Parameters for Quotation {quote['id']}:", selected_params)
+
             with st.expander(f"🧾 Invoice Data {i}: {customer.get('name', 'Unknown')}"):
                 st.markdown("### 👤 Customer Info")
                 st.write(f"**Name**: {customer.get('name')}")
                 st.write(f"**Email**: {customer.get('email')}")
-                st.write(f"GST Number: {customer.get('gst','Not Found')}")
-                st.write(f"GST Number: {customer.get('gst', None)}")
+                st.write(f"GST Number: {customer.get('gst', 'Not Found')}")
                 st.write(f"**Phone**: {customer.get('phone_number')}")
                 st.write(f"**WhatsApp**: {customer.get('whatsapp_number')}")
                 st.write(f"**Address**: {customer.get('address')}")
@@ -120,7 +122,6 @@ if st.session_state.login:
 
                 st.markdown("### 🧾 Quotation PDF")
                 if pdf_url:
-                    # st.write(pdf_url)
                     st.markdown(f"[📄 Download Quotation PDF]({API_BASE_URL}/static/Quotation/{pdf_url})")
 
                 if sample:
