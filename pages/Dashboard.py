@@ -74,7 +74,7 @@ if st.session_state.get("login", False):
 
                         # Build full pdf_url
                         pdf_filename = quotation.get("pdf_url", "")
-                        pdf_url = f"{API_BASE_URL}/static/Quotation/{pdf_filename}" if pdf_filename else ""
+                        pdf_url = f"{API_BASE_URL}static/Quotation/{pdf_filename}" if pdf_filename else ""
 
                         # Add data with extra fields
                         enriched_data.append({
